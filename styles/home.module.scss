@@ -108,6 +108,14 @@
   margin-left: 0.5rem;
 }
 
+.gridFull {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
@@ -115,7 +123,7 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   .card,
   .footer {
     border-color: #222;

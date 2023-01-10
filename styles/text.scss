@@ -1,0 +1,65 @@
+.text-h1 {
+}
+.text-h2 {
+}
+.text-h3 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 42px;
+}
+.text-h4 {
+}
+.text-h5 {
+  font-style: normal;
+
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.text-body-lg-bold {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+
+  color: var(--neutral07);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-title {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+.link {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 19px;
+  letter-spacing: -0.24px;
+
+  color: var(--byte);
+}
+
+.hint {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: -0.078px;
+
+  color: var(--byte);
+}
+
+label {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: var(--neutral08);
+}

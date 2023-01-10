@@ -1,0 +1,19 @@
+.container {
+  height: 40px;
+  border: 1.5px solid #000000;
+  border-radius: 12px;
+  width: 100%;
+  background: var(--wyde);
+  color: var(--white);
+}
+
+.btnPrimary {
+  height: 40px;
+  border: none;
+  border-radius: 12px;
+  width: 100%;
+  color: var(--white);
+  background: var(--wyde);
+  background: linear-gradient(125.35deg, #6a78d1 0%, #4e5aa5 100%);
+  border-radius: 12px;
+}
