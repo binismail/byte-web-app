@@ -1,10 +1,11 @@
-import { IInput } from './input';
+import { IHome } from './index';
 
-const base: IInput = {
+const base: IHome = {
   placeholder: 'Hello world!',
   value: '',
   type: 'text',
   onChange: '',
+  className: '',
 };
 
 export const mockInputProps = {

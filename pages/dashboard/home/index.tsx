@@ -3,7 +3,7 @@ import DashboardLayout from '../../../components/layouts/dashboard-layout';
 import Layout from '../../../components/layouts/layout';
 import { NextPageWithLayout } from '../../_app';
 import styles from './Home.module.scss';
-export interface IInput {
+export interface IHome {
   placeholder: string;
   type: string;
   value: string;
@@ -11,7 +11,7 @@ export interface IInput {
   className: string;
 }
 
-const Home: NextPageWithLayout<IInput> = ({ placeholder, type }) => {
+const Home: NextPageWithLayout<IHome> = ({ placeholder, type }) => {
   return (
     <input className={styles.input} placeholder={placeholder} type={type} />
   );
