@@ -1,7 +1,7 @@
 import styles from './table.module.scss';
 export interface ITable {
-  header: any[];
-  content: any[];
+  header?: any[];
+  content?: any[];
 }
 
 const Table: React.FC<ITable> = ({ header }) => {
