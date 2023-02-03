@@ -8,6 +8,6 @@ const base: IHome = {
   className: '',
 };
 
-export const mockInputProps = {
+export const mockHomeProps = {
   base,
 };
