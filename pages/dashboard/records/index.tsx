@@ -65,7 +65,7 @@ const Records: NextPageWithLayout = () => {
             setStatus(true);
           }}
         />
-        <Filter value="Filter" />
+        <Filter placeholder='' value="Filter" />
       </div>
       <div>
         <RecordTable header={header} contents={contents} />

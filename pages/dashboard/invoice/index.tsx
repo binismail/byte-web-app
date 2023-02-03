@@ -75,7 +75,7 @@ const Invoice: NextPageWithLayout = () => {
             setStatus(true);
           }}
         />
-        <Filter value="Filter" />
+        <Filter placeholder='' value="Filter" />
       </div>
       <div>
         <InvoiceTable header={header} contents={contents} />

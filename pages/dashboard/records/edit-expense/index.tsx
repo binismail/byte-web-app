@@ -63,9 +63,9 @@ const EditSales: NextPageWithLayout = () => {
           </div>
           <p className="text-value">Payment method</p>
           <div className="flex">
-            <Input type="radio" />
-            <Input type="radio" />
-            <Input type="radio" />
+            <Input placeholder='' type="radio" />
+            <Input placeholder='' type="radio" />
+            <Input placeholder='' type="radio" />
           </div>
         </div>
       </div>

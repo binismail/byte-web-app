@@ -6,11 +6,11 @@ import homeStyles from '../../../styles/home.module.scss';
 import logo from '../../../public/logo.svg';
 import Image from 'next/image';
 
-export interface IRegister {
+export interface ILogin{
   sampleTextProp: string;
 }
 
-const Register: React.FC<IRegister> = () => {
+const Register: React.FC<ILogin> = () => {
   return (
     <div className={''}>
       <div className={homeStyles.gridFull}>

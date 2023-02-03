@@ -2,7 +2,7 @@ import { IRecordTable } from './record-table';
 
 const base: IRecordTable = {
   header: [],
-  content: [],
+  contents: [],
 };
 
 export const mockRecordTableProps = {

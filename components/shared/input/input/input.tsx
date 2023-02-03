@@ -2,7 +2,7 @@ import styles from './Input.module.scss';
 export interface IInput {
   placeholder: string;
   type: string;
-  value: string;
+  value?: string;
   onChange?: any;
 }
 
