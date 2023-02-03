@@ -1,6 +1,6 @@
 import ByteIcon from '../../../../../../components/shared/icon/byte.icon';
 import IconShadow from '../../../../../../components/shared/icon/icon-shadow';
-import styles from './fund-wallet-transfer.module.scss';
+import styles from './fund-wallet-card.module.scss';
 
 const FundWalletBank: React.FC<any> = () => {
   return (
