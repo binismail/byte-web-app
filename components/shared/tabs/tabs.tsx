@@ -1,8 +1,8 @@
 import styles from './tabs.module.scss';
 export interface ITabs {
   label: string[];
-  click: any;
-  value: string;
+  click?: any;
+  value?: string;
 }
 
 const Tabs: React.FC<ITabs> = ({
