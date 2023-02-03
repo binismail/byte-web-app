@@ -1,5 +1,5 @@
 import ByteIcon from '../../../../components/shared/icon/byte.icon';
-import styles from './make-payment.module.scss';
+import styles from './fund-wallet.module.scss';
 
 const MakePayment: React.FC<any> = () => {
   return (
