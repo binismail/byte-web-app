@@ -1,0 +1,25 @@
+.tabsContainer {
+  border-bottom: 1px solid var(--neutral04);
+  color: var(--neutral06);
+}
+
+.tab {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+.tabActive {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  width: 100%;
+  // padding-bottom: var(--space-md-1);
+  color: var(--primary06);
+  border-bottom: 2px solid var(--primary06);
+}

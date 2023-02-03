@@ -6,14 +6,30 @@
   background: var(--wyde);
   color: var(--white);
 }
-
-.btnPrimary {
+.btn {
+  padding: 0px 3rem;
   height: 40px;
   border: none;
   border-radius: 12px;
-  width: 100%;
-  color: var(--white);
-  background: var(--wyde);
-  background: linear-gradient(125.35deg, #6a78d1 0%, #4e5aa5 100%);
   border-radius: 12px;
+}
+
+.btnPrimary {
+  color: var(--white);
+  background: var(--byte);
+  background: linear-gradient(125.35deg, #6a78d1 0%, #4e5aa5 100%);
+}
+
+.btnLight {
+  color: var(--byte);
+  background: var(--primary01);
+  // background: linear-gradient(125.35deg, #6a78d1 0%, #4e5aa5 100%);
+}
+
+.btnBlock {
+  width: 100%;
+}
+
+.btnLarge {
+  height: 60px;
 }

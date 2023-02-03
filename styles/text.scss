@@ -9,13 +9,32 @@
   line-height: 42px;
 }
 .text-h4 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: 0.0025em;
+  color: var(--primary09);
 }
 .text-h5 {
   font-style: normal;
-
   font-weight: 600;
   font-size: 24px;
   line-height: 32px;
+}
+
+.text-h6 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 32px;
+
+  letter-spacing: 0.0015em;
+  color: var(--neutral08);
+}
+
+.text-strong {
+  font-weight: 600 !important;
 }
 
 .text-body-lg-bold {
@@ -23,8 +42,46 @@
   font-weight: 700;
   font-size: 16px;
   line-height: 24px;
-
   color: var(--neutral07);
+}
+
+.text-section-subtitle {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--neutral09);
+}
+
+.text-secton-content {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: var(--neutral07);
+}
+
+.text-secton-items {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--neutral07);
+}
+
+.text-label {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--neutral05);
+}
+
+.text-value {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--neutral08);
 }
 
 .text-center {
@@ -35,6 +92,14 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 23px;
+}
+
+.text-security-assurance {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--neutral07);
 }
 
 .link {
@@ -62,4 +127,49 @@ label {
   font-size: 14px;
   line-height: 16px;
   color: var(--neutral08);
+}
+
+hr {
+  border: 1px solid var(--neutral03);
+}
+
+.weight-400 {
+  font-weight: 400;
+}
+
+// Color
+
+.text-byte {
+  color: var(--byte);
+}
+.text-white {
+  color: var(--white);
+}
+
+.text-primary-01 {
+  color: var(--primary01);
+}
+
+.text-primary-06 {
+  color: var(--primary06);
+}
+
+.text-success {
+  color: var(--success);
+}
+
+.text-neutral-06 {
+  color: var(--neutral06);
+}
+
+.text-neutral-08 {
+  color: var(--neutral08);
+}
+
+.text-neutral-07 {
+  color: var(--neutral08);
+}
+
+.text-neutral-07 {
+  color: var(--neutral09);
 }

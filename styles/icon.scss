@@ -3,4 +3,54 @@
   height: 72px;
   background: var(--primary01);
   border-radius: 40px;
+  &.byte {
+    background: var(--primary05);
+    &.small {
+      width: 38px;
+      height: 38px;
+    }
+  }
+
+  &.byte-light {
+    background: var(--primary01);
+    &.small {
+      width: 38px;
+      height: 38px;
+    }
+
+    &.medium {
+      width: 64px;
+      height: 64px;
+    }
+
+    &.large {
+      width: 72px;
+      height: 72px;
+    }
+  }
+
+  &.grey {
+    background: var(--neutral02);
+    &.small {
+      width: 38px;
+      height: 38px;
+    }
+
+    &.medium {
+      width: 64px;
+      height: 64px;
+    }
+
+    &.large {
+      width: 72px;
+      height: 72px;
+    }
+  }
+
+  &.byte-security {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(134.07deg, #f4e1d4 -12.15%, #dbc3d9 116.36%);
+    border-radius: 12px;
+  }
 }

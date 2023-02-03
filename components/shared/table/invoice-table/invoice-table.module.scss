@@ -1,0 +1,83 @@
+.container {
+  border-radius: 16px;
+  margin-top: var(--space-md-1);
+}
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  border-radius: 16px;
+}
+
+.td,
+.th {
+  // border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  height: 72px;
+  border-bottom: 1px solid var(--neutral03);
+  color: #565a63;
+}
+
+.header {
+  border-radius: 16px;
+  background-color: #f8f9fa;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  color: #565a63;
+}
+
+.tr:nth-child(even) {
+  border-bottom: 1px solid var(--neutral03);
+  height: 4rem;
+}
+
+.tranIcon {
+  padding: 10px;
+  gap: 10px;
+  width: 40px;
+  height: 40px;
+  background: var(--success-light);
+  border-radius: 32px;
+  margin-right: var(--space-md-1);
+}
+
+.description {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--neutral08);
+}
+
+.subDescription {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--neutral07);
+  opacity: 0.8;
+}
+
+.status {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.paid {
+  background-color: var(--success-light);
+  color: var(--success);
+}
+
+.unpaid {
+  background-color: var(--warning-light);
+  color: var(--warning-dark);
+}
+
+.overdue {
+  background-color: var(--danger-light);
+  color: var(--danger-dark);
+}

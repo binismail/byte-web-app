@@ -34,7 +34,7 @@ const Register: React.FC<IRegister> = () => {
               <Input placeholder="" value="" type="text" />
             </div>
             <div className="form-group">
-              <Button color="btnPrimary" title="Continue" />
+              <Button color="btnPrimary" title="Continue" type="block" />
             </div>
             <p className="link text-center">Already on Byte? Log in</p>
           </div>

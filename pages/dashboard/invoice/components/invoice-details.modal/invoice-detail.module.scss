@@ -1,0 +1,26 @@
+.container {
+  padding: 20px;
+  margin-bottom: var(--space-md-3);
+}
+
+.cardByte {
+  border-radius: 16px;
+  background-color: var(--byte);
+  width: 100%;
+  padding: 16px;
+}
+
+.amount {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--primary01);
+  margin-bottom: 0px;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--primary04);
+}

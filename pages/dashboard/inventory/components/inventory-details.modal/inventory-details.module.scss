@@ -1,0 +1,23 @@
+.container {
+  padding: 20px;
+  margin-bottom: var(--space-md-3);
+  .copy {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: var(--primary05);
+  }
+
+  .successHighlight {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: var(--success-dark);
+    background-color: var(--success-light);
+    padding: 5px 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    height: 20px;
+  }
+}

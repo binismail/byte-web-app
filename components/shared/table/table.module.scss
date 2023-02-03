@@ -1,0 +1,45 @@
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.td,
+.th {
+  // border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  height: 72px;
+  border-bottom: 1px solid var(--neutral03);
+}
+
+.tr:nth-child(even) {
+  border-bottom: 1px solid var(--neutral03);
+  height: 4rem;
+}
+
+.tranIcon {
+  padding: 10px;
+  gap: 10px;
+  width: 40px;
+  height: 40px;
+  background: var(--success-light);
+  border-radius: 32px;
+  margin-right: var(--space-md-1);
+}
+
+.description {
+  margin-top: 20px;
+  margin-bottom: -10px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--neutral08);
+}
+
+.subDescription {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--neutral07);
+  opacity: 0.8;
+}
