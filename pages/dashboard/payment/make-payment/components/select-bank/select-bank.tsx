@@ -9,7 +9,7 @@ const Selectbank: React.FC<any> = () => {
       <div className={styles.container}>
         <div>
           <div className="form-group">
-            <SearchInput placeholder="Search for a bank" value="" type="text" />
+            <SearchInput placeholder="Search for a bank" type="text" />
           </div>
           <div>
             <BankItem name="Citi Bank" />
