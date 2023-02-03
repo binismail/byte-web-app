@@ -5,7 +5,7 @@ import styles from './sales-record-service-form-group.module.scss';
 const SalesRecordServiceFormGroup: React.FC<any> = () => {
   return (
     <div className={styles.container}>
-      <Checkbox label="Add product from inventory" />
+      <Checkbox className="" label="Add product from inventory" />
       <div className="flex gap-1 form-group">
         <div className="input-wrapper">
           <label>Service name</label>
