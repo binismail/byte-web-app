@@ -4,6 +4,6 @@ const base: IPayment = {
   sampleTextProp: 'Hello world!',
 };
 
-export const mockDashboardProps = {
+export const mockPaymentProps = {
   base,
 };
