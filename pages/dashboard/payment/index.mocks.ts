@@ -1,6 +1,6 @@
-import { IDashboard } from '.';
+import { IPayment } from ".";
 
-const base: IDashboard = {
+const base: IPayment = {
   sampleTextProp: 'Hello world!',
 };
 
