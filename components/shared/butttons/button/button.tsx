@@ -7,6 +7,7 @@ export interface IButton {
   click?: any;
   icon?: string;
   iconColor?: string;
+  iconPosition?: string;
 }
 
 const Button: React.FC<IButton> = ({
@@ -16,6 +17,7 @@ const Button: React.FC<IButton> = ({
   click,
   icon,
   iconColor,
+  iconPosition,
 }) => {
   switch (color) {
     case 'btnPrimary':
@@ -46,10 +48,15 @@ const Button: React.FC<IButton> = ({
       <button className={`${styles.btn} + ${color} + ${type} `} onClick={click}>
         {icon && (
           <span>
-            <ByteIcon icon={icon} size={14} color={iconColor} />
+            <ByteIcon icon={icon} size={16} color={iconColor} />
           </span>
         )}{' '}
         {title}{' '}
+        {icon && iconPosition === 'right' && (
+          <span>
+            <ByteIcon icon={icon} size={14} color={iconColor} />
+          </span>
+        )}{' '}
       </button>
     </div>
   );

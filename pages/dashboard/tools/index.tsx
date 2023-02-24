@@ -2,22 +2,15 @@ import { ReactElement } from 'react';
 import DashboardLayout from '../../../components/layouts/dashboard-layout';
 import Layout from '../../../components/layouts/layout';
 import { NextPageWithLayout } from '../../_app';
-import styles from './Home.module.scss';
-export interface IInput {
-  placeholder: string;
-  type: string;
-  value: string;
-  onChange?: any;
-  className: string;
-}
 
-const Home: NextPageWithLayout<IInput> = ({ placeholder, type }) => {
+
+const Tools: NextPageWithLayout<any> = () => {
   return (
-    <input className={styles.input} placeholder={placeholder} type={type} />
+    <div></div>
   );
 };
 
-Home.getLayout = function getLayout(page: ReactElement) {
+Tools.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
       <DashboardLayout>{page}</DashboardLayout>
@@ -25,4 +18,4 @@ Home.getLayout = function getLayout(page: ReactElement) {
   );
 };
 
-export default Home;
+export default Tools;

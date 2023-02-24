@@ -1,7 +1,7 @@
 import styles from './Checkbox.module.scss';
 export interface ICheckbox {
   label: string;
-  className: string;
+  className?: string;
 }
 
 const Checkbox: React.FC<ICheckbox> = ({ label, className }) => {

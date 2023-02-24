@@ -158,18 +158,30 @@ hr {
   color: var(--success);
 }
 
+.text-neutral-05 {
+  color: var(--neutral05);
+}
+
 .text-neutral-06 {
   color: var(--neutral06);
+}
+
+.text-neutral-07 {
+  color: var(--neutral07);
 }
 
 .text-neutral-08 {
   color: var(--neutral08);
 }
 
-.text-neutral-07 {
-  color: var(--neutral08);
+.text-neutral-09 {
+  color: var(--neutral09);
 }
 
-.text-neutral-07 {
-  color: var(--neutral09);
+.text-small {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: var(--grey04);
 }

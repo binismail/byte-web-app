@@ -1,5 +1,8 @@
+.close{
+margin-top: var(--space-md-1) ;
+}
 .container {
-  padding: 20px;
+  padding: 3rem 1rem;
   margin-bottom: var(--space-md-3);
   .copy {
     font-weight: 400;
@@ -8,3 +11,4 @@
     color: var(--primary05);
   }
 }
+

@@ -12,7 +12,6 @@ const SalesProductForm: React.FC<any> = ({ type }) => {
         <p className="text-value text-primary-06 text-strong">
           {type === 'expense' ? 'Item Details' : ' Product details'}
         </p>
-
         <SalesRecordProductFormGroup type={type} />
         <SalesRecordProductFormGroup />
 
@@ -90,9 +89,9 @@ const SalesProductForm: React.FC<any> = ({ type }) => {
             </div>
             <p className="text-value">Payment method</p>
             <div className="flex">
-              <Input placeholder='' type="radio" />
-              <Input placeholder='' type="radio" />
-              <Input placeholder='' type="radio" />
+              <Input placeholder="" type="radio" />
+              <Input placeholder="" type="radio" />
+              <Input placeholder="" type="radio" />
             </div>
           </div>
         </div>

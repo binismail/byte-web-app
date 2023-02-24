@@ -44,8 +44,12 @@ const InvoiceDetail: React.FC<any> = () => {
             <ByteIcon icon="arrow-right-3" size="18" color="var(--white)" />
           </div>
         </div>
-        <div>
-          <p className="text-secton-items">Items:</p>
+        <div className={styles.invoiceContent}>
+          <div className="flex flex-space-between">
+            <p className="text-secton-items">Items:</p>
+            <p className="text-byte">Go to sales record</p>
+          </div>
+
           <div>
             <div className="flex flex-space-between ">
               <div>
@@ -105,10 +109,13 @@ const InvoiceDetail: React.FC<any> = () => {
                 <p className=" text-value text-neutral-08 mt-0 ">₦127,271.49</p>
               </div>
             </div>
+          </div>
+        </div>
 
-            <p>
-              <a className=" link">See change history</a>
-            </p>
+        <div className={styles.footer}>
+          <div className="flex flex-space-between">
+            <p className={styles.small}>Total</p>
+            <p className={styles.footerAmount}>₦201,987.82</p>
           </div>
         </div>
       </div>

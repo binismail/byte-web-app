@@ -1,0 +1,46 @@
+.container {
+  padding: 20px;
+  margin-bottom: var(--space-md-3);
+}
+
+.invoiceContent {
+  background: var(--neutral01);
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.cardByte {
+  border-radius: 16px;
+  width: 100%;
+  padding: 16px;
+}
+
+.amount {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--primary01);
+  margin-bottom: 0px;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--neutral04);
+  margin: var(--space-md-1) 0px 0px;
+}
+
+.footer {
+  border-radius: 0px 0px 16px 16px;
+  padding: 6px 12px;
+  background: #e1e4f6;
+}
+
+.small {
+  color: var(--neutral06);
+}
+
+.footerAmount {
+  font-weight: 600;
+}

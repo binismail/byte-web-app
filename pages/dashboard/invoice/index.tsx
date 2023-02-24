@@ -4,10 +4,10 @@ import DashboardLayout from '../../../components/layouts/dashboard-layout';
 import Layout from '../../../components/layouts/layout';
 import Button from '../../../components/shared/butttons/button/button';
 import SearchInput from '../../../components/shared/input/search-input/search-input';
+import SuccessModal from '../../../components/shared/modal/components/success/success.modal';
 import Modal from '../../../components/shared/modal/modal';
 import InvoiceTable from '../../../components/shared/table/invoice-table/invoice-table';
 import { NextPageWithLayout } from '../../_app';
-import InvoiceDetail from './components/invoice-details.modal/invoice-detail';
 
 export interface IInvoice {
   sampleTextProp: string;
@@ -58,7 +58,12 @@ const Invoice: NextPageWithLayout = () => {
     <div>
       {status && (
         <Modal closeModal={() => setStatus(false)} header={''}>
-          <InvoiceDetail closeModal={() => setStatus(false)} />
+          <SuccessModal
+            title="You’ve generated your invoice!"
+            message="Congratulations! Your invoice has been successfully generated. Tap the share button below to share it to your customer."
+            
+            closeModal={() => setStatus(false)}
+          />
         </Modal>
       )}
       <div className="mb-md-2">
@@ -75,7 +80,7 @@ const Invoice: NextPageWithLayout = () => {
             setStatus(true);
           }}
         />
-        <Filter placeholder='' value="Filter" />
+        <Filter placeholder="" value="Filter" />
       </div>
       <div>
         <InvoiceTable header={header} contents={contents} />

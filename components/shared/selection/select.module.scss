@@ -1,0 +1,15 @@
+.container {
+}
+.input {
+  height: 48px;
+  width: 100%;
+  border: 1px solid var(--neutral06);
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 4px;
+}
+
+.input:focus {
+  outline: none;
+  border: 1px solid var(--neutral06);
+}

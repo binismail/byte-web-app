@@ -1,0 +1,23 @@
+.container {
+  background: var(--neutral01);
+  border-radius: 10px;
+  padding: var(--space-md-2);
+  max-width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.containerLoading {
+  background: var(--neutral01);
+  border-radius: 10px;
+  padding: var(--space-md-2);
+  max-width: 100%;
+  height: 80px;
+  display: flex;
+  margin-top: 12px;
+  justify-content: space-between;
+}

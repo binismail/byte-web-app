@@ -1,9 +1,32 @@
 import Button from '../../../butttons/button/button';
+import ByteIcon from '../../../icon/byte.icon';
 import styles from './success.modal.module.scss';
-
-const SuccessModal: React.FC<any> = () => {
+export interface ISuccess {
+  title: string;
+  message: string;
+  cta?: boolean;
+  closeModal: any;
+  buttonTitle?: string;
+  buttonColor?: string;
+}
+const SuccessModal: React.FC<ISuccess> = ({
+  title,
+  message,
+  cta,
+  closeModal,
+  buttonTitle = 'Done',
+  buttonColor = 'btnPrimary',
+}) => {
   return (
     <div className="modal">
+      {closeModal && (
+        <div className="flex flex-space-between">
+          <div></div>
+          <div className={styles.close}>
+            <ByteIcon icon="close-circle" size={'20px'} />
+          </div>
+        </div>
+      )}
       <div className={styles.container}>
         <div className="flex flex-justify-center">
           <svg
@@ -20,14 +43,14 @@ const SuccessModal: React.FC<any> = () => {
           </svg>
         </div>
         <div>
-          <p className="text-strong text-center">Fund wallet successfull</p>
-          <p className="text-section-subtitle text-center">
-            How much would you like to fund your Byte Pocket with?
-          </p>
+          <p className="text-strong text-center">{title}</p>
+          <p className="text-section-subtitle text-center">{message}</p>
           <div>
-            <div className="form-group mb-2">
-              <Button color="btnPrimary" title="Done" type="block" />
-            </div>
+            {(cta || buttonTitle) && (
+              <div className="form-group mb-2">
+                <Button color={buttonColor} title={buttonTitle} type="block" />
+              </div>
+            )}
           </div>
         </div>
       </div>
