@@ -4,6 +4,7 @@ export interface IInput {
   type: string;
   value?: string;
   onChange?: any;
+  className?:any;
 }
 
 const Input: React.FC<IInput> = ({ placeholder, type }) => {
