@@ -117,7 +117,7 @@ const Register: React.FC<ILogin> = () => {
             </div>
 
             <div className="form-group">
-              <label>Confirm password</label>
+              <label>Password</label>
               <PasswordInput placeholder="" value=""  />
             </div>
             <div className="form-group">
