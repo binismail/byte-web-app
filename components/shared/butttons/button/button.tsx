@@ -8,7 +8,7 @@ export interface IButton {
   icon?: string;
   iconColor?: string;
   iconPosition?: string;
-  loading: boolean;
+  loading?: boolean;
 }
 
 const Button: React.FC<IButton> = ({
