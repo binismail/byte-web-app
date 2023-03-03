@@ -1,0 +1,70 @@
+{
+  "urli": "localhost:3000/api/v2/",
+  "prodUrl": "https://api.joinbyte.co/api/v2/",
+  "devUrl": "https://byte-app-v2.herokuapp.com/api/v2/",
+  "url": "https://api.joinbyte.co/api/v2/",
+
+  "authentication": {
+    "refreshToken": "auth/refreshToken",
+    "forgotBizPassword": "auth/business/forgotPassword",
+    "verifyBvn": "businesses/kyc/verifyBvn",
+    "register": "auth/business/register",
+    "verifyPhoneNumber": "auth/business/verifyRegistrationPhone",
+    "login": "auth/business/loginWithEmail",
+    "logout": "auth/logout",
+    "resetPassword":"auth/business/resetPassword"
+  },
+
+  "business": {
+    "getBusinessDetails": "businesses/details",
+    "createUserName": "businesses/createUsername",
+    "updateDetail": "businesses/updateBusinessDetails",
+    "updateProfilePicture": "businesses/updateProfilePicture",
+    "completeRegistration": "businesses/kyc/completeOnboarding",
+    "updateBusinessAdminDetails": "businesses/updateBusinessAdminDetails",
+    "updateUsername": "businesses/updateUsername",
+    "updatePassword": "businesses/updatePassword",
+    "togglePushNotificationStatus": "businesses/togglePushNotificationStatus",
+    "searchBusinessDocs": "businesses/search",
+    "completeBvnVerification": "businesses/kyc/completeBvnVerification",
+    "createTransactionPin": "businesses/createTransactionPin",
+    "transPinState": "businesses/transPinState",
+    "QRkitDetails": "businesses/QRkitDetails",
+    "orderQRkit": "businesses/orderQRkit",
+    "acceptQRkit": "businesses/acceptQRkit",
+    "getAnalytics": "businesses/analytics?daysCount=",
+    "record": "businesses/records",
+    "invoice": "businesses/invoices",
+    "inventory": "businesses/inventories",
+    "updatePin":"businesses/updateTransactionPin",
+    "updateProductsStock":"businesses/inventories/updateProductsStock"
+  },
+
+  "businessPocket": {
+    "createVirtualAccount": "businesses/virtualAccounts/seerbit",
+    "transactions": "businesses/transactions",
+    "linkedBanks": "businesses/banks",
+    "linkBankAccount": "businesses/linkBankAccount",
+    "getWallet": "businesses/wallets",
+    "getVirtualAccount": "businesses/virtualAccounts?provider=seerbit",
+    "searchBusinessDocs": "businesses/search",
+    "cards":"businesses/cards"
+  },
+
+  "businessPayment": {
+    "withdrawToLinkedBank": "businesses/payments/withdrawToLinkedBank",
+    "withdrawToNonLinkedBank": "businesses/payments/withdrawal",
+    "fundCard": "businesses/payments/fundByteWalletWithCard"
+  },
+
+  "deal": "deals/featured",
+
+  "verification": {
+    "dojah": "verification/verifyTermiiOtp",
+    "termii": "verification/verifyTermiiOtp",
+    "resolveBankAccount": "verification/resolveBankAccount",
+    "retrieveBanks": "verification/retrieveBanks"
+  },
+  "feed": "feed",
+  "beneficiaries":"beneficiaries"
+}

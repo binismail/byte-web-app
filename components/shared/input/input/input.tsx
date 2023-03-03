@@ -7,9 +7,9 @@ export interface IInput {
   className?:any;
 }
 
-const Input: React.FC<IInput> = ({ placeholder, type }) => {
+const Input: React.FC<IInput> = ({ placeholder, type, onChange }) => {
   return (
-    <input className={styles.input} placeholder={placeholder} type={type} />
+    <input className={styles.input} placeholder={placeholder} type={type} onChange={onChange}/>
   );
 };
 
