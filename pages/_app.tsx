@@ -9,6 +9,7 @@ import '../styles/icon.scss';
 import '../styles/badge.scss';
 import '../styles/text.scss';
 import '../styles/variable.scss';
+import { wrapper } from '../lib/redux/store';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -29,4 +30,6 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 //   return <Component {...pageProps} />;
 // }
 
-export default MyApp;
+// export default MyApp;
+export default wrapper.withRedux(MyApp);
+

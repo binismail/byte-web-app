@@ -8,6 +8,7 @@ export interface IButton {
   icon?: string;
   iconColor?: string;
   iconPosition?: string;
+  loading?: boolean;
 }
 
 const Button: React.FC<IButton> = ({
@@ -18,6 +19,7 @@ const Button: React.FC<IButton> = ({
   icon,
   iconColor,
   iconPosition,
+  loading,
 }) => {
   switch (color) {
     case 'btnPrimary':
@@ -50,8 +52,8 @@ const Button: React.FC<IButton> = ({
           <span>
             <ByteIcon icon={icon} size={16} color={iconColor} />
           </span>
-        )}{' '}
-        {title}{' '}
+        )}
+        {!loading ?  title  : 'loading...'}
         {icon && iconPosition === 'right' && (
           <span>
             <ByteIcon icon={icon} size={14} color={iconColor} />
