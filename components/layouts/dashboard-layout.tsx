@@ -1,6 +1,6 @@
-import logo from '../../public/logo.svg';
-import profile from '../../public/image/profile.jpg';
 import React, { useState } from 'react';
+import profile from '../../public/image/profile.jpg';
+import logo from '../../public/logo.svg';
 
 import Image from 'next/image';
 import ByteIcon from '../../components/shared/icon/byte.icon';
@@ -14,12 +14,16 @@ import Modal from '../../components/shared/modal/modal';
 // import Selectbank from './payment/make-payment/components/select-bank/select-bank';
 // import ConfirmTransaction from './payment/make-payment/components/confirm-transaction/confirm-transaction ';
 import VerifyPhone from '../../components/verify-phone/verify-phone';
+import ActiveLink from '../shared/active-link/active-link';
 
+// IDASHBOARD INTERFACE
 export interface IDashboard {
   children: any;
 }
 
+// DASHBOARDLAYOUT COMPONENT
 const DashboardLayout: React.FC<IDashboard> = ({ children }) => {
+  // STATES
   const [status, setStatus] = useState(false);
 
   return (
@@ -29,6 +33,8 @@ const DashboardLayout: React.FC<IDashboard> = ({ children }) => {
           <VerifyPhone />
         </Modal>
       )}
+
+      {/* HEADER */}
       <header className="header">
         <div className="header-container">
           <div className="header-title">
@@ -63,53 +69,75 @@ const DashboardLayout: React.FC<IDashboard> = ({ children }) => {
           </div>
         </div>
       </header>
+
+      {/* ASIDE TAG */}
       <aside className="aside">
         <div className="aside-header">
           <Image src={logo} alt="logo" width="80px" height="80px" />
         </div>
+
+        {/* ASIDE CHILD CONTAINER */}
         <div className="aside-menu">
+          {/* DASHBOARD LIST CONTAINER */}
           <ul>
-            <li className="link-item">
-              <ByteIcon
-                style={{ marginBottom: '-4px' }}
-                icon="home-2"
-                size={20}
-                color="var(--neutral06)"
-              />{' '}
-              Home
-            </li>
-            <li className="link-item">
-              {' '}
-              <ByteIcon
-                style={{ marginBottom: '-4px' }}
-                icon="briefcase"
-                size={20}
-                color="var(--neutral06)"
-              />{' '}
-              Tools
-            </li>
-            <li className="link-item">
-              {' '}
-              <ByteIcon
-                style={{ marginBottom: '-4px' }}
-                icon="card-pos"
-                size={20}
-                color="var(--neutral06)"
-              />{' '}
-              Payments
-            </li>
-            <li className="link-item">
-              {' '}
-              <ByteIcon
-                style={{ marginBottom: '-4px' }}
-                icon="people"
-                size={20}
-                color="var(--neutral06)"
-              />{' '}
-              Network
-            </li>
+            {/* HOME */}
+            <ActiveLink href={'/dashboard'} activeClassName="active-tab">
+              <li className="link-item">
+                <ByteIcon
+                  style={{ marginBottom: '-4px' }}
+                  icon="home-2"
+                  size={20}
+                  color="var(--neutral06)"
+                />{' '}
+                Home
+              </li>
+            </ActiveLink>
+
+            {/* TOOLS */}
+            <ActiveLink href={''} activeClassName="active-tab">
+              <li className="link-item">
+                {' '}
+                <ByteIcon
+                  style={{ marginBottom: '-4px' }}
+                  icon="briefcase"
+                  size={20}
+                  color="var(--neutral06)"
+                />{' '}
+                Tools
+              </li>
+            </ActiveLink>
+
+            {/* PAYMENTS */}
+            <ActiveLink href={''} activeClassName="active-tab">
+              <li className="link-item">
+                {' '}
+                <ByteIcon
+                  style={{ marginBottom: '-4px' }}
+                  icon="card-pos"
+                  size={20}
+                  color="var(--neutral06)"
+                />{' '}
+                Payments
+              </li>
+            </ActiveLink>
+
+            {/* NETWORK */}
+            <ActiveLink href={''} activeClassName="active-tab">
+              <li className="link-item">
+                {' '}
+                <ByteIcon
+                  style={{ marginBottom: '-4px' }}
+                  icon="people"
+                  size={20}
+                  color="var(--neutral06)"
+                />{' '}
+                Network
+              </li>
+            </ActiveLink>
           </ul>
         </div>
+
+        {/* LOGOUT */}
         <div className="aside-footer">
           <p className="link-item">
             {' '}
@@ -123,6 +151,8 @@ const DashboardLayout: React.FC<IDashboard> = ({ children }) => {
           </p>
         </div>
       </aside>
+
+      {/* MAIN CHILDREN */}
       <main className="main">
         <div className="main-content">{children}</div>
       </main>

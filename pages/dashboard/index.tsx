@@ -1,4 +1,5 @@
-import React, { ReactElement, useState } from 'react';
+import { Eye, EyeSlash } from 'iconsax-react';
+import { ReactElement, useState } from 'react';
 import QuickLinkCard from '../../components/cards/quicklink.card';
 import DashboardLayout from '../../components/layouts/dashboard-layout';
 import Layout from '../../components/layouts/layout';
@@ -15,6 +16,8 @@ export interface IDashboard {
 }
 
 const Dashboard: NextPageWithLayout = () => {
+  // STATES
+  const [balanceisHidden, setBalanceIsHidden] = useState(false);
   const [status, setStatus] = useState(false);
 
   return (
@@ -35,9 +38,32 @@ const Dashboard: NextPageWithLayout = () => {
           />
           <span>Byte Pocket</span>
         </p>
-        <p className="balance text-h4">
-          ₦150,000.00<span></span>
-        </p>
+
+        {/* Balance Amount */}
+        <div className={styles.balance_amount_cont}>
+          <p className="text-h4">
+            {balanceisHidden ? '******' : '₦150,000.00'}
+
+            {/* icon */}
+            {balanceisHidden ? (
+              <Eye
+                onClick={() => setBalanceIsHidden(false)}
+                className={styles.hidden_balance}
+                size="18"
+                color="#232846"
+              />
+            ) : (
+              <EyeSlash
+                onClick={() => setBalanceIsHidden(true)}
+                className={styles.hiddenbalance}
+                size="18"
+                color="#232846"
+              />
+            )}
+          </p>
+        </div>
+
+        {/* Funding Wallet */}
         <div className="flex gap">
           <Button title="Fund wallet" color="btnLight" />
           <Button

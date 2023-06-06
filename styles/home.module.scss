@@ -12,6 +12,18 @@
   align-items: center;
 }
 
+.balance_amount_cont {
+  display: inline-flex !important;
+  justify-content: center;
+  row-gap: 0.5rem;
+}
+
+.hiddenbalance {
+  margin-left: 4px;
+  cursor: pointer;
+  background-color: green;
+}
+
 .footer {
   display: flex;
   flex: 1;

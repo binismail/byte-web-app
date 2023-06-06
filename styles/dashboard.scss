@@ -72,17 +72,23 @@
 .aside-footer {
   display: flex;
   justify-content: center;
-  .link-item {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    color: var(--neutral06);
-    height: 45px;
-    list-style: none;
-  }
+}
+.active-tab {
+  color: green;
 }
 
+.link-item {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--neutral06);
+  height: 45px;
+  list-style: none;
+
+  & .icon-component {
+  }
+}
 .aside-header {
   display: flex;
   justify-content: center;
