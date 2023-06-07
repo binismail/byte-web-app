@@ -1,15 +1,18 @@
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
+import { wrapper } from '../lib/redux/store';
+import '../styles/badge.scss';
 import '../styles/colors.scss';
 import '../styles/dashboard.scss';
 import '../styles/form.scss';
 import '../styles/globals.scss';
 import '../styles/icon.scss';
-import '../styles/badge.scss';
 import '../styles/text.scss';
 import '../styles/variable.scss';
-import { wrapper } from '../lib/redux/store';
+
+// Import Tailwind CSS file config
+import '../styles/tailwind.css';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -32,4 +35,3 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
 // export default MyApp;
 export default wrapper.withRedux(MyApp);
-
