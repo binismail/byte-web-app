@@ -47,13 +47,16 @@ const Button: React.FC<IButton> = ({
   }
   return (
     <div>
-      <button className={`${styles.btn} + ${color} + ${type} `} onClick={click}>
+      <button
+        className={`${styles.btn} + ${color} + ${type} text-xs`}
+        onClick={click}
+      >
         {icon && (
           <span>
             <ByteIcon icon={icon} size={16} color={iconColor} />
           </span>
         )}
-        {!loading ?  title  : 'loading...'}
+        {!loading ? title : 'loading...'}
         {icon && iconPosition === 'right' && (
           <span>
             <ByteIcon icon={icon} size={14} color={iconColor} />

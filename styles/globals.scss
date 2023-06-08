@@ -2,8 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Aclonica', sans-serif;
 }
 
 a {
@@ -176,8 +175,6 @@ link {
 .image-rounded {
   border-radius: 50%;
 }
-
-
 
 @media (prefers-color-scheme: light) {
   html {
