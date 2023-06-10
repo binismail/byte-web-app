@@ -72,22 +72,22 @@ const DashboardLayout: React.FC<IDashboard> = ({ children }) => {
           {/* DASHBOARD LIST CONTAINER */}
           <ul className="flex flex-col gap-6">
             {/* HOME */}
-            <ActiveLink href={'/dashboard'}>
+            <ActiveLink href={'/dashboard'} passHref>
               <SideBarTab text="Home" Icon={Home2} />
             </ActiveLink>
 
             {/* TOOLS */}
-            <ActiveLink href={'/dashboard/tools'}>
+            <ActiveLink href={'/dashboard/tools'} passHref>
               <SideBarTab text="Tools" Icon={Briefcase} />
             </ActiveLink>
 
             {/* PAYMENTS */}
-            <ActiveLink href={'/dashboard/payments'}>
+            <ActiveLink href={'/dashboard/payments'} passHref>
               <SideBarTab text="Payments" Icon={CardPos} />
             </ActiveLink>
 
             {/* NETWORK */}
-            <ActiveLink href={'/dashboard/network'}>
+            <ActiveLink href={'/dashboard/network'} passHref>
               <SideBarTab text="Network" Icon={People} />
             </ActiveLink>
           </ul>

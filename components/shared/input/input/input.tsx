@@ -1,15 +1,36 @@
+import { FocusEventHandler } from 'react';
 import styles from './Input.module.scss';
 export interface IInput {
   placeholder: string;
   type: string;
   value?: string;
   onChange?: any;
-  className?:any;
+  onBlur?: FocusEventHandler<HTMLInputElement>;
+  name?: string;
+  onFocus?: FocusEventHandler<HTMLInputElement>;
+  className?: any;
 }
 
-const Input: React.FC<IInput> = ({ placeholder, type, onChange }) => {
+const Input: React.FC<IInput> = ({
+  placeholder,
+  type,
+  onChange,
+  onBlur,
+  onFocus,
+  name,
+  value,
+}) => {
   return (
-    <input className={styles.input} placeholder={placeholder} type={type} onChange={onChange}/>
+    <input
+      className={styles.input}
+      placeholder={placeholder}
+      value={value}
+      type={type}
+      onChange={onChange}
+      onBlur={onBlur}
+      name={name}
+      onFocus={onFocus}
+    />
   );
 };
 
