@@ -17,7 +17,7 @@ import logo from '../../../public/logo.svg';
 import homeStyles from '../../../styles/home.module.scss';
 import styles from './login.module.scss';
 
-const Register: NextPage = () => {
+const Login: NextPage = () => {
   // DATA INITIALZATION
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -138,4 +138,4 @@ const Register: NextPage = () => {
   );
 };
 
-export default Register;
+export default Login;
