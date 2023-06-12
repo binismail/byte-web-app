@@ -14,6 +14,10 @@ import logo from '../../../public/logo.svg';
 import homeStyles from '../../../styles/home.module.scss';
 import styles from './register.module.scss';
 
+export type IRegister = {
+  sampleTextProp: string;
+};
+
 const Register: NextPage = () => {
   // DATA INITIALIZATION
   const router = useRouter();
