@@ -12,8 +12,13 @@ import {
   People,
 } from 'iconsax-react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 import Modal from '../../components/shared/modal/modal';
 import VerifyPhone from '../../components/verify-phone/verify-phone';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { logout, selectUserId } from '../../lib/redux/authSlice/authSlice';
+import { useLogoutMutation } from '../../lib/services/businessApi';
 import ActiveLink from '../shared/active-link/active-link';
 import SideBarTab from '../shared/sidebar-tab/sidebar-tab';
 
@@ -26,6 +31,12 @@ export interface IDashboard {
 const DashboardLayout: React.FC<IDashboard> = ({ children }) => {
   // STATES
   const [status, setStatus] = useState(false);
+
+  // DATA INITIALIZATION
+  const [logoutUser, { isLoading }] = useLogoutMutation();
+  const router = useRouter();
+  const userId = useAppSelector(selectUserId);
+  const dispatch = useAppDispatch();
 
   return (
     <div className="grid-container">
@@ -95,7 +106,23 @@ const DashboardLayout: React.FC<IDashboard> = ({ children }) => {
 
         {/* LOGOUT */}
         <div className="aside-footer">
-          <div className="font-normal text-base text-[#808691] flex items-center gap-3 hover:text-[#6A78D1]">
+          <div
+            onClick={() => {
+              logoutUser({
+                userId,
+              })
+                .unwrap()
+                .then((data) => {
+                  router.push('/auth/login');
+                  toast.success(data?.message || 'Logged out!');
+                  dispatch(logout());
+                })
+                .catch((error) => {
+                  toast.error(error?.data?.message || 'Logout failed!');
+                });
+            }}
+            className="font-normal cursor-pointer text-base text-[#808691] flex items-center gap-3 hover:text-[#6A78D1]"
+          >
             <LogoutCurve size="20" color="#808691" variant="Outline" />
             Log out
           </div>

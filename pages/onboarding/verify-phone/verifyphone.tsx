@@ -1,16 +1,13 @@
-import Button from '../../../components/shared/butttons/button/button';
-import Header from '../../../components/shared/header/header';
-import styles from './verifyphone.module.scss';
-import homeStyles from '../../../styles/home.module.scss';
-import logo from '../../../public/logo.svg';
+import { NextPage } from 'next';
 import Image from 'next/image';
 import PinInput from 'react-pin-input';
+import Button from '../../../components/shared/butttons/button/button';
+import Header from '../../../components/shared/header/header';
+import logo from '../../../public/logo.svg';
+import homeStyles from '../../../styles/home.module.scss';
+import styles from './verifyphone.module.scss';
 
-export interface IVerifyPhone {
-  sampleTextProp: string;
-}
-
-const VerifyPhone: React.FC<IVerifyPhone> = () => {
+const VerifyPhone: NextPage = () => {
   return (
     <div className={''}>
       <div className={homeStyles.gridFull}>
@@ -45,7 +42,9 @@ const VerifyPhone: React.FC<IVerifyPhone> = () => {
                 Resend code if it doesn’t arrive in 00:59 seconds
               </p>
             </div>
-            <div className="form-group">
+
+            {/* Button */}
+            <div className="flex w-full flex-col items-stretch my-6">
               <Button color="btnPrimary" title="Validate" />
             </div>
             <p className="link text-center">Entered a wrong number?</p>

@@ -1,142 +1,140 @@
+import { Formik } from 'formik';
+import { NextPage } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import * as Yup from 'yup';
 import Button from '../../../components/shared/butttons/button/button';
+import FormError from '../../../components/shared/form-error/form-error';
 import Header from '../../../components/shared/header/header';
 import Input from '../../../components/shared/input/input/input';
-import styles from './login.module.scss';
-import homeStyles from '../../../styles/home.module.scss';
-import logo from '../../../public/logo.svg';
-import Image from 'next/image';
-import { useState } from 'react';
-import axios from 'axios';
-import urlList from '../../../lib/endpoints.json';
 import PasswordInput from '../../../components/shared/input/password-input/password-input';
+import { useAppDispatch } from '../../../hooks/hooks';
+import { setCredentials } from '../../../lib/redux/authSlice/authSlice';
+import { useLoginMutation } from '../../../lib/services/businessApi';
+import logo from '../../../public/logo.svg';
+import homeStyles from '../../../styles/home.module.scss';
+import styles from './login.module.scss';
 
-export interface ILogin {
-  sampleTextProp: string;
-}
-
-const Register: React.FC<ILogin> = () => {
-  const [serverResponse, setServerResponse] = useState('');
-  const [errorResponse, setErrorResponse] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [valueInput, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const emailRegex = RegExp(
-    /^([\w-/.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
-  );
-
-  const change = {
-    valueInput: (value: string) => {
-      setErrorResponse('');
-      setEmail(value);
-    },
-
-    password: (value: string) => {
-      setErrorResponse('');
-      setPassword(value);
-    },
-  };
-
-  const handleSubmit = () => {
-    if (!valueInput.trim() && !password.trim()) {
-      setErrorResponse('error');
-      setTimeout(() => {
-        setErrorResponse('');
-      }, 3000);
-      return;
-    }
-    handeleBusinessLogin();
-  };
-
-  const handeleBusinessLogin = async () => {
-    if (!emailRegex.test(valueInput)) {
-      setErrorResponse('Enter a valid email');
-      setTimeout(() => {
-        setErrorResponse('');
-      }, 3000);
-    } else {
-      try {
-        setLoading(true);
-        const { data } = await axios.post(
-          `${urlList.url}${urlList.authentication.login}`,
-          {
-            email: valueInput.toLowerCase().trim(),
-            password: password,
-          },
-          {
-            timeout: 1500 * 60,
-          }
-        );
-
-        const { userId, accessToken, refreshToken } = data.data;
-        let appData = { userId, refreshToken, authToken: accessToken };
-
-        console.log(appData);
-      } catch (error: any) {
-        setLoading(false);
-        if (error.response) {
-          setErrorResponse(error.response.data.message);
-          if (error.response) {
-            const formatResponse =
-              error.response.data.message.charAt(0).toUpperCase() +
-              error.response.data.message.slice(1);
-            setServerResponse(formatResponse);
-          }
-        } else {
-          setErrorResponse('Connection Timed Out');
-          setServerResponse('Connection Timed Out');
-        }
-        setTimeout(() => {
-          setServerResponse('');
-        }, 4000);
-      }
-    }
-  };
+const Register: NextPage = () => {
+  // DATA INITIALZATION
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const [login, { isLoading }] = useLoginMutation();
 
   return (
-    <div className={''}>
-      <p>{serverResponse}</p>
-      <p>{errorResponse}</p>
+    <Formik
+      enableReinitialize
+      initialValues={{
+        companyEmail: '',
+        password: '',
+      }}
+      onSubmit={(values) => {
+        login({
+          email: values.companyEmail,
+          password: values.password,
+        })
+          .unwrap()
+          .then((data) => {
+            toast.success(data?.message || 'Logged successfully!');
+            dispatch(
+              setCredentials({
+                userId: data?.data?.userId,
+                role: data?.data?.role,
+                accessToken: data?.data?.accessToken,
+                refreshToken: data?.data?.refreshToken,
+                loggedIn: true,
+              })
+            );
+            router.push('/dashboard');
+          })
+          .catch((error) => {
+            toast.error(error?.data?.message || 'Login failed!');
+          });
+      }}
+      validationSchema={Yup.object({
+        companyEmail: Yup.string()
+          .email('invalid email address')
+          .required('Email is required'),
+        password: Yup.string()
+          .required('password is required')
+          .min(8, 'password must be at least 8 characters long')
+          .matches(/\d/, 'password must contain a number')
+          .matches(/[a-z]/, 'password must contain a lowercase letter')
+          .matches(/[A-Z]/, 'password must contain an uppercase letter'),
+      })}
+    >
+      {({
+        values,
+        touched,
+        errors,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+      }) => {
+        return (
+          <div className={''}>
+            <div className={homeStyles.gridFull}>
+              <div className={styles.container}>
+                <div className="form-container">
+                  <Image src={logo} alt="logo" width="100px" height="100px" />
+                  <Header
+                    title={'Let’s set you up on Byte'}
+                    subtitle={'We need information about you'}
+                  ></Header>
+                  <div className="form-group">
+                    <label>Business name</label>
+                    <Input
+                      name={'companyEmail'}
+                      value={values.companyEmail}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder=""
+                      type="text"
+                    />
+                    {touched.companyEmail && errors.companyEmail && (
+                      <FormError message={errors.companyEmail} />
+                    )}
+                  </div>
 
-      <div className={homeStyles.gridFull}>
-        <div className={styles.container}>
-          <div className="form-container">
-            <Image src={logo} alt="logo" width="100px" height="100px" />
-            <Header
-              title={'Let’s set you up on Byte'}
-              subtitle={'We need information about you'}
-            ></Header>
-            <div className="form-group">
-              <label>Business name</label>
-              <Input
-                placeholder=""
-                value=""
-                type="text"
-                onChange={change.valueInput}
-              />
+                  <div className="form-group">
+                    <label>Password</label>
+                    <PasswordInput
+                      name={'password'}
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder=""
+                    />
+                    {touched.password && errors.password && (
+                      <FormError message={errors.password} />
+                    )}
+                  </div>
+                  <div className="form-group">
+                    <Button
+                      click={handleSubmit}
+                      color="btnPrimary"
+                      title="Continue"
+                      type="block"
+                      loading={isLoading}
+                    />
+                  </div>
+                  <Link href={'/auth/register'}>
+                    <a className="font-normal text-[15px] text-[#6A78D1] block w-full text-center">
+                      No account yet? Sign up
+                    </a>
+                  </Link>
+                </div>
+              </div>
+              <div className={styles.background}>
+                <div className={styles.side}></div>
+              </div>
             </div>
-
-            <div className="form-group">
-              <label>Password</label>
-              <PasswordInput placeholder="" value=""  />
-            </div>
-            <div className="form-group">
-              <Button
-                click={handleSubmit}
-                color="btnPrimary"
-                title="Continue"
-                type="block"
-                loading={loading}
-              />
-            </div>
-            <p className="link text-center">Already on Byte? Log in</p>
           </div>
-        </div>
-        <div className={styles.background}>
-          <div className={styles.side}></div>
-        </div>
-      </div>
-    </div>
+        );
+      }}
+    </Formik>
   );
 };
 

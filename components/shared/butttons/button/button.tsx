@@ -9,6 +9,7 @@ export interface IButton {
   iconColor?: string;
   iconPosition?: string;
   loading?: boolean;
+  disabled?: boolean;
 }
 
 const Button: React.FC<IButton> = ({
@@ -20,6 +21,7 @@ const Button: React.FC<IButton> = ({
   iconColor,
   iconPosition,
   loading,
+  disabled,
 }) => {
   switch (color) {
     case 'btnPrimary':
@@ -46,24 +48,23 @@ const Button: React.FC<IButton> = ({
       break;
   }
   return (
-    <div>
-      <button
-        className={`${styles.btn} + ${color} + ${type} text-xs`}
-        onClick={click}
-      >
-        {icon && (
-          <span>
-            <ByteIcon icon={icon} size={16} color={iconColor} />
-          </span>
-        )}
-        {!loading ? title : 'loading...'}
-        {icon && iconPosition === 'right' && (
-          <span>
-            <ByteIcon icon={icon} size={14} color={iconColor} />
-          </span>
-        )}{' '}
-      </button>
-    </div>
+    <button
+      disabled={disabled}
+      className={`${styles.btn} + ${color} + ${type} text-xs disabled:cursor-not-allowed disabled:opacity-40`}
+      onClick={click}
+    >
+      {icon && (
+        <span>
+          <ByteIcon icon={icon} size={16} color={iconColor} />
+        </span>
+      )}
+      {!loading ? title : 'loading...'}
+      {icon && iconPosition === 'right' && (
+        <span>
+          <ByteIcon icon={icon} size={14} color={iconColor} />
+        </span>
+      )}{' '}
+    </button>
   );
 };
 

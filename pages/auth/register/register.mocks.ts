@@ -1,4 +1,4 @@
-import { IRegister } from './register';
+import { IRegister } from '.';
 
 const base: IRegister = {
   sampleTextProp: 'Hello world!',
