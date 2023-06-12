@@ -1,6 +1,4 @@
-type ILogin = {
-  sampleTextProp: string;
-};
+import { ILogin } from '.';
 
 const base: ILogin = {
   sampleTextProp: 'Hello world!',

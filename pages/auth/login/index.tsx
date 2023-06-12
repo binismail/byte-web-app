@@ -17,6 +17,10 @@ import logo from '../../../public/logo.svg';
 import homeStyles from '../../../styles/home.module.scss';
 import styles from './login.module.scss';
 
+export type ILogin = {
+  sampleTextProp: string;
+};
+
 const Login: NextPage = () => {
   // DATA INITIALZATION
   const router = useRouter();
