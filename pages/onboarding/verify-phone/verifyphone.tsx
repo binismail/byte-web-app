@@ -7,6 +7,10 @@ import logo from '../../../public/logo.svg';
 import homeStyles from '../../../styles/home.module.scss';
 import styles from './verifyphone.module.scss';
 
+export type IVerifyPhone = {
+  sampleTextProp: string;
+};
+
 const VerifyPhone: NextPage = () => {
   return (
     <div className={''}>
