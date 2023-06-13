@@ -1,13 +1,13 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 
 import DashboardLayout from '../../../../components/layouts/dashboard-layout';
 import Layout from '../../../../components/layouts/layout';
+import SalesRecordProductFormGroup from '../../../../components/records/sales-record-product-form-group/sales-record-product-form-group';
+import Button from '../../../../components/shared/butttons/button/button';
+import Input from '../../../../components/shared/input/input/input';
+import TotalAmount from '../../../../components/total amount/total-amount';
 import { NextPageWithLayout } from '../../../_app';
 import styles from './index.module.scss';
-import SalesRecordFormGroup from '../components/sales-record-product-form-group/sales-record-product-form-group';
-import TotalAmount from '../../../../components/total amount/total-amount';
-import Input from '../../../../components/shared/input/input/input';
-import Button from '../../../../components/shared/butttons/button/button';
 
 export interface IEditSales {
   sampleTextProp: string;
@@ -21,7 +21,8 @@ const EditSales: NextPageWithLayout = () => {
           Product details
         </p>
 
-        <SalesRecordFormGroup />
+        {/* <SalesRecordFormGroup /> */}
+        <SalesRecordProductFormGroup />
 
         <p>
           <a className="text-value text-primary-06 mx-md-1">
@@ -63,9 +64,9 @@ const EditSales: NextPageWithLayout = () => {
           </div>
           <p className="text-value">Payment method</p>
           <div className="flex">
-            <Input placeholder='' type="radio" />
-            <Input placeholder='' type="radio" />
-            <Input placeholder='' type="radio" />
+            <Input placeholder="" type="radio" />
+            <Input placeholder="" type="radio" />
+            <Input placeholder="" type="radio" />
           </div>
         </div>
       </div>

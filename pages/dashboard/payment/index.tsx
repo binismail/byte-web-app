@@ -2,7 +2,7 @@ import { ReactElement, useState } from 'react';
 import DashboardLayout from '../../../components/layouts/dashboard-layout';
 import Layout from '../../../components/layouts/layout';
 import Chart from '../../../components/payment/chart/chart';
-import TopCustomer from '../../../components/payment/chart/top-customer/top-costumerr';
+import TopCustomer from '../../../components/payment/top-customer/top-costumer';
 import Button from '../../../components/shared/butttons/button/button';
 import ByteIcon from '../../../components/shared/icon/byte.icon';
 import Modal from '../../../components/shared/modal/modal';

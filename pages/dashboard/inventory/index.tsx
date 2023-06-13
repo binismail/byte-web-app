@@ -1,5 +1,6 @@
-import React, { ReactElement, useState } from 'react';
+import { ReactElement, useState } from 'react';
 import Filter from '../../../components/filter/filter';
+import UpdateStock from '../../../components/inventory/update-stock.modal/update-stock';
 import DashboardLayout from '../../../components/layouts/dashboard-layout';
 import Layout from '../../../components/layouts/layout';
 import Button from '../../../components/shared/butttons/button/button';
@@ -7,7 +8,6 @@ import SearchInput from '../../../components/shared/input/search-input/search-in
 import Modal from '../../../components/shared/modal/modal';
 import InventoryTable from '../../../components/shared/table/inventory-table/inventory-table';
 import { NextPageWithLayout } from '../../_app';
-import UpdateStock from './components/update-stock.modal/update-stock';
 
 export interface IRecords {
   sampleTextProp: string;
@@ -70,7 +70,7 @@ const Records: NextPageWithLayout = () => {
             setStatus(true);
           }}
         />
-        <Filter placeholder='' value="Filter" />
+        <Filter placeholder="" value="Filter" />
       </div>
       <div>
         <InventoryTable header={header} contents={contents} />

@@ -1,10 +1,10 @@
 import { ReactElement, useState } from 'react';
 import DashboardLayout from '../../../../components/layouts/dashboard-layout';
 import Layout from '../../../../components/layouts/layout';
+import SalesProductForm from '../../../../components/records/sales-product-form/sales-product-form';
+import SalesServiceForm from '../../../../components/records/sales-service-form/sales-service-form';
 import Tabs from '../../../../components/shared/tabs/tabs';
 import { NextPageWithLayout } from '../../../_app';
-import SalesProductForm from '../components/sales-product-form/sales-product-form';
-import SalesServiceForm from '../components/sales-service-form/sales-service-form';
 export interface ICreateExpense {
   sampleTextProp: string;
 }
