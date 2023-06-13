@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import Records, { IRecords } from './index';
 import { mockRecordsProps } from './index.mocks';
+import Records, { IRecords } from './index.page';
 
 export default {
   title: 'templates/Records',

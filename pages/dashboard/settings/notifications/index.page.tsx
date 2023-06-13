@@ -3,12 +3,11 @@ import DashboardLayout from '../../../../components/layouts/dashboard-layout';
 import Layout from '../../../../components/layouts/layout';
 import CheckboxSpecial from '../../../../components/shared/checkboxSpecial/checkbox-special';
 
-import { NextPageWithLayout } from '../../../_app';
+import { NextPageWithLayout } from '../../../_app.page';
 
 export interface IInput {}
 
 const Verifications: NextPageWithLayout<IInput> = () => {
-
   return (
     <div>
       <div className="container-border-rounded">
@@ -69,10 +68,12 @@ const Verifications: NextPageWithLayout<IInput> = () => {
           </div>
         </div>
 
-           <div className="flex flex-space-between ">
+        <div className="flex flex-space-between ">
           <div className="mx-md-1 my-md-1">
             <p className="text-value  text-neutral-08 mb-0">Mobile only</p>
-            <p className='text-label'>Receive notifications only on mobile device</p>
+            <p className="text-label">
+              Receive notifications only on mobile device
+            </p>
           </div>
           <div className="flex flex-align-center">
             <CheckboxSpecial label="" />

@@ -9,7 +9,7 @@ import SearchInput from '../../../components/shared/input/search-input/search-in
 import Modal from '../../../components/shared/modal/modal';
 import RecordTable from '../../../components/shared/table/record-table/record-table';
 import Tabs from '../../../components/shared/tabs/tabs';
-import { NextPageWithLayout } from '../../_app';
+import { NextPageWithLayout } from '../../_app.page';
 
 export interface IRecords {
   sampleTextProp: string;

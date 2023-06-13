@@ -3,12 +3,11 @@ import DashboardLayout from '../../../../components/layouts/dashboard-layout';
 import Layout from '../../../../components/layouts/layout';
 import ByteIcon from '../../../../components/shared/icon/byte.icon';
 
-import { NextPageWithLayout } from '../../../_app';
+import { NextPageWithLayout } from '../../../_app.page';
 
 export interface IPrivacy {}
 
 const Privacy: NextPageWithLayout<IPrivacy> = () => {
-
   return (
     <div>
       <div className="container-border-rounded mt-md-2">

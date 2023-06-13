@@ -4,7 +4,7 @@ import Link from 'next/link';
 import DashboardLayout from '../../../../components/layouts/dashboard-layout';
 import Layout from '../../../../components/layouts/layout';
 import MenuItem from '../../../../components/menu-item/menu-item';
-import { NextPageWithLayout } from '../../../_app';
+import { NextPageWithLayout } from '../../../_app.page';
 
 const Home: NextPageWithLayout<any> = () => {
   return (

@@ -7,7 +7,7 @@ import Button from '../../../components/shared/butttons/button/button';
 import SearchInput from '../../../components/shared/input/search-input/search-input';
 import Modal from '../../../components/shared/modal/modal';
 import InventoryTable from '../../../components/shared/table/inventory-table/inventory-table';
-import { NextPageWithLayout } from '../../_app';
+import { NextPageWithLayout } from '../../_app.page';
 
 export interface IRecords {
   sampleTextProp: string;

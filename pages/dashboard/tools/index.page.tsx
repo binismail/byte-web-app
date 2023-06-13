@@ -1,13 +1,10 @@
 import { ReactElement } from 'react';
 import DashboardLayout from '../../../components/layouts/dashboard-layout';
 import Layout from '../../../components/layouts/layout';
-import { NextPageWithLayout } from '../../_app';
-
+import { NextPageWithLayout } from '../../_app.page';
 
 const Tools: NextPageWithLayout<any> = () => {
-  return (
-    <div></div>
-  );
+  return <div></div>;
 };
 
 Tools.getLayout = function getLayout(page: ReactElement) {

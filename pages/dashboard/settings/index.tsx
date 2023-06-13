@@ -3,7 +3,7 @@ import { ReactElement } from 'react';
 import DashboardLayout from '../../../components/layouts/dashboard-layout';
 import Layout from '../../../components/layouts/layout';
 import MenuItem from '../../../components/menu-item/menu-item';
-import { NextPageWithLayout } from '../../_app';
+import { NextPageWithLayout } from '../../_app.page';
 
 export interface IInput {
   placeholder: string;

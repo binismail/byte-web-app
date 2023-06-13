@@ -4,19 +4,18 @@ import Layout from '../../../../components/layouts/layout';
 import SalesProductForm from '../../../../components/records/sales-product-form/sales-product-form';
 import SalesServiceForm from '../../../../components/records/sales-service-form/sales-service-form';
 import Tabs from '../../../../components/shared/tabs/tabs';
-import { NextPageWithLayout } from '../../../_app';
-import styles from './index.module.scss';
-export interface ICreateSales {
+import { NextPageWithLayout } from '../../../_app.page';
+export interface ICreateExpense {
   sampleTextProp: string;
 }
 
-const CreateSales: NextPageWithLayout = () => {
-  const [tab, setTab] = useState('Product details');
+const CreateExpense: NextPageWithLayout = () => {
+  const [tab, setTab] = useState('Item details');
 
   // must be of the following types
-  const label: ('Product details' | 'Service records')[] & string[] = [
-    'Product details',
-    'Service records',
+  const label: ('Item details' | 'Service details')[] & string[] = [
+    'Item details',
+    'Service details',
   ];
 
   return (
@@ -25,14 +24,14 @@ const CreateSales: NextPageWithLayout = () => {
         <Tabs label={label} click={(t: any) => setTab(t)} value={tab} />
       </div>
 
-      <div className={styles.container}>
-        {tab === 'Product details' ? (
-          <div className="productDetails">
-            <SalesProductForm />
+      <div>
+        {tab === 'Item details' ? (
+          <div className="itemDetails">
+            <SalesProductForm type="expense" />
           </div>
         ) : (
           <div className="serviceDetails">
-            <SalesServiceForm />
+            <SalesServiceForm type="expense" />
           </div>
         )}
       </div>
@@ -40,7 +39,7 @@ const CreateSales: NextPageWithLayout = () => {
   );
 };
 
-CreateSales.getLayout = function getLayout(page: ReactElement) {
+CreateExpense.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
       <DashboardLayout>{page}</DashboardLayout>
@@ -48,4 +47,4 @@ CreateSales.getLayout = function getLayout(page: ReactElement) {
   );
 };
 
-export default CreateSales;
+export default CreateExpense;

@@ -1,11 +1,12 @@
 import { ReactElement } from 'react';
+
 import DashboardLayout from '../../../../components/layouts/dashboard-layout';
 import Layout from '../../../../components/layouts/layout';
-import SalesProductForm from '../../../../components/records/sales-product-form/sales-product-form';
+import SalesRecordProductFormGroup from '../../../../components/records/sales-record-product-form-group/sales-record-product-form-group';
 import Button from '../../../../components/shared/butttons/button/button';
 import Input from '../../../../components/shared/input/input/input';
 import TotalAmount from '../../../../components/total amount/total-amount';
-import { NextPageWithLayout } from '../../../_app';
+import { NextPageWithLayout } from '../../../_app.page';
 import styles from './index.module.scss';
 
 export interface IEditSales {
@@ -20,7 +21,8 @@ const EditSales: NextPageWithLayout = () => {
           Product details
         </p>
 
-        <SalesProductForm />
+        {/* <SalesRecordFormGroup /> */}
+        <SalesRecordProductFormGroup />
 
         <p>
           <a className="text-value text-primary-06 mx-md-1">

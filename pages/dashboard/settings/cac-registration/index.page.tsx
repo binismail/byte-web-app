@@ -6,7 +6,7 @@ import Button from '../../../../components/shared/butttons/button/button';
 import ByteIcon from '../../../../components/shared/icon/byte.icon';
 import Input from '../../../../components/shared/input/input/input';
 import Select from '../../../../components/shared/selection/select';
-import { NextPageWithLayout } from '../../../_app';
+import { NextPageWithLayout } from '../../../_app.page';
 
 export interface IInput {}
 

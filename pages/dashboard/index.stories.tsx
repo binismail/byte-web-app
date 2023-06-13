@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import Dashboard, { IDashboard } from '.';
 import { mockDashboardProps } from './index.mocks';
+import Dashboard, { IDashboard } from './index.page';
 
 export default {
   title: 'templates/Dashboard',

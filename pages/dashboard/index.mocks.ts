@@ -1,4 +1,4 @@
-import { IDashboard } from '.';
+import { IDashboard } from './index.page';
 
 const base: IDashboard = {
   sampleTextProp: 'Hello world!',

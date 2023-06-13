@@ -4,7 +4,7 @@ import Layout from '../../../../components/layouts/layout';
 import ByteIcon from '../../../../components/shared/icon/byte.icon';
 import SuccessModal from '../../../../components/shared/modal/components/success/success.modal';
 import Modal from '../../../../components/shared/modal/modal';
-import { NextPageWithLayout } from '../../../_app';
+import { NextPageWithLayout } from '../../../_app.page';
 
 export interface IInput {}
 

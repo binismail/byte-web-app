@@ -4,39 +4,27 @@ import DashboardLayout from '../../../../components/layouts/dashboard-layout';
 import Layout from '../../../../components/layouts/layout';
 import Button from '../../../../components/shared/butttons/button/button';
 import ByteIcon from '../../../../components/shared/icon/byte.icon';
-import Input from '../../../../components/shared/input/input/input';
-import Select from '../../../../components/shared/selection/select';
-import { NextPageWithLayout } from '../../../_app';
+import TextArea from '../../../../components/shared/textarea/textarea';
+import { NextPageWithLayout } from '../../../_app.page';
 
 export interface IInput {}
-
-const list = [
-  { label: 'Drivers License', value: 'Drivers License' },
-  { label: 'National ID', value: 'National ID' },
-];
 
 const Verifications: NextPageWithLayout<IInput> = () => {
   return (
     <div>
       <div className="container-border-rounded">
+        <p className="text-value text-primary-06 text-strong">
+          Send us a message{' '}
+        </p>
+        <hr></hr>
         <div className="mx-md-1 my-md-2">
-          <p className="text-body-lg-bold mb-0 text-neutral-09">
-            Upload a valid ID
-          </p>
-          <div className="flex mt-0">
-            <p className="text-value ">
-              Upload a valid means of identification (NIN slip, Drivers license,
-              International passport).
-            </p>
-          </div>
-          <div className="form-group w-33">
+          <div className="form-group">
             <label>ID Type</label>
-            <Select list={list} placeholder="Select an ID type" />
+            <TextArea rows={8} value="" placeholder="" />
           </div>
-          <hr />
 
           <div className="form-group">
-            <label>Drivers’ License</label>
+            <label>Attach file</label>
             <DocumentUpload />
           </div>
           <div className="flex flex-justify-center">
@@ -50,12 +38,13 @@ const Verifications: NextPageWithLayout<IInput> = () => {
               </p>
             </div>
           </div>
-
-          <div className="form-group w-33">
-            <label>ID Type</label>
-            <Input type="date" placeholder="Enter ID expiry date" />
+          <div className="flex gap-1">
+            <Button title="Send" type="large" color="btnPrimary" />
+            <p className="text-byte">Send via email</p>
           </div>
-          <Button title="Submit ID Document" type="large" color="btnPrimary" />
+          <p className="hint " style={{ color: 'var(--grey-faded)' }}>
+            We will respond to you via Byte Inbox
+          </p>
         </div>
       </div>
     </div>

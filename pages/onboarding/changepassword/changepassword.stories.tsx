@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import ChangePassword, { IChangePassword } from './changepassword';
 import { mockChangePasswordProps } from './changepassword.mocks';
+import ChangePassword, { IChangePassword } from './changepassword.page';
 
 export default {
   title: 'templates/ChangePassword',

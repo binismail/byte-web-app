@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import VerifyPhone, { IVerifyPhone } from './verifyphone';
 import { mockVerifyPhoneProps } from './verifyphone.mocks';
+import VerifyPhone, { IVerifyPhone } from './verifyphone.page';
 
 export default {
   title: 'templates/VerifyPhone',

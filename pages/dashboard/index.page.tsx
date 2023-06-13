@@ -7,7 +7,7 @@ import Button from '../../components/shared/butttons/button/button';
 import Modal from '../../components/shared/modal/modal';
 import Table from '../../components/shared/table/table';
 import VerifyPhone from '../../components/verify-phone/verify-phone';
-import { NextPageWithLayout } from '../_app';
+import { NextPageWithLayout } from '../_app.page';
 
 export interface IDashboard {
   sampleTextProp: string;
