@@ -3,12 +3,14 @@ import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import FirstRegStep from '../../../components/register/first-reg-step';
 import SecondRegStep from '../../../components/register/second-reg-step';
+import ThirdRegStep from '../../../components/register/third-reg-step';
 import Header from '../../../components/shared/header/header';
+import useStorage from '../../../hooks/useStorage';
 import { useRegisterMutation } from '../../../lib/services/businessApi';
 import logo from '../../../public/logo.svg';
 import homeStyles from '../../../styles/home.module.scss';
@@ -22,9 +24,19 @@ const Register: NextPage = () => {
   // DATA INITIALIZATION
   const router = useRouter();
   const [register, { isLoading }] = useRegisterMutation();
+  const [storedPhone, setStoredPhone] = useState('');
+  const { getItem, removeItem } = useStorage();
 
   // STATES
   const [progress, setProgress] = useState<number>(1);
+
+  // SIDE EFFECTS
+  useEffect(() => {
+    if (progress === 3) {
+      const phone = getItem('phone', 'session');
+      setStoredPhone(phone);
+    }
+  }, [progress]);
 
   return (
     <Formik
@@ -42,9 +54,10 @@ const Register: NextPage = () => {
         register(values)
           .unwrap()
           .then((data) => {
-            console.log(data);
+            removeItem('phone', 'session');
+            removeItem('id', 'session');
             toast.success(data?.message || 'Registered successfully!');
-            router.push('/onboarding/verify-phone/verifyphone');
+            router.push('/auth/login');
           })
           .catch((error) => {
             toast.error(error?.data?.message || 'Registration failed!');
@@ -80,6 +93,7 @@ const Register: NextPage = () => {
     >
       {({
         values,
+        isValid,
         touched,
         errors,
         handleChange,
@@ -92,10 +106,20 @@ const Register: NextPage = () => {
               <div className={styles.container}>
                 <div className="form-container">
                   <Image src={logo} alt="logo" width="100px" height="100px" />
-                  <Header
-                    title={'Let’s get to know you'}
-                    subtitle={'We need information about you'}
-                  ></Header>
+                  {progress === 3 ? (
+                    <Header
+                      className="flex flex-col w-full gap-1 text-center mt-4"
+                      titleClassName="font-normal text-2xl text-[#15171F]"
+                      subtitleClassName="font-normal text-sm text-[#565A63]"
+                      title={'Verify Phone'}
+                      subtitle={`A One-Time Password as been sent to ${storedPhone}`}
+                    />
+                  ) : (
+                    <Header
+                      title={'Let’s get to know you'}
+                      subtitle={'We need information about you'}
+                    />
+                  )}
                   {progress === 1 ? (
                     <FirstRegStep
                       values={values}
@@ -107,6 +131,18 @@ const Register: NextPage = () => {
                     />
                   ) : progress === 2 ? (
                     <SecondRegStep
+                      isValid={isValid}
+                      values={values}
+                      handleChange={handleChange}
+                      handleBlur={handleBlur}
+                      touched={touched}
+                      errors={errors}
+                      setProgress={setProgress}
+                      handleSubmit={handleSubmit}
+                      isLoading={isLoading}
+                    />
+                  ) : progress === 3 ? (
+                    <ThirdRegStep
                       values={values}
                       handleChange={handleChange}
                       handleBlur={handleBlur}
@@ -117,11 +153,13 @@ const Register: NextPage = () => {
                       isLoading={isLoading}
                     />
                   ) : null}
-                  <Link href={'/auth/login'}>
-                    <a className="font-normal text-[15px] text-[#6A78D1] block w-full text-center">
-                      Already on Byte? Log in
-                    </a>
-                  </Link>
+                  {progress !== 3 ? (
+                    <Link href={'/auth/login'}>
+                      <a className="font-normal text-[15px] text-[#6A78D1] block w-full text-center">
+                        Already on Byte? Log in
+                      </a>
+                    </Link>
+                  ) : null}
                 </div>
               </div>
               <div className={styles.background}>

@@ -1,3 +1,6 @@
+import { toast } from 'react-toastify';
+import useStorage from '../../hooks/useStorage';
+import { useSendOTPMutation } from '../../lib/services/businessApi';
 import { RegStepProps } from '../../pages/auth/register/register.types';
 import Button from '../shared/butttons/button/button';
 import FormError from '../shared/form-error/form-error';
@@ -11,9 +14,29 @@ const SecondRegStep = ({
   touched,
   errors,
   setProgress,
-  handleSubmit,
-  isLoading,
+  isValid,
 }: RegStepProps) => {
+  // DATA INITIALIZATION
+  const { setItem } = useStorage();
+  const [sendOtp, { isLoading }] = useSendOTPMutation();
+
+  // HANDLERS
+  const handlerContinue = () => {
+    sendOtp({
+      phone: values.phone,
+    })
+      .unwrap()
+      .then((data) => {
+        setProgress(3);
+        setItem('phone', values.phone, 'session');
+        setItem('id', data?.data?.pinId, 'session');
+        toast.success(data?.message || 'Code sent successfully!');
+      })
+      .catch((error) => {
+        toast.error(error?.data?.message || 'Failed!');
+      });
+  };
+
   return (
     <>
       <div className="form-group">
@@ -62,9 +85,14 @@ const SecondRegStep = ({
         <Button click={() => setProgress(1)} title="Back" color="btnLight" />
 
         <Button
-          disabled={isLoading}
+          disabled={
+            !values.businessName ||
+            !values.password ||
+            !values.repeatPassword ||
+            !isValid
+          }
           loading={isLoading}
-          click={handleSubmit}
+          click={handlerContinue}
           color="btnPrimary"
           title="Continue"
         />

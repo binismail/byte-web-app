@@ -1,5 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { RegisterProps } from '../../pages/auth/register/register.types';
+import {
+  RegisterProps,
+  SendOtpProps,
+  VerifyNumberProps,
+} from '../../pages/auth/register/register.types';
 import baseUrl from '../endpoints.json';
 
 export const businessApi = createApi({
@@ -14,6 +18,26 @@ export const businessApi = createApi({
       query: (body: { email: string; password: string }) => {
         return {
           url: baseUrl.authentication.login,
+          method: 'POST',
+          body,
+        };
+      },
+      invalidatesTags: ['AuthUser'],
+    }),
+    sendOTP: builder.mutation<any, SendOtpProps>({
+      query: (body: SendOtpProps) => {
+        return {
+          url: baseUrl.authentication.verifyPhoneNumber,
+          method: 'POST',
+          body,
+        };
+      },
+      invalidatesTags: ['AuthUser'],
+    }),
+    verifyNumber: builder.mutation<any, VerifyNumberProps>({
+      query: (body: VerifyNumberProps) => {
+        return {
+          url: baseUrl.verification.termii,
           method: 'POST',
           body,
         };
@@ -52,5 +76,10 @@ export const businessApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useLogoutMutation } =
-  businessApi;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useLogoutMutation,
+  useSendOTPMutation,
+  useVerifyNumberMutation,
+} = businessApi;

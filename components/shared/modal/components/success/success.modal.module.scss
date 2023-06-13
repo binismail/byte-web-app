@@ -1,9 +1,14 @@
-.close{
-margin-top: var(--space-md-1) ;
+.close {
+  margin-top: var(--space-md-1);
 }
 .container {
   padding: 3rem 1rem;
-  margin-bottom: var(--space-md-3);
+  min-height: fit-content;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 32px;
+
   .copy {
     font-weight: 400;
     font-size: 13px;
@@ -11,4 +16,3 @@ margin-top: var(--space-md-1) ;
     color: var(--primary05);
   }
 }
-
