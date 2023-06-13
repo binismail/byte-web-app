@@ -1,5 +1,5 @@
-import Checkbox from '../../../../../components/shared/checkbox/checkbox';
-import Input from '../../../../../components/shared/input/input/input';
+import Checkbox from '../../shared/checkbox/checkbox';
+import Input from '../../shared/input/input/input';
 import styles from './sales-record-service-form-group.module.scss';
 
 const SalesRecordServiceFormGroup: React.FC<any> = () => {

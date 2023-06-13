@@ -1,4 +1,4 @@
-import Button from '../../../../../../components/shared/butttons/button/button';
+import Button from '../../../shared/butttons/button/button';
 import styles from './confirm-transaction.module.scss';
 
 const ConfirmTransaction: React.FC<any> = () => {

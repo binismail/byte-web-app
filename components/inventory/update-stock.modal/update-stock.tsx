@@ -1,5 +1,5 @@
-import ByteIcon from '../../../../../components/shared/icon/byte.icon';
-import QuantityInput from '../../../../../components/shared/input/quantity-input/quantity-input';
+import ByteIcon from '../../shared/icon/byte.icon';
+import QuantityInput from '../../shared/input/quantity-input/quantity-input';
 import styles from './update-stock.module.scss';
 
 const UpdateStock: React.FC<any> = ({ closeModal }) => {

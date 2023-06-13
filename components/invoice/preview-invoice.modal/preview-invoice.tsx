@@ -1,7 +1,7 @@
-import Avatar from '../../../../../components/shared/avatar/avatar';
-import ByteIcon from '../../../../../components/shared/icon/byte.icon';
+import profile from '../../../public/image/profile.jpg';
+import Avatar from '../../shared/avatar/avatar';
+import ByteIcon from '../../shared/icon/byte.icon';
 import styles from './preview-invoice.module.scss';
-import profile from '../../../../../public/image/profile.jpg';
 
 const PreviewInvoice: React.FC<any> = () => {
   return (

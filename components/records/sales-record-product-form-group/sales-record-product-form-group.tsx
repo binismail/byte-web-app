@@ -1,12 +1,12 @@
-import Checkbox from '../../../../../components/shared/checkbox/checkbox';
-import CheckboxSpecial from '../../../../../components/shared/checkboxSpecial/checkbox-special';
-import Input from '../../../../../components/shared/input/input/input';
+import Checkbox from '../../shared/checkbox/checkbox';
+import CheckboxSpecial from '../../shared/checkboxSpecial/checkbox-special';
+import Input from '../../shared/input/input/input';
 import styles from './sales-record-product-form-group.module.scss';
 
 const SalesRecordProductFormGroup: React.FC<any> = ({ type }) => {
   return (
     <div className={styles.container}>
-      <Checkbox className='' label="Add product from inventory" />
+      <Checkbox className="" label="Add product from inventory" />
       <div className="flex gap-1 form-group">
         <div className="input-wrapper">
           <label>{type === 'expense' ? 'Item name' : 'Product name'}</label>

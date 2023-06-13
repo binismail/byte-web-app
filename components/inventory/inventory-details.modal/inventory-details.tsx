@@ -1,6 +1,6 @@
-import Button from '../../../../../components/shared/butttons/button/button';
-import ByteIcon from '../../../../../components/shared/icon/byte.icon';
-import IconShadow from '../../../../../components/shared/icon/icon-shadow';
+import Button from '../../shared/butttons/button/button';
+import ByteIcon from '../../shared/icon/byte.icon';
+import IconShadow from '../../shared/icon/icon-shadow';
 import styles from './inventory-details.module.scss';
 
 const InventoryDetails: React.FC<any> = ({ closeModal }) => {

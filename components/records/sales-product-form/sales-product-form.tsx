@@ -1,7 +1,7 @@
-import Button from '../../../../../components/shared/butttons/button/button';
-import Input from '../../../../../components/shared/input/input/input';
-import TextArea from '../../../../../components/shared/textarea/textarea';
-import TotalAmount from '../../../../../components/total amount/total-amount';
+import Button from '../../shared/butttons/button/button';
+import Input from '../../shared/input/input/input';
+import TextArea from '../../shared/textarea/textarea';
+import TotalAmount from '../../total amount/total-amount';
 import SalesRecordProductFormGroup from '../sales-record-product-form-group/sales-record-product-form-group';
 import styles from './sales-product-form.module.scss';
 

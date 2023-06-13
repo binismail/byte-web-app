@@ -1,4 +1,4 @@
-import ByteIcon from '../../../../../components/shared/icon/byte.icon';
+import ByteIcon from '../../shared/icon/byte.icon';
 import styles from './invoice-selection.module.scss';
 
 const InvoiceSelection: React.FC<any> = () => {

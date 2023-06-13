@@ -1,6 +1,5 @@
-import BankItem from '../../../../../../components/bank-item/bank-item';
-
-import SearchInput from '../../../../../../components/shared/input/search-input/search-input';
+import BankItem from '../../../bank-item/bank-item';
+import SearchInput from '../../../shared/input/search-input/search-input';
 import styles from './select-bank.module.scss';
 
 const Selectbank: React.FC<any> = () => {

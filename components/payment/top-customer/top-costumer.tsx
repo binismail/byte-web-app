@@ -1,7 +1,7 @@
 import React from 'react';
-import ProductItem from '../../../../../components/product-item/product-item';
-import ByteIcon from '../../../../../components/shared/icon/byte.icon';
 import image from '../../../../../public/image/profile.jpg';
+import ProductItem from '../../product-item/product-item';
+import ByteIcon from '../../shared/icon/byte.icon';
 import styles from './top-customer.module.scss';
 
 export interface ITopCustomer {
