@@ -1,13 +1,13 @@
-import React, { ReactElement, useState } from 'react';
+import { ReactElement, useState } from 'react';
 import DashboardLayout from '../../../components/layouts/dashboard-layout';
 import Layout from '../../../components/layouts/layout';
+import Chart from '../../../components/payment/chart/chart';
+import TopCustomer from '../../../components/payment/chart/top-customer/top-costumerr';
 import Button from '../../../components/shared/butttons/button/button';
 import ByteIcon from '../../../components/shared/icon/byte.icon';
 import Modal from '../../../components/shared/modal/modal';
 import Table from '../../../components/shared/table/table';
 import { NextPageWithLayout } from '../../_app';
-import Chart from './components/chart/chart';
-import TopCustomer from './components/top-customer/top-costumer';
 
 export interface IPayment {
   sampleTextProp: string;
@@ -94,8 +94,8 @@ const Payment: NextPageWithLayout = () => {
           Transaction-history
         </p>
         <div className="float-right">
-          <div className='flex gap-1'>
-            <p className='mt-0 mb-0 text-byte'> View all</p>
+          <div className="flex gap-1">
+            <p className="mt-0 mb-0 text-byte"> View all</p>
             <ByteIcon color="var(--byte)" icon="arrow-right-1" size={20} />
           </div>
         </div>

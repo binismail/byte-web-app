@@ -1,4 +1,4 @@
-import ByteIcon from '../../../../../components/shared/icon/byte.icon';
+import ByteIcon from '../../shared/icon/byte.icon';
 import styles from './record-details.module.scss';
 
 const RecordDetails: React.FC<any> = () => {

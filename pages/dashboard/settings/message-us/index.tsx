@@ -1,14 +1,13 @@
 import { ReactElement } from 'react';
+import DocumentUpload from '../../../../components/document-upload/document-upload';
 import DashboardLayout from '../../../../components/layouts/dashboard-layout';
 import Layout from '../../../../components/layouts/layout';
 import Button from '../../../../components/shared/butttons/button/button';
 import ByteIcon from '../../../../components/shared/icon/byte.icon';
 import TextArea from '../../../../components/shared/textarea/textarea';
 import { NextPageWithLayout } from '../../../_app';
-import DocumentUpload from '../components/document-upload/document-upload';
 
 export interface IInput {}
-
 
 const Verifications: NextPageWithLayout<IInput> = () => {
   return (
@@ -43,7 +42,9 @@ const Verifications: NextPageWithLayout<IInput> = () => {
             <Button title="Send" type="large" color="btnPrimary" />
             <p className="text-byte">Send via email</p>
           </div>
-          <p className='hint ' style={{color:'var(--grey-faded)'}}>We will respond to you via Byte Inbox</p>
+          <p className="hint " style={{ color: 'var(--grey-faded)' }}>
+            We will respond to you via Byte Inbox
+          </p>
         </div>
       </div>
     </div>

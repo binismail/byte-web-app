@@ -1,6 +1,6 @@
-import Button from '../../../../../../components/shared/butttons/button/button';
-import ByteIcon from '../../../../../../components/shared/icon/byte.icon';
-import Input from '../../../../../../components/shared/input/input/input';
+import Button from '../../../shared/butttons/button/button';
+import ByteIcon from '../../../shared/icon/byte.icon';
+import Input from '../../../shared/input/input/input';
 import styles from './send-money.module.scss';
 
 const SendMoney: React.FC<any> = () => {

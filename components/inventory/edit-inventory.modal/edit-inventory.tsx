@@ -1,8 +1,8 @@
-import ByteIcon from '../../../../../components/shared/icon/byte.icon';
-import IconShadow from '../../../../../components/shared/icon/icon-shadow';
-import AmountInput from '../../../../../components/shared/input/amount-input/amount-input';
-import Input from '../../../../../components/shared/input/input/input';
-import TextArea from '../../../../../components/shared/textarea/textarea';
+import ByteIcon from '../../shared/icon/byte.icon';
+import IconShadow from '../../shared/icon/icon-shadow';
+import AmountInput from '../../shared/input/amount-input/amount-input';
+import Input from '../../shared/input/input/input';
+import TextArea from '../../shared/textarea/textarea';
 import styles from './edit-inventory.module.scss';
 
 const EditInventory: React.FC<any> = ({ closeModal }) => {

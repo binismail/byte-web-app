@@ -1,6 +1,6 @@
-import Button from '../../../../../../components/shared/butttons/button/button';
-import IconShadow from '../../../../../../components/shared/icon/icon-shadow';
-import Input from '../../../../../../components/shared/input/input/input';
+import Button from '../../../shared/butttons/button/button';
+import IconShadow from '../../../shared/icon/icon-shadow';
+import Input from '../../../shared/input/input/input';
 import styles from './fund-wallet-transfer-card.module.scss';
 
 const FundWalletCard: React.FC<any> = () => {
@@ -22,7 +22,7 @@ const FundWalletCard: React.FC<any> = () => {
           <div>
             <div className="form-group">
               <label>Amount</label>
-              <Input  placeholder="" value="" type="text"  />
+              <Input placeholder="" value="" type="text" />
             </div>
             <div className="form-group mb-2">
               <Button color="btnPrimary" title="Continue" type="block" />

@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import DocumentUpload from '../../../../components/document-upload/document-upload';
 import DashboardLayout from '../../../../components/layouts/dashboard-layout';
 import Layout from '../../../../components/layouts/layout';
 import Button from '../../../../components/shared/butttons/button/button';
@@ -6,7 +7,6 @@ import ByteIcon from '../../../../components/shared/icon/byte.icon';
 import Input from '../../../../components/shared/input/input/input';
 import Select from '../../../../components/shared/selection/select';
 import { NextPageWithLayout } from '../../../_app';
-import DocumentUpload from '../components/document-upload/document-upload';
 
 export interface IInput {}
 
@@ -33,24 +33,24 @@ const Verifications: NextPageWithLayout<IInput> = () => {
             <label>ID Type</label>
             <Select list={list} placeholder="Select an ID type" />
           </div>
-                    <hr/>
+          <hr />
 
           <div className="form-group">
             <label>Drivers’ License</label>
             <DocumentUpload />
           </div>
-          <div className='flex flex-justify-center'>
+          <div className="flex flex-justify-center">
             <div className="flex flex-align-center">
-            <p className="mr-md-1">
-              {' '}
-              <ByteIcon icon="info-circle" size={12} color="grey" />
-            </p>
-            <p className="text-value text-neutral-06">
-              File must be an image and less than 2MB.{' '}
-            </p>
+              <p className="mr-md-1">
+                {' '}
+                <ByteIcon icon="info-circle" size={12} color="grey" />
+              </p>
+              <p className="text-value text-neutral-06">
+                File must be an image and less than 2MB.{' '}
+              </p>
+            </div>
           </div>
-          </div>
-          
+
           <div className="form-group w-33">
             <label>ID Type</label>
             <Input type="date" placeholder="Enter ID expiry date" />

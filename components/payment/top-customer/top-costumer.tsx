@@ -1,15 +1,14 @@
 import React from 'react';
 import ProductItem from '../../../../../components/product-item/product-item';
 import ByteIcon from '../../../../../components/shared/icon/byte.icon';
-import styles from './top-customer.module.scss';
 import image from '../../../../../public/image/profile.jpg';
+import styles from './top-customer.module.scss';
 
 export interface ITopCustomer {
   title: string;
 }
 
-const TopCustomer: React.FC<any> = ({title}) => {
-
+const TopCustomer: React.FC<any> = ({ title }) => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>

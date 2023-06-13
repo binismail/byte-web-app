@@ -1,8 +1,8 @@
-import Avatar from '../../../../../components/shared/avatar/avatar';
-import Badge from '../../../../../components/shared/badge/badge';
-import ByteIcon from '../../../../../components/shared/icon/byte.icon';
+import profile from '../../../public/image/profile.jpg';
+import Avatar from '../../shared/avatar/avatar';
+import Badge from '../../shared/badge/badge';
+import ByteIcon from '../../shared/icon/byte.icon';
 import styles from './invoice-detail.module.scss';
-import profile from '../../../../../public/image/profile.jpg';
 
 const InvoiceDetail: React.FC<any> = () => {
   return (

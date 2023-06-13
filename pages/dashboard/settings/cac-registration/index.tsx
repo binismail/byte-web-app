@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import DocumentUpload from '../../../../components/document-upload/document-upload';
 import DashboardLayout from '../../../../components/layouts/dashboard-layout';
 import Layout from '../../../../components/layouts/layout';
 import Button from '../../../../components/shared/butttons/button/button';
@@ -6,7 +7,6 @@ import ByteIcon from '../../../../components/shared/icon/byte.icon';
 import Input from '../../../../components/shared/input/input/input';
 import Select from '../../../../components/shared/selection/select';
 import { NextPageWithLayout } from '../../../_app';
-import DocumentUpload from '../components/document-upload/document-upload';
 
 export interface IInput {}
 
@@ -43,7 +43,7 @@ const Verifications: NextPageWithLayout<IInput> = () => {
               <Select list={list} placeholder="Drivers License" />
             </div>
           </div>
-          <hr/>
+          <hr />
           <div className="form-group">
             <label>Drivers’ License</label>
             <DocumentUpload />

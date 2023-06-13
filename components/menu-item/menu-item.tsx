@@ -1,5 +1,5 @@
 import React from 'react';
-import ByteIcon from '../../../../../components/shared/icon/byte.icon';
+import ByteIcon from '../shared/icon/byte.icon';
 import styles from './menu-item.module.scss';
 
 export interface IInput {
