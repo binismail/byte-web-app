@@ -1,5 +1,5 @@
 import React from 'react';
-import image from '../../../../../public/image/profile.jpg';
+import image from '../../../public/image/profile.jpg';
 import ProductItem from '../../product-item/product-item';
 import ByteIcon from '../../shared/icon/byte.icon';
 import styles from './top-customer.module.scss';
