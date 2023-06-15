@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import Register, { IRegister } from '.';
+import Register, { IRegister } from './index.page';
 import { mockRegisterProps } from './register.mocks';
 
 export default {

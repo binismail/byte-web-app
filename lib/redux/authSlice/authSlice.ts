@@ -31,6 +31,12 @@ export const authSlice = createSlice({
         ...payload,
       };
     },
+    setNewTokenCredentials(state, { payload }: PayloadAction<AuthState>) {
+      return {
+        ...state,
+        ...payload,
+      };
+    },
     logout(state) {
       state.userId = '';
       state.role = '';
@@ -50,7 +56,8 @@ export const authSlice = createSlice({
 });
 
 // Actions
-export const { setCredentials, logout } = authSlice.actions;
+export const { setCredentials, logout, setNewTokenCredentials } =
+  authSlice.actions;
 
 // Selectors
 export const selectLoggedIn = (state: AppState) => state.auth.loggedIn;

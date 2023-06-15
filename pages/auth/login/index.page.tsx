@@ -41,7 +41,6 @@ const Login: NextPage = () => {
         })
           .unwrap()
           .then((data) => {
-            toast.success(data?.message || 'Logged successfully!');
             dispatch(
               setCredentials({
                 userId: data?.data?.userId,
@@ -51,7 +50,8 @@ const Login: NextPage = () => {
                 loggedIn: true,
               })
             );
-            router.push('/dashboard');
+            const { returnUrl } = router.query;
+            router.push(returnUrl ? `${returnUrl}` : '/dashboard');
           })
           .catch((error) => {
             toast.error(error?.data?.message || 'Login failed!');
@@ -102,7 +102,7 @@ const Login: NextPage = () => {
                     )}
                   </div>
 
-                  <div className="form-group">
+                  <div className="form-group w-full flex flex-col gap-1">
                     <label>Password</label>
                     <PasswordInput
                       name={'password'}
@@ -114,8 +114,14 @@ const Login: NextPage = () => {
                     {touched.password && errors.password && (
                       <FormError message={errors.password} />
                     )}
+
+                    <Link href={'/onboarding/forgotpassword/forgotpassword'}>
+                      <a className="text-[#6A78D1] text-[15px] font-normal pt-2">
+                        Forgot your password?
+                      </a>
+                    </Link>
                   </div>
-                  <div className="form-group">
+                  <div className="mt-10 mb-6">
                     <Button
                       click={handleSubmit}
                       color="btnPrimary"

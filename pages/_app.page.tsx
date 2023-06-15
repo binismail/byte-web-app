@@ -17,6 +17,7 @@ import '../styles/variable.scss';
 // Import Tailwind CSS file config
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
+import RouteGuard from '../components/route-guard/route-guard';
 import '../styles/tailwind.css';
 
 // type NextPageWithLayout
@@ -40,7 +41,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        {getLayout(<Component {...pageProps} />)}
+        <RouteGuard>
+          <>{getLayout(<Component {...pageProps} />)}</>
+        </RouteGuard>
       </PersistGate>
       <ToastContainer
         position="top-right"

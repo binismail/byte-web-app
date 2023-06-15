@@ -1,23 +1,24 @@
 import Button from '../../../components/shared/butttons/button/button';
 import Input from '../../../components/shared/input/input/input';
-import styles from './forgotpassword.module.scss';
-import homeStyles from '../../../styles/home.module.scss';
 import logo from '../../../public/logo.svg';
 import key from '../../../public/svg/key.svg';
+import homeStyles from '../../../styles/home.module.scss';
+import styles from './forgotpassword.module.scss';
 
+import { NextPage } from 'next';
 import Image from 'next/image';
 
 export interface IForgotPassword {
   sampleTextProp: string;
 }
 
-const ForgotPassword: React.FC<IForgotPassword> = () => {
+const ForgotPassword: NextPage = () => {
   return (
     <div className={''}>
       <div className={homeStyles.gridFull}>
         <div className={styles.container}>
           {true && (
-            <div className="form-container">
+            <div className="flex flex-col">
               <Image src={logo} alt="logo" width="100px" height="100px" />
               <div className="flex-container">
                 <div className="icon-shadow flex flex-center">

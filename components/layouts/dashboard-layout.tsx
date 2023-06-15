@@ -112,9 +112,8 @@ const DashboardLayout: React.FC<IDashboard> = ({ children }) => {
                 userId,
               })
                 .unwrap()
-                .then((data) => {
-                  router.push('/auth/login');
-                  toast.success(data?.message || 'Logged out!');
+                .then(() => {
+                  router.replace('/auth/login');
                   dispatch(logout());
                 })
                 .catch((error) => {
