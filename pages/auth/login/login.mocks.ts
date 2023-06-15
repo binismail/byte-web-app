@@ -1,4 +1,4 @@
-import { ILogin } from '.';
+import { ILogin } from './index.page';
 
 const base: ILogin = {
   sampleTextProp: 'Hello world!',
