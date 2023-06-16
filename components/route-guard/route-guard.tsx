@@ -34,31 +34,13 @@ const RouteGuard = (props: {
   useEffect(() => {
     const authCheck = () => {
       if (!isLoggedIn && !publicPaths.includes(router.asPath.split('?')[0])) {
-        // setAuthorized(false);
-        // dispatch(setRedirectLink({ goto: router.asPath }));
-        // void router.push({
-        //   pathname: '/login',
-        // });
         setAuthorized(false);
-        logoutUser({
-          userId,
-        })
-          .unwrap()
-          .then(() => {
-            router.push({
-              pathname: '/auth/login',
-              query: { returnUrl: router.asPath },
-            });
-            dispatch(logout());
-          })
-          .catch((error) => {
-            console.log(error);
-            router.push({
-              pathname: '/auth/login',
-              query: { returnUrl: router.asPath },
-            });
-            dispatch(logout());
-          });
+        router.push({
+          pathname: '/auth/login',
+          query: { returnUrl: router.asPath },
+        });
+        dispatch(logout());
+        logoutUser({ userId });
       } else {
         setAuthorized(true);
       }
@@ -116,8 +98,8 @@ const RouteGuard = (props: {
   return authorized ? (
     children
   ) : (
-    <div className="w-[100vw] h-[100vh] bg-gray-200 text-[rgba(0,0,0,.5)] font-normal text-base flex items-center justify-center">
-      authenticating...
+    <div className="w-[100vw] h-[100vh] bg-white text-gray-600 font-normal text-base flex items-center justify-center">
+      Please wait...
     </div>
   );
 };

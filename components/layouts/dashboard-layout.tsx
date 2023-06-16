@@ -20,7 +20,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { logout, selectUserId } from '../../lib/redux/authSlice/authSlice';
 import { useLogoutMutation } from '../../lib/services/businessApi';
 import ActiveLink from '../shared/active-link/active-link';
-import SideBarTab from '../shared/sidebar-tab/sidebar-tab';
 
 // IDASHBOARD INTERFACE
 export interface IDashboard {
@@ -83,48 +82,58 @@ const DashboardLayout: React.FC<IDashboard> = ({ children }) => {
           {/* DASHBOARD LIST CONTAINER */}
           <ul className="flex flex-col gap-6">
             {/* HOME */}
-            <ActiveLink href={'/dashboard'} passHref>
-              <SideBarTab text="Home" Icon={Home2} />
-            </ActiveLink>
+            <ActiveLink href={'/dashboard'} text="Home" Icon={Home2} />
 
             {/* TOOLS */}
-            <ActiveLink href={'/dashboard/tools'} passHref>
-              <SideBarTab text="Tools" Icon={Briefcase} />
-            </ActiveLink>
+            <ActiveLink
+              href={'/dashboard/tools'}
+              text="Tools"
+              Icon={Briefcase}
+            />
 
             {/* PAYMENTS */}
-            <ActiveLink href={'/dashboard/payments'} passHref>
-              <SideBarTab text="Payments" Icon={CardPos} />
-            </ActiveLink>
+            <ActiveLink
+              href={'/dashboard/payment'}
+              text="Payments"
+              Icon={CardPos}
+            />
 
             {/* NETWORK */}
-            <ActiveLink href={'/dashboard/network'} passHref>
-              <SideBarTab text="Network" Icon={People} />
-            </ActiveLink>
+            <ActiveLink
+              href={'/dashboard/network'}
+              text="Network"
+              Icon={People}
+            />
           </ul>
         </div>
 
         {/* LOGOUT */}
-        <div className="aside-footer">
-          <div
-            onClick={() => {
-              logoutUser({
-                userId,
-              })
-                .unwrap()
-                .then(() => {
-                  router.replace('/auth/login');
-                  dispatch(logout());
+        <div className="aside-footer items-center">
+          {isLoading ? (
+            <span className="font-normal text-base text-[#808691]">
+              Siging out...
+            </span>
+          ) : (
+            <div
+              onClick={() => {
+                logoutUser({
+                  userId,
                 })
-                .catch((error) => {
-                  toast.error(error?.data?.message || 'Logout failed!');
-                });
-            }}
-            className="font-normal cursor-pointer text-base text-[#808691] flex items-center gap-3 hover:text-[#6A78D1]"
-          >
-            <LogoutCurve size="20" color="#808691" variant="Outline" />
-            Log out
-          </div>
+                  .unwrap()
+                  .then(() => {
+                    router.replace('/auth/login');
+                    dispatch(logout());
+                  })
+                  .catch((error) => {
+                    toast.error(error?.data?.message || 'Logout failed!');
+                  });
+              }}
+              className="font-normal cursor-pointer text-base text-[#808691] flex items-center gap-3 hover:text-[#6A78D1]"
+            >
+              <LogoutCurve size="20" color="#808691" variant="Outline" />
+              Log out
+            </div>
+          )}
         </div>
       </aside>
 
