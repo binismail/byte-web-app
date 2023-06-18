@@ -19,7 +19,9 @@ const ActiveLink = ({ ...props }: ActiveLinkProps) => {
 
   return (
     <Link {...props}>
-      <li className={`inline-flex items-center gap-3 ${className}`}>
+      <li
+        className={`inline-flex items-center gap-3 ${className} cursor-pointer`}
+      >
         <props.Icon
           size="20"
           color={isLinkActive ? '#6A78D1' : '#808691'}

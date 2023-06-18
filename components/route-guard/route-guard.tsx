@@ -95,6 +95,10 @@ const RouteGuard = (props: {
   //   }
   // }
 
+  if (isLoggedIn) {
+    return children;
+  }
+
   return authorized ? (
     children
   ) : (

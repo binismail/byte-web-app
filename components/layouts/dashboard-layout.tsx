@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import profile from '../../public/image/profile.jpg';
 import logo from '../../public/logo.svg';
 
@@ -23,11 +23,11 @@ import ActiveLink from '../shared/active-link/active-link';
 
 // IDASHBOARD INTERFACE
 export interface IDashboard {
-  children: any;
+  children: ReactElement;
 }
 
 // DASHBOARDLAYOUT COMPONENT
-const DashboardLayout: React.FC<IDashboard> = ({ children }) => {
+const DashboardLayout = ({ children }: IDashboard) => {
   // STATES
   const [status, setStatus] = useState(false);
 

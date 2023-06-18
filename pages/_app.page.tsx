@@ -44,6 +44,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <RouteGuard>
           <>{getLayout(<Component {...pageProps} />)}</>
         </RouteGuard>
+        {/* <DashboardLayout>
+          <>
+            <Component {...pageProps} />
+          </>
+        </DashboardLayout> */}
       </PersistGate>
       <ToastContainer
         position="top-right"
