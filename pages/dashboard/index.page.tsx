@@ -1,12 +1,16 @@
-import { Eye, EyeSlash, WalletMoney } from 'iconsax-react';
+import { WalletMoney } from 'iconsax-react';
 import { ReactElement, useState } from 'react';
 import QuickLinkCard from '../../components/cards/quicklink.card';
+import WalletBalance from '../../components/home/wallet-balance/wallet-balance';
 import DashboardLayout from '../../components/layouts/dashboard-layout';
+import FundWalletLayout from '../../components/layouts/home/fund-wallet-layout';
+import MakePaymentLayout from '../../components/layouts/home/make-payment-layout';
 import Layout from '../../components/layouts/layout';
 import Button from '../../components/shared/butttons/button/button';
+import FailedModal from '../../components/shared/modal/components/failed/failed.modal';
+import SuccessModal from '../../components/shared/modal/components/success/success.modal';
 import Modal from '../../components/shared/modal/modal';
 import Table from '../../components/shared/table/table';
-import VerifyPhone from '../../components/verify-phone/verify-phone';
 import { NextPageWithLayout } from '../_app.page';
 
 export interface IDashboard {
@@ -15,16 +19,50 @@ export interface IDashboard {
 
 const Dashboard: NextPageWithLayout = () => {
   // STATES
-  const [balanceisHidden, setBalanceIsHidden] = useState(false);
-  const [status, setStatus] = useState(false);
+  const [successModal, setSuccessModal] = useState<boolean>(false);
+  const [errorModal, setErrorModal] = useState<boolean>(false);
+  const [isPaymentModalOpen, setIsPaymentModalState] = useState<boolean>(false);
+  const [isFundWalletModalOpen, setIsFundWalletModalState] =
+    useState<boolean>(false);
 
   return (
     <div className="flex flex-col gap-10 py-2 px-3">
-      {status && (
-        <Modal closeModal={() => setStatus(false)} header={'Make a payment'}>
-          <VerifyPhone />
+      {/* Payment Status Modal */}
+      {successModal ? (
+        <Modal>
+          <SuccessModal
+            title="Transfer successful"
+            message="The money is on its way to the recipient bank account."
+            buttonTitle="Done"
+            buttonOnClick={() => setSuccessModal(false)}
+          />
         </Modal>
-      )}
+      ) : errorModal ? (
+        <Modal>
+          <FailedModal
+            title="Transfer failed"
+            message="Something went wrong. Please try again"
+            buttonTitle="Try again"
+            buttonOnClick={() => setErrorModal(false)}
+          />
+        </Modal>
+      ) : null}
+
+      {/* Make Payment layout */}
+      <MakePaymentLayout
+        isVisible={isPaymentModalOpen}
+        setSuccessModal={setSuccessModal}
+        setErrorModal={setErrorModal}
+        setVisibility={setIsPaymentModalState}
+      />
+
+      {/* Fund Wallet modal */}
+      <FundWalletLayout
+        isVisible={isFundWalletModalOpen}
+        setSuccessModal={setSuccessModal}
+        setErrorModal={setErrorModal}
+        setVisibility={setIsFundWalletModalState}
+      />
 
       {/* Header container */}
       <div className="">
@@ -38,38 +76,22 @@ const Dashboard: NextPageWithLayout = () => {
         </div>
 
         {/* Balance Amount */}
-        <div className="flex items-center gap-1">
-          <span className="font-normal text-[32px] text-[#232846]">
-            {balanceisHidden ? '******' : '₦150,000.00'}
-          </span>
-
-          {/* icon */}
-          <div>
-            {balanceisHidden ? (
-              <Eye
-                onClick={() => setBalanceIsHidden(false)}
-                className="cursor-pointer"
-                size="18"
-                color="#232846"
-              />
-            ) : (
-              <EyeSlash
-                onClick={() => setBalanceIsHidden(true)}
-                className="cursor-pointer ml-2"
-                size="18"
-                color="#232846"
-              />
-            )}
-          </div>
-        </div>
+        <WalletBalance />
 
         {/* Funding Wallet */}
         <div className="flex gap-5 mt-7">
-          <Button type="large" title="Fund wallet" color="btnLight" />
+          <Button
+            type="large"
+            title="Fund wallet"
+            color="btnLight"
+            click={() => {
+              setIsFundWalletModalState(true);
+            }}
+          />
           <Button
             type="large"
             click={() => {
-              setStatus(true);
+              setIsPaymentModalState(true);
             }}
             title="Make a payment"
             color="btnPrimary"

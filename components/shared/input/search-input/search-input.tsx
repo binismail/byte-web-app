@@ -4,9 +4,17 @@ export interface ISearchInput {
   placeholder: string;
   type: string;
   onChange?: any;
+  name?: string;
+  value?: string | number;
 }
 
-const SearchInput: React.FC<ISearchInput> = ({ placeholder, type }) => {
+const SearchInput: React.FC<ISearchInput> = ({
+  placeholder,
+  type,
+  onChange,
+  name,
+  value,
+}) => {
   return (
     <div className={styles.container}>
       <div className={styles.inputContainer}>
@@ -14,7 +22,14 @@ const SearchInput: React.FC<ISearchInput> = ({ placeholder, type }) => {
           {' '}
           <ByteIcon icon={'search-normal-1'} size={15} />
         </div>
-        <input className={styles.input} placeholder={placeholder} type={type} />
+        <input
+          name={name}
+          value={value}
+          onChange={onChange}
+          className={`${styles.input} placeholder:text-sm placeholder:text-[#808691]`}
+          placeholder={placeholder}
+          type={type}
+        />
       </div>
     </div>
   );

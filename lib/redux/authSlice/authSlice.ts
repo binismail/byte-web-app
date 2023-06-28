@@ -37,13 +37,7 @@ export const authSlice = createSlice({
         ...payload,
       };
     },
-    logout(state) {
-      state.userId = '';
-      state.role = '';
-      state.accessToken = '';
-      state.refreshToken = '';
-      state.loggedIn = false;
-    },
+    logout: () => initialState,
   },
   extraReducers: (builder) => {
     builder.addCase(HYDRATE, (state, action: AnyAction) => {

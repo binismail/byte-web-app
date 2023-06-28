@@ -10,9 +10,20 @@ import {
   SendOtpProps,
   VerifyNumberProps,
 } from '../../pages/auth/register/register.types';
+import {
+  FundWalletDetailTypes,
+  MakePaymentTypes,
+  ResolveBankType,
+} from '../../pages/dashboard/home/home.types';
 import baseUrl from '../endpoints.json';
 import { logout, setNewTokenCredentials } from '../redux/authSlice/authSlice';
 import { AppState } from '../redux/store';
+import {
+  ErrorDataTypes,
+  ForgotPasswordType,
+  LogoutUserType,
+  ResetPasswordType,
+} from './business-api.types';
 
 // create a new mutex
 const mutex = new Mutex();
@@ -23,14 +34,13 @@ const baseQuery = fetchBaseQuery({
   timeout: 1500 * 60,
   prepareHeaders: (headers, { getState, endpoint }) => {
     // getting access token from store
-    const token = (getState() as AppState).auth.accessToken;
+    const token: string = (getState() as AppState).auth.accessToken;
 
     if (token && endpoint !== 'refresh') {
       headers.set('Authorization', `Bearer ${token}`);
     }
     return headers;
   },
-  // credentials: 'include', // This allows server to set cookies
 });
 
 // Define baseQueryWithReauth
@@ -44,7 +54,13 @@ const baseQueryWithReauth: BaseQueryFn<
 
   // getting result
   let result = await baseQuery(args, api, extraOptions);
-  if (result.error && result.error.status === 401) {
+  if (
+    result.error &&
+    result.error.status === 401 &&
+    (result.error.data as ErrorDataTypes).message ===
+      'Access denied! Please log in again'
+  ) {
+    console.log(result);
     // checking whether the mutex is locked
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
@@ -93,8 +109,57 @@ const baseQueryWithReauth: BaseQueryFn<
 export const businessApi = createApi({
   reducerPath: 'businessApi',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['AuthUser'],
+  // tagTypes: [
+  //   'AuthUser',
+  //   'Banks',
+  //   'BankAccount',
+  //   'Send Money',
+  //   'VirtualBank',
+  //   'Wallet',
+  //   'User Information',
+  //   'FundWallet',
+  // ],
   endpoints: (builder) => ({
+    // GET USER INFORMATION
+    getUserInformation: builder.query<any, void>({
+      query: () => baseUrl.business.getBusinessDetails,
+    }),
+
+    // PAYMENT/TRANSFER MONEY TO BANK
+    getBanks: builder.query<any, void>({
+      query: () => baseUrl.verification.retrieveBanks,
+    }),
+    confirmBankAccount: builder.query<any, ResolveBankType>({
+      query: (body: ResolveBankType) => ({
+        url: baseUrl.verification.resolveBankAccount,
+        method: 'POST',
+        body,
+      }),
+    }),
+    makePayment: builder.mutation<any, MakePaymentTypes>({
+      query: (body: MakePaymentTypes) => ({
+        url: baseUrl.businessPayment.withdrawToNonLinkedBank,
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    // WALLET
+    getWalletInfo: builder.query<any, void>({
+      query: () => baseUrl.businessPocket.getWallet,
+    }),
+    getVirtualBank: builder.query<any, void>({
+      query: () => baseUrl.businessPocket.getVirtualAccount,
+    }),
+    fundWallet: builder.mutation<any, FundWalletDetailTypes>({
+      query: (body: FundWalletDetailTypes) => ({
+        url: baseUrl.businessPayment.fundCard,
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    // AUTHENTICATION
     login: builder.mutation({
       query: (body: { email: string; password: string }) => {
         return {
@@ -103,7 +168,6 @@ export const businessApi = createApi({
           body,
         };
       },
-      invalidatesTags: ['AuthUser'],
     }),
     sendOTP: builder.mutation<any, SendOtpProps>({
       query: (body: SendOtpProps) => {
@@ -113,7 +177,6 @@ export const businessApi = createApi({
           body,
         };
       },
-      invalidatesTags: ['AuthUser'],
     }),
     verifyNumber: builder.mutation<any, VerifyNumberProps>({
       query: (body: VerifyNumberProps) => {
@@ -123,7 +186,6 @@ export const businessApi = createApi({
           body,
         };
       },
-      invalidatesTags: ['AuthUser'],
     }),
     register: builder.mutation<any, RegisterProps>({
       query: (body: RegisterProps) => ({
@@ -142,43 +204,33 @@ export const businessApi = createApi({
           },
         },
       }),
-      invalidatesTags: ['AuthUser'],
     }),
-    logout: builder.mutation<any, { userId: string }>({
-      query: (body: { userId: string }) => {
+    logoutUser: builder.mutation<any, LogoutUserType>({
+      query: (body: LogoutUserType) => {
         return {
           url: baseUrl.authentication.logout,
           method: 'POST',
           body,
         };
       },
-      invalidatesTags: ['AuthUser'],
     }),
-    forgotPassword: builder.mutation<any, { email: string }>({
-      query: (body: { email: string }) => {
+    forgotPassword: builder.mutation<any, ForgotPasswordType>({
+      query: (body: ForgotPasswordType) => {
         return {
           url: baseUrl.authentication.forgotBizPassword,
           method: 'POST',
           body,
         };
       },
-      invalidatesTags: ['AuthUser'],
     }),
-    resetPassword: builder.mutation<
-      any,
-      {
-        password: string;
-        emailCode: string;
-      }
-    >({
-      query: (body: { password: string; emailCode: string }) => {
+    resetPassword: builder.mutation<any, ResetPasswordType>({
+      query: (body: ResetPasswordType) => {
         return {
           url: `${baseUrl.authentication.resetPassword}/${body.emailCode}`,
           method: 'POST',
           body,
         };
       },
-      invalidatesTags: ['AuthUser'],
     }),
   }),
 });
@@ -186,9 +238,16 @@ export const businessApi = createApi({
 export const {
   useLoginMutation,
   useRegisterMutation,
-  useLogoutMutation,
+  useLogoutUserMutation,
   useSendOTPMutation,
   useVerifyNumberMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
+  useGetBanksQuery,
+  useConfirmBankAccountQuery,
+  useMakePaymentMutation,
+  useGetVirtualBankQuery,
+  useGetUserInformationQuery,
+  useGetWalletInfoQuery,
+  useFundWalletMutation,
 } = businessApi;

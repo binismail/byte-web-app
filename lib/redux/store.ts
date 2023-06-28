@@ -12,19 +12,20 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { businessApi } from '../services/businessApi';
 import { authSlice } from './authSlice/authSlice';
+import { userDetailsSlice } from './userDetailsSlice/userDetailsSlice';
 
 const persistConfig = {
   key: 'root',
-  whiteList: [authSlice.name],
-  blackList: [businessApi.reducerPath],
-  version: 1,
   storage,
+  whitelist: [authSlice.name, userDetailsSlice.name],
+  version: 1,
 };
 
 // combining reducers
 const rootReducers = combineReducers({
   [authSlice.name]: authSlice.reducer,
   [businessApi.reducerPath]: businessApi.reducer,
+  [userDetailsSlice.name]: userDetailsSlice.reducer,
 });
 
 // persisted reducers

@@ -1,7 +1,29 @@
 import Button from '../../../butttons/button/button';
 import styles from './failed.modal.module.scss';
 
-const FailedModal: React.FC<any> = () => {
+export interface IFailed {
+  title?: string;
+  message: string;
+  cta?: boolean;
+  closeModal?: any;
+  buttonTitle?: string;
+  buttonColor?: string;
+  buttonOnClick?: () => void;
+  buttonDisabled?: boolean;
+  buttonLoading?: boolean;
+}
+
+const FailedModal: React.FC<any> = ({
+  title,
+  message,
+  cta,
+  closeModal,
+  buttonTitle = 'Try again',
+  buttonColor = 'btnPrimary',
+  buttonOnClick,
+  buttonDisabled,
+  buttonLoading,
+}) => {
   return (
     <div className="modal">
       <div className={styles.container}>
@@ -20,14 +42,23 @@ const FailedModal: React.FC<any> = () => {
           </svg>
         </div>
         <div>
-          <p className="text-strong text-center">Funding failed</p>
-          <p className="text-section-content text-center">
-            Something went wrong. Please try again
-          </p>
+          <div className="w-full flex flex-col gap-2">
+            <p className="text-strong text-center">{title}</p>
+            <p className="text-section-content text-center">{message}</p>
+          </div>
           <div>
-            <div className="form-group mb-2">
-              <Button color="btnPrimary" title="Try again" type="block" />
-            </div>
+            {(cta || buttonTitle) && (
+              <div className="form-group mb-2">
+                <Button
+                  disabled={buttonDisabled}
+                  loading={buttonLoading}
+                  click={buttonOnClick}
+                  color={buttonColor}
+                  title={buttonTitle}
+                  type="block"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

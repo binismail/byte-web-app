@@ -1,25 +1,25 @@
-import { ReactElement, useState } from 'react';
-import profile from '../../public/image/profile.jpg';
+import { ReactElement, useEffect, useState } from 'react';
 import logo from '../../public/logo.svg';
 
-import {
-  ArrowDown2,
-  Briefcase,
-  CardPos,
-  Home2,
-  LogoutCurve,
-  Notification,
-  People,
-} from 'iconsax-react';
+import { Briefcase, CardPos, Home2, LogoutCurve, People } from 'iconsax-react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import Modal from '../../components/shared/modal/modal';
 import VerifyPhone from '../../components/verify-phone/verify-phone';
+import { isEmpty } from '../../helpers/is-emtpy';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { logout, selectUserId } from '../../lib/redux/authSlice/authSlice';
-import { useLogoutMutation } from '../../lib/services/businessApi';
+import {
+  clearUserDetails,
+  setUserDetails,
+} from '../../lib/redux/userDetailsSlice/userDetailsSlice';
+import {
+  useGetUserInformationQuery,
+  useLogoutUserMutation,
+} from '../../lib/services/businessApi';
 import ActiveLink from '../shared/active-link/active-link';
+import LayoutHeader from './header';
 
 // IDASHBOARD INTERFACE
 export interface IDashboard {
@@ -34,10 +34,26 @@ const DashboardLayout = ({ children, headerTitle = 'Home' }: IDashboard) => {
   const [status, setStatus] = useState(false);
 
   // DATA INITIALIZATION
-  const [logoutUser, { isLoading }] = useLogoutMutation();
   const router = useRouter();
   const userId = useAppSelector(selectUserId);
   const dispatch = useAppDispatch();
+
+  // HOOKS
+  const {
+    data: userDetails,
+    isLoading: getUserDetailsLoading,
+    isError: getUserDetailsError,
+  } = useGetUserInformationQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
+  const [logoutUser, { isLoading }] = useLogoutUserMutation();
+
+  // SIDE EFFETS
+  useEffect(() => {
+    if (!getUserDetailsError && !isEmpty(userDetails)) {
+      dispatch(setUserDetails(userDetails?.data));
+    }
+  }, [userDetails, getUserDetailsError]);
 
   return (
     <div className="max-h-[98vh] w-full flex">
@@ -70,7 +86,7 @@ const DashboardLayout = ({ children, headerTitle = 'Home' }: IDashboard) => {
 
           {/* NETWORK */}
           <ActiveLink
-            href={'/dashboard/network'}
+            href={'/dashboard/settings'}
             text="Network"
             Icon={People}
           />
@@ -92,6 +108,7 @@ const DashboardLayout = ({ children, headerTitle = 'Home' }: IDashboard) => {
                   .then(() => {
                     router.replace('/auth/login');
                     dispatch(logout());
+                    dispatch(clearUserDetails());
                   })
                   .catch((error) => {
                     toast.error(error?.data?.message || 'Logout failed!');
@@ -109,40 +126,10 @@ const DashboardLayout = ({ children, headerTitle = 'Home' }: IDashboard) => {
       {/* CONTAINER */}
       <div className="flex flex-col h-screen w-[80%]">
         {/* HEADER */}
-        <header className="h-[12%] w-full py-4 px-20 border-b border-[#E6EAED]">
-          <div className="h-full flex w-full justify-between items-center">
-            {/* header title */}
-            <div className="text-lg font-normal text-[#30333B]">
-              <p>{headerTitle}</p>
-            </div>
-
-            {/* header profile */}
-            <div className="flex gap-4 items-center">
-              {/* Notification icon */}
-              <Notification size="28" color="#232846" variant="Bold" />
-
-              {/* Image */}
-              <div className="inline-flex items-center justify-center border-[3px] border-[#6A78D1] [box-shadow:0px_0px_0px_4px_rgba(106,120,209,0.4)] rounded-[50%]">
-                <Image
-                  className="rounded-[50%]"
-                  src={profile}
-                  width="30px"
-                  height="30px"
-                  alt="profile image"
-                />
-              </div>
-
-              {/* Profile Name */}
-              <div className="flex flex-col font-normal text-sm">
-                <p className="text-[#30333B">Cynthia Williams</p>
-                <p className="text-[#808691]">Fresh market stores</p>
-              </div>
-
-              {/* Arrow */}
-              <ArrowDown2 size="16" color="#30333B" variant="Bold" />
-            </div>
-          </div>
-        </header>
+        <LayoutHeader
+          headerTitle={headerTitle}
+          loading={getUserDetailsLoading}
+        />
 
         {/* MAIN CHILDREN */}
         <main className="w-full h-full py-8 px-16 flex items-center justify-center overflow-auto">

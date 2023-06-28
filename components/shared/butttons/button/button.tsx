@@ -1,3 +1,4 @@
+import { ThreeDots } from 'react-loader-spinner';
 import ByteIcon from '../../icon/byte.icon';
 import styles from './Button.module.scss';
 export interface IButton {
@@ -58,7 +59,20 @@ const Button: React.FC<IButton> = ({
           <ByteIcon icon={icon} size={16} color={iconColor} />
         </span>
       )}
-      {!loading ? title : 'loading...'}
+      {loading ? (
+        <span className="inline-flex mx-auto items-center justify-center">
+          <ThreeDots
+            height="40"
+            width="40"
+            radius="9"
+            color="#fff"
+            ariaLabel="three-dots-loading"
+            visible={true}
+          />
+        </span>
+      ) : (
+        <>{title}</>
+      )}
       {icon && iconPosition === 'right' && (
         <span>
           <ByteIcon icon={icon} size={14} color={iconColor} />

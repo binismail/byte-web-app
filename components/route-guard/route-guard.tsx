@@ -11,7 +11,7 @@ import {
   selectLoggedIn,
   selectUserId,
 } from '../../lib/redux/authSlice/authSlice';
-import { useLogoutMutation } from '../../lib/services/businessApi';
+import { useLogoutUserMutation } from '../../lib/services/businessApi';
 const publicPaths = [
   '/auth/login',
   '/auth/register',
@@ -27,7 +27,7 @@ const RouteGuard = (props: {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
   const isLoggedIn = useAppSelector(selectLoggedIn);
-  const [logoutUser] = useLogoutMutation();
+  const [logoutUser] = useLogoutUserMutation();
   const userId = useAppSelector(selectUserId);
   const dispatch = useAppDispatch();
 
