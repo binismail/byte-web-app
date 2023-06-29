@@ -27,6 +27,7 @@ const TransactionPin = ({ onSendClick, loading }: Props) => {
           onChange={(value) => {
             setPin(value);
           }}
+          disabled={loading}
           type="numeric"
           inputMode="number"
           style={{ padding: '5px', margin: '5px', display: 'flex' }}
@@ -46,7 +47,7 @@ const TransactionPin = ({ onSendClick, loading }: Props) => {
 
       <div className="form-group mb-2">
         <Button
-          disabled={pin.length !== 4}
+          disabled={pin.length !== 4 || loading}
           loading={loading}
           color="btnPrimary"
           title="Send"
