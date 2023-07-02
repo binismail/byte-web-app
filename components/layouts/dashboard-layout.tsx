@@ -77,7 +77,12 @@ const DashboardLayout = ({
         {/* DASHBOARD LIST CONTAINER */}
         <ul className="flex flex-col gap-6 w-[70%] ml-auto">
           {/* HOME */}
-          <ActiveLink href={'/dashboard'} text="Home" Icon={Home2} />
+          <ActiveLink
+            exact={true}
+            href={'/dashboard'}
+            text="Home"
+            Icon={Home2}
+          />
 
           {/* TOOLS */}
           <ActiveLink href={'/dashboard/tools'} text="Tools" Icon={Briefcase} />
