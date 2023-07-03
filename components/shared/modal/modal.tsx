@@ -1,4 +1,3 @@
-import React from 'react';
 import ByteIcon from '../icon/byte.icon';
 import styles from './modal.module.scss';
 
@@ -12,7 +11,7 @@ const Modal = (props: any) => {
           <div></div>
           {header && (
             <ByteIcon
-              style={{ marginTop: '0px' }}
+              style={{ marginTop: '16px' }}
               icon="close-circle"
               size={16}
               color="var(--primary09)"
@@ -21,9 +20,11 @@ const Modal = (props: any) => {
           )}
         </div>
         {header && (
-          <div className="text-center my-md-2 text-strong">{header}</div>
+          <p className="w-full text-center font-normal text-[#30333B]">
+            {header}
+          </p>
         )}
-        <div className="content">{props.children}</div>
+        <div className="h-fit bg-white">{props.children}</div>
       </div>
     </div>
   );

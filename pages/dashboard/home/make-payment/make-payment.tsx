@@ -1,11 +1,11 @@
 import ByteIcon from '../../../../components/shared/icon/byte.icon';
 import styles from './make-payment.module.scss';
 
-const MakePayment: React.FC<any> = () => {
+const MakePayment: React.FC<any> = ({ onClickLeft, onClickRight }) => {
   return (
     <div className="modal">
       <div className={styles.container}>
-        <div className={styles.cardSelect}>
+        <div onClick={onClickLeft} className={styles.cardSelect}>
           <div className="icon-shadow byte small flex flex-center">
             <ByteIcon
               style={{ marginTop: '0px' }}
@@ -17,7 +17,7 @@ const MakePayment: React.FC<any> = () => {
           <p>Send money</p>
         </div>
 
-        <div className={styles.cardSelect}>
+        <div onClick={onClickRight} className={styles.cardSelect}>
           <div className="icon-shadow byte small flex flex-center">
             <ByteIcon
               style={{ marginTop: '0px' }}

@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-between;
   padding: 20px;
-  margin-bottom: var(--space-md-3);
+  margin-block: 10px;
+  gap: 10px;
 }
 .cardSelect {
   width: 145px;
@@ -13,6 +14,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   p {
     color: var(--primary05);
   }

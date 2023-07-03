@@ -1,4 +1,4 @@
-import { IRecords } from './index';
+import { IRecords } from './index.page';
 
 const base: IRecords = {
   sampleTextProp: 'Hello world!',

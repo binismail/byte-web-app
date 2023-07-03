@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import ForgotPassword, { IForgotPassword } from './forgotpassword';
 import { mockForgotPasswordProps } from './forgotpassword.mocks';
+import ForgotPassword, { IForgotPassword } from './forgotpassword.page';
 
 export default {
   title: 'templates/ForgotPassword',

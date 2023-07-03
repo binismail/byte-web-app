@@ -1,10 +1,10 @@
-import React from 'react';
+import { ReactElement } from 'react';
 
 interface ILayout {
-  children: any;
+  children: ReactElement;
 }
 
-const Layout: React.FC<ILayout> = ({ children }) => {
+const Layout = ({ children }: ILayout) => {
   return (
     <>
       <main>{children}</main>
