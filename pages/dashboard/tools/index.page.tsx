@@ -27,7 +27,7 @@ const Tools: NextPageWithLayout<any> = () => {
           cardBg="bg-[#FFF0F4]"
           iconBg="bg-[#D495A6]"
           IconSelect={DocumentText}
-          path=""
+          path="/dashboard/tools/inventory-management"
         />
         <ToolsCard
           header="Analytics"

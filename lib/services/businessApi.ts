@@ -5,6 +5,7 @@ import type {
 } from '@reduxjs/toolkit/query';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Mutex } from 'async-mutex';
+import { objectToFormData } from '../../helpers/object-to-formdata';
 import {
   RegisterProps,
   SendOtpProps,
@@ -15,6 +16,7 @@ import {
   MakePaymentTypes,
   ResolveBankType,
 } from '../../pages/dashboard/home/home.types';
+import { UpdateInventoryType } from '../../pages/dashboard/tools/inventory-management/inventory.types';
 import baseUrl from '../endpoints.json';
 import { logout, setNewTokenCredentials } from '../redux/authSlice/authSlice';
 import { AppState } from '../redux/store';
@@ -109,16 +111,17 @@ const baseQueryWithReauth: BaseQueryFn<
 export const businessApi = createApi({
   reducerPath: 'businessApi',
   baseQuery: baseQueryWithReauth,
-  // tagTypes: [
-  //   'AuthUser',
-  //   'Banks',
-  //   'BankAccount',
-  //   'Send Money',
-  //   'VirtualBank',
-  //   'Wallet',
-  //   'User Information',
-  //   'FundWallet',
-  // ],
+  tagTypes: [
+    // 'AuthUser',
+    // 'Banks',
+    // 'BankAccount',
+    // 'Send Money',
+    // 'VirtualBank',
+    // 'Wallet',
+    // 'User Information',
+    // 'FundWallet',
+    'Inventory',
+  ],
   endpoints: (builder) => ({
     // GET USER INFORMATION
     getUserInformation: builder.query<any, void>({
@@ -232,6 +235,89 @@ export const businessApi = createApi({
         };
       },
     }),
+
+    // INVENTORY
+    getInventories: builder.query<any, void>({
+      query: () => baseUrl.business.inventory,
+      providesTags: ['Inventory'],
+    }),
+    getSingleInventory: builder.query<any, string>({
+      query: (productId: string) =>
+        `${baseUrl.business.inventory}/${productId}`,
+      providesTags: ['Inventory'],
+      // providesTags: (result, error, arg) => {
+      //   return [{ type: 'Inventory', id: arg }];
+      // },
+    }),
+    deleteProduct: builder.mutation<any, string>({
+      query: (productId: string) => ({
+        url: `${baseUrl.business.inventory}/${productId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Inventory'],
+      // invalidatesTags: (result, error, arg) => {
+      //   return [{ type: 'Inventory', id: arg }];
+      // },
+    }),
+    createInventory: builder.mutation<any, any>({
+      query: (body: any) => {
+        // convert body to formData
+        const bodyFormData = objectToFormData(body);
+
+        // return request payload
+        return {
+          url: baseUrl.business.inventory,
+          method: 'POST',
+          body: bodyFormData,
+          formData: true,
+        };
+      },
+      invalidatesTags: ['Inventory'],
+    }),
+    updateInventory: builder.mutation<
+      any,
+      { data: UpdateInventoryType; productId: string }
+    >({
+      query: (body: { data: UpdateInventoryType; productId: string }) => {
+        // convert body to formData
+        const bodyFormData = objectToFormData(body.data);
+
+        // return request payload
+        return {
+          url: `${baseUrl.business.inventory}/${body.productId}`,
+          method: 'PUT',
+          body: bodyFormData,
+          formData: true,
+        };
+      },
+      invalidatesTags: ['Inventory'],
+    }),
+    updateProductQuantity: builder.mutation<
+      any,
+      { productId: string; quantity: number }
+    >({
+      query: (body: { productId: string; quantity: number }) => ({
+        url: `${baseUrl.business.inventory}/${body.productId}/updateProductQuantity`,
+        method: 'PUT',
+        body: {
+          quantity: body.quantity,
+        },
+      }),
+      invalidatesTags: ['Inventory'],
+    }),
+    updateProductSalesCount: builder.mutation<
+      any,
+      { productId: string; salesAmount: number }
+    >({
+      query: (body: { productId: string; salesAmount: number }) => ({
+        url: `${baseUrl.business.inventory}/updateProductsStock`,
+        method: 'PUT',
+        body: {
+          salesData: [[`${body.productId}`, body.salesAmount]],
+        },
+      }),
+      invalidatesTags: ['Inventory'],
+    }),
   }),
 });
 
@@ -250,4 +336,11 @@ export const {
   useGetUserInformationQuery,
   useGetWalletInfoQuery,
   useFundWalletMutation,
+  useGetInventoriesQuery,
+  useGetSingleInventoryQuery,
+  useDeleteProductMutation,
+  useCreateInventoryMutation,
+  useUpdateInventoryMutation,
+  useUpdateProductQuantityMutation,
+  useUpdateProductSalesCountMutation,
 } = businessApi;

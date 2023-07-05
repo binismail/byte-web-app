@@ -6,7 +6,8 @@
 .input {
   height: 48px;
   width: 100%;
-  color: var(--neutral06);
+  // color: var(--neutral06);
+  color: black;
   padding-left: 42px;
   border-radius: 12px;
   border: 1px solid var(--neutral06);
@@ -34,8 +35,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-right: 0.3px solid var(--neutral06);
   border-left: 0.3px solid var(--neutral06);
-  border-top: 0.3px solid var(--neutral06);
+  // border-top: 0.3px solid var(--neutral06);
   border-bottom: 0.3px solid var(--neutral06);
 }
 

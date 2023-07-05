@@ -1,8 +1,15 @@
+import { ReactNode } from 'react';
 import ByteIcon from '../icon/byte.icon';
 import styles from './modal.module.scss';
 
-const Modal = (props: any) => {
-  const { closeModal, header } = props;
+type ModalPropType = {
+  closeModal?: () => void;
+  header?: string;
+  children?: ReactNode;
+};
+
+const Modal = ({ closeModal, header, children }: ModalPropType) => {
+  // const { closeModal, header, } = props;
 
   return (
     <div className={styles.overlay}>
@@ -24,7 +31,7 @@ const Modal = (props: any) => {
             {header}
           </p>
         )}
-        <div className="h-fit bg-white">{props.children}</div>
+        <div className="h-fit bg-white">{children}</div>
       </div>
     </div>
   );
