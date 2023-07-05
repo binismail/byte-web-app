@@ -25,8 +25,6 @@ const InventoryManagement: NextPageWithLayout = () => {
     refetchOnMountOrArgChange: true,
   });
 
-  // DATA INITIALIZATION
-
   //   SIDE EFFECTS
   useEffect(() => {
     if (isSuccess) {

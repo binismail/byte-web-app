@@ -100,10 +100,11 @@ const Records: NextPageWithLayout = () => {
       </div>
       <div>
         <InventoryTable
-          searchInput={''}
           filter={'num'}
           header={header}
           contents={contents}
+          isAscending={true}
+          loading={true}
         />
       </div>
     </div>
