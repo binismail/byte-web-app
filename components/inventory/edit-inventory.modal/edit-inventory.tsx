@@ -1,5 +1,6 @@
 import { Formik } from 'formik';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { isEmpty } from '../../../helpers/is-emtpy';
@@ -22,9 +23,27 @@ type Props = {
   setEditProductState: Dispatch<SetStateAction<boolean>>;
   productId: string;
 };
+type PickedImageType = {
+  path: string;
+  preview: string;
+  name: string;
+  size: number;
+  type: string;
+  webkitRelativePath: string;
+};
 
 const EditInventory = ({ setEditProductState, productId }: Props) => {
   // STATES
+  const [pickedImage, setPickedImage] = useState<PickedImageType>({
+    path: '',
+    preview: '',
+    name: '',
+    size: 0,
+    type: '',
+    webkitRelativePath: '',
+  });
+  const [files, setFiles] = useState<unknown[]>([]);
+  const [error, setError] = useState<string>('');
   const [inventoryDetails, setInventoryDetails] =
     useState<InventoryDetailsType>({
       productImage: '',
@@ -48,6 +67,31 @@ const EditInventory = ({ setEditProductState, productId }: Props) => {
   const [updateStockState, setUpdateStockState] = useState<boolean>(false);
   const [saleCountState, setSalesCountState] = useState<boolean>(false);
 
+  // DATA INITIALIZATION
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: {
+      'image/*': ['.png', '.jpeg', '.jpg'],
+    },
+    maxFiles: 1,
+    multiple: false,
+    maxSize: 5242880,
+    onDrop: (acceptedFiles) => {
+      setError('');
+      setFiles(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )
+      );
+    },
+    onDropRejected(fileRejections, event) {
+      setError("file shouldn't be more than 5mb");
+      console.log('files: ', fileRejections);
+      console.log('event: ', event);
+    },
+  });
+
   // HOOKS
   const { data, isSuccess } = useGetSingleInventoryQuery(productId, {
     refetchOnMountOrArgChange: true,
@@ -55,6 +99,12 @@ const EditInventory = ({ setEditProductState, productId }: Props) => {
   const [updateInventory, { isLoading }] = useUpdateInventoryMutation();
 
   // SIDE EFFECTS
+  useEffect(() => {
+    if (!isEmpty(files)) {
+      setPickedImage(files[0] as PickedImageType);
+      console.log(files);
+    }
+  }, [files]);
   useEffect(() => {
     if (isSuccess && !isEmpty(data?.data)) {
       setInventoryDetails({ ...data.data });
@@ -86,6 +136,7 @@ const EditInventory = ({ setEditProductState, productId }: Props) => {
             productCategory: values.productCategory,
             unitCostPrice: values.unitCostPrice,
             unitSellingPrice: values.unitSellingPrice,
+            // productImage: pickedImage.name || null,
           };
           updateInventory({ data, productId })
             .unwrap()

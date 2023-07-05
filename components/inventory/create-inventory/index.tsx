@@ -91,11 +91,11 @@ const CreateInventory = ({ setAddProductState }: Props) => {
           productQuantityStocked: '',
         }}
         onSubmit={(values) => {
-          const data = {
-            ...values,
-            productImage: pickedImage.name || null,
-          };
-          createInventory(data)
+          // const data = {
+          //   ...values,
+          //   productImage: pickedImage.name || null,
+          // };
+          createInventory(values)
             .unwrap()
             .then((data: any) => {
               setAddProductState(false);
