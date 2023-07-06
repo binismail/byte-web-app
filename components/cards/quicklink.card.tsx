@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import ByteIcon from '../shared/icon/byte.icon';
 import styles from './quicklink.card.module.scss';
 export interface IQuickLinkCard {
@@ -6,6 +7,7 @@ export interface IQuickLinkCard {
   name: string;
   size: string;
   iconColor: string;
+  path?: string;
 }
 
 const QuickLinkCard: React.FC<IQuickLinkCard> = ({
@@ -14,9 +16,16 @@ const QuickLinkCard: React.FC<IQuickLinkCard> = ({
   name,
   size,
   iconColor,
+  path = '',
 }) => {
+  // DATA INITALIZATION
+  const router = useRouter();
   return (
-    <div style={{ backgroundColor: color }} className={styles.quicklinkCard}>
+    <div
+      onClick={() => router.push(path)}
+      style={{ backgroundColor: color }}
+      className={styles.quicklinkCard}
+    >
       <ByteIcon icon={name} color={iconColor} size={size} />
       <p className={styles.quicklinkTitle}> {title}</p>
     </div>
