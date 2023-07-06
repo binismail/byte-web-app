@@ -2,7 +2,7 @@
   "urli": "localhost:3000/api/v2/",
   "prodUrl": "https://api.joinbyte.co/api/v2/",
   "devUrl": "https://byte-app-v2.herokuapp.com/api/v2/",
-  "url": "https://api.joinbyte.co/api/v2/",
+  "testUrl": "https://byte-backend-testing.onrender.com",
 
   "authentication": {
     "refreshToken": "auth/refreshToken",
@@ -12,7 +12,7 @@
     "verifyPhoneNumber": "auth/business/verifyRegistrationPhone",
     "login": "auth/business/loginWithEmail",
     "logout": "auth/logout",
-    "resetPassword":"auth/business/resetPassword"
+    "resetPassword": "auth/business/resetPassword"
   },
 
   "business": {
@@ -36,8 +36,8 @@
     "record": "businesses/records",
     "invoice": "businesses/invoices",
     "inventory": "businesses/inventories",
-    "updatePin":"businesses/updateTransactionPin",
-    "updateProductsStock":"businesses/inventories/updateProductsStock"
+    "updatePin": "businesses/updateTransactionPin",
+    "updateProductsStock": "businesses/inventories/updateProductsStock"
   },
 
   "businessPocket": {
@@ -48,7 +48,7 @@
     "getWallet": "businesses/wallets",
     "getVirtualAccount": "businesses/virtualAccounts?provider=seerbit",
     "searchBusinessDocs": "businesses/search",
-    "cards":"businesses/cards"
+    "cards": "businesses/cards"
   },
 
   "businessPayment": {
@@ -66,5 +66,5 @@
     "retrieveBanks": "verification/retrieveBanks"
   },
   "feed": "feed",
-  "beneficiaries":"beneficiaries"
+  "beneficiaries": "beneficiaries"
 }
