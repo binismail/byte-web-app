@@ -1,19 +1,40 @@
+import { ChangeEventHandler, FocusEventHandler } from 'react';
 import styles from './amount-input.module.scss';
 export interface IAmountInput {
   placeholder: string;
-  type: string;
-  onChange?: any;
-  value: string;
+  type?: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  value?: string | number;
+  onBlur?: FocusEventHandler<HTMLInputElement>;
+  onFocus?: FocusEventHandler<HTMLInputElement>;
+  name?: string;
 }
 
-const AmountInput: React.FC<IAmountInput> = ({ placeholder, type }) => {
+const AmountInput = ({
+  placeholder,
+  type = 'text',
+  value,
+  onChange,
+  onBlur,
+  onFocus,
+  name,
+}: IAmountInput) => {
   return (
     <div className={styles.container}>
       <div className={styles.inputContainer}>
         <div className={styles.currency}>
-          <div>₦</div>
+          <div className="text-[#565A63]">₦</div>
         </div>
-        <input className={styles.input} placeholder={placeholder} type={type} />
+        <input
+          name={name}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          value={value}
+          onChange={onChange}
+          className={styles.input}
+          placeholder={placeholder}
+          type={type}
+        />
       </div>
     </div>
   );

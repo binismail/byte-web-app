@@ -111,6 +111,7 @@ const Dashboard: NextPageWithLayout = () => {
             size="20"
           />
           <QuickLinkCard
+            path="/dashboard/tools/inventory-management"
             title="Add inventory"
             color="var(--primary01)"
             name="clipboard-text"

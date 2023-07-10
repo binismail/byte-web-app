@@ -26,10 +26,15 @@ export interface IDashboard {
   children: ReactElement;
   headerTitle?: string;
   backBtn?: boolean;
+  enableBackBtn?: boolean;
 }
 
 // DASHBOARDLAYOUT COMPONENT
-const DashboardLayout = ({ children, headerTitle = 'Home' }: IDashboard) => {
+const DashboardLayout = ({
+  children,
+  headerTitle = 'Home',
+  enableBackBtn,
+}: IDashboard) => {
   // STATES
   const [status, setStatus] = useState(false);
 
@@ -72,7 +77,12 @@ const DashboardLayout = ({ children, headerTitle = 'Home' }: IDashboard) => {
         {/* DASHBOARD LIST CONTAINER */}
         <ul className="flex flex-col gap-6 w-[70%] ml-auto">
           {/* HOME */}
-          <ActiveLink href={'/dashboard'} text="Home" Icon={Home2} />
+          <ActiveLink
+            exact={true}
+            href={'/dashboard'}
+            text="Home"
+            Icon={Home2}
+          />
 
           {/* TOOLS */}
           <ActiveLink href={'/dashboard/tools'} text="Tools" Icon={Briefcase} />
@@ -127,6 +137,7 @@ const DashboardLayout = ({ children, headerTitle = 'Home' }: IDashboard) => {
       <div className="flex flex-col h-screen w-[80%]">
         {/* HEADER */}
         <LayoutHeader
+          enableBackBtn={enableBackBtn}
           headerTitle={headerTitle}
           loading={getUserDetailsLoading}
         />

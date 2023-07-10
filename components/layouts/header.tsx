@@ -1,5 +1,6 @@
-import { ArrowDown2, Notification, User } from 'iconsax-react';
+import { ArrowDown2, ArrowLeft, Notification, User } from 'iconsax-react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { isEmpty } from '../../helpers/is-emtpy';
 import { useAppSelector } from '../../hooks/hooks';
 import { selectUserDetails } from '../../lib/redux/userDetailsSlice/userDetailsSlice';
@@ -7,10 +8,16 @@ import { selectUserDetails } from '../../lib/redux/userDetailsSlice/userDetailsS
 type Props = {
   headerTitle: string;
   loading: boolean;
+  enableBackBtn?: boolean;
 };
 
-const LayoutHeader = ({ headerTitle = 'Home', loading }: Props) => {
+const LayoutHeader = ({
+  headerTitle = 'Home',
+  loading,
+  enableBackBtn,
+}: Props) => {
   // DATA INITIALZIATION
+  const router = useRouter();
   const {
     name,
     administrator: { firstName, lastName, identityImageUrl },
@@ -20,8 +27,22 @@ const LayoutHeader = ({ headerTitle = 'Home', loading }: Props) => {
     <header className="h-[12%] w-full py-4 px-20 border-b border-[#E6EAED]">
       <div className="h-full flex w-full justify-between items-center">
         {/* header title */}
-        <div className="text-lg font-normal text-[#30333B]">
-          <p>{headerTitle}</p>
+        <div className="inline-flex items-center gap-6">
+          {/* back button */}
+          {enableBackBtn ? (
+            <div
+              role="button"
+              onClick={() => router.back()}
+              className="inline-flex items-center gap-1 cursor-pointer"
+            >
+              <ArrowLeft size="24" color="#565A63" />
+
+              <span className="text-[#808691] text-sm font-normal">Back</span>
+            </div>
+          ) : null}
+
+          {/* title */}
+          <p className="text-lg font-normal text-[#30333B]">{headerTitle}</p>
         </div>
 
         {/* header profile */}

@@ -5,17 +5,19 @@ import { useRouter } from 'next/router';
 interface ActiveLinkProps extends LinkProps {
   text: string;
   Icon: Icon;
+  exact?: boolean;
 }
 
 const ActiveLink = ({ ...props }: ActiveLinkProps) => {
   const { asPath } = useRouter();
 
-  const isActive = asPath === props.href || asPath === props.as;
+  const isLinkActive = props.exact
+    ? asPath === props.href
+    : asPath.includes(props.href as string);
 
-  const className = isActive
+  const className = isLinkActive
     ? 'text-base text-[#6A78D1] font-normal'
     : 'text-[#808691] text-base font-normal';
-  const isLinkActive: boolean = isActive;
 
   return (
     <Link {...props}>
