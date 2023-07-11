@@ -97,7 +97,12 @@ const SalesProductForm: React.FC<any> = ({ type }) => {
         </div>
       )}
       <div className="my-md-1 ">
-        <TotalAmount value="N20,000.00" />
+        <TotalAmount
+          subTotal={0}
+          taxAmount={0}
+          discountPercentage={0}
+          value="N20,000.00"
+        />
       </div>
       <Button title="Save Changes" type="large" color="btnPrimary" />
     </div>
