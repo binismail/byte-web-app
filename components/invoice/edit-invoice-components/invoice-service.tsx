@@ -141,7 +141,7 @@ const InvoiceService = ({
                     className="inline-flex items-center gap-2 text-[#6A78D1] text-sm hover:opacity-70"
                   >
                     <Add size="12" color="#6A78D1" />
-                    Add another product
+                    Add another service
                   </button>
                 )}
 

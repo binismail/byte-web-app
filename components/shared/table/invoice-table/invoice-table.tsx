@@ -126,7 +126,10 @@ const InvoiceTable = ({
 
                   {/* amount */}
                   <td className={styles.td}>
-                    <p className={styles.description}> {content.totalAmount}</p>
+                    <p className={styles.description}>
+                      {' '}
+                      {content.totalAmount.toLocaleString('en-US')}
+                    </p>
                   </td>
 
                   {/* expiry date */}

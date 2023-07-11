@@ -74,6 +74,7 @@ const MarkAsPaid = ({
           {/* delete */}
           <div className="w-full flex-col items-stretch">
             <Button
+              disabled={isLoading}
               click={handleMarkAsPaid}
               loading={isLoading}
               color="btnLight"

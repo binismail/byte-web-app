@@ -1,5 +1,6 @@
 import { Sort } from 'iconsax-react';
 import { ChangeEvent, ReactElement, useEffect, useState } from 'react';
+import CreateInvoiceModal from '../../../../components/invoice/create-invoice';
 import SortModal from '../../../../components/invoice/sort-modal';
 import DashboardLayout from '../../../../components/layouts/dashboard-layout';
 import Layout from '../../../../components/layouts/layout';
@@ -16,14 +17,14 @@ const Invoices: NextPageWithLayout = () => {
   const [filter, setFilter] = useState<string>('num');
   const [ascending, setAscending] = useState<boolean>(true);
   const [sortModalStatus, setSortModalStatus] = useState<boolean>(false);
+  const [createInvoiceModalState, setCreateInvoiceModalState] =
+    useState<boolean>(false);
   const [invoices, setInvoices] = useState([]);
 
   //   HOOKS
   const { data, isLoading, isSuccess } = useGetInvoicesQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
-
-  // DATA INITIALIZATION
 
   //   SIDE EFFECTS
   useEffect(() => {
@@ -42,6 +43,13 @@ const Invoices: NextPageWithLayout = () => {
           setFilter={setFilter}
           filter={filter}
           setSortModalStatus={setSortModalStatus}
+        />
+      )}
+      {createInvoiceModalState && (
+        <CreateInvoiceModal
+          closeModal={() => {
+            setCreateInvoiceModalState(false);
+          }}
         />
       )}
 
@@ -63,7 +71,7 @@ const Invoices: NextPageWithLayout = () => {
         <div className="w-full flex items-center justify-between">
           {/* add inventory */}
           <Button
-            // click={() => setAddProductState(true)}
+            click={() => setCreateInvoiceModalState(true)}
             type="large"
             icon="add"
             color="btnPrimary"

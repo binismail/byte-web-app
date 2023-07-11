@@ -68,6 +68,7 @@ const DeleteInvoice = ({
           <div className="w-full flex-col items-stretch">
             <Button
               click={handleDeleteInvoice}
+              disabled={isDeleteLoading}
               loading={isDeleteLoading}
               color="btnWarning"
               title="Delete invoice"

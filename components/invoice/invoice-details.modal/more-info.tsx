@@ -25,9 +25,10 @@ const MoreInfo = ({
       <ul className="w-full flex flex-col gap-2 py-4">
         {/* edit details */}
         <li
-          onClick={() =>
-            router.push(`/dashboard/tools/invoices/edit-invoice/${invoiceId}`)
-          }
+          onClick={() => {
+            router.push(`/dashboard/tools/invoices/edit-invoice/${invoiceId}`);
+            setMoreModalState(false);
+          }}
           className="text-[#30333B] text-sm font-normal inline-flex items-center gap-4 py-2 px-2 rounded-md active:bg-gray-300"
         >
           <Edit2 variant="Bold" size="20" color="#30333B" />

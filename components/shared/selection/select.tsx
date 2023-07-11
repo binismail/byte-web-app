@@ -11,7 +11,9 @@ const Select: React.FC<IInput> = ({ placeholder, list }) => {
   return (
     <select className={styles.input} placeholder={placeholder}>
       {list.map((res, i) => (
-        <option key={i} value={res.value}>{res.label}</option>
+        <option key={i} value={res.value}>
+          {res.label}
+        </option>
       ))}
     </select>
   );

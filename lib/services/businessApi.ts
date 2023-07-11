@@ -362,6 +362,14 @@ export const businessApi = createApi({
       }),
       invalidatesTags: ['Invoices'],
     }),
+    createInvoice: builder.mutation<any, SingleInvoiceDetailsType>({
+      query: (body: SingleInvoiceDetailsType) => ({
+        url: baseUrl.business.invoice,
+        method: 'POST',
+        body: body,
+      }),
+      invalidatesTags: ['Invoices'],
+    }),
   }),
 });
 
@@ -399,4 +407,5 @@ export const {
   useDeleteInvoiceMutation,
   useMarkInvoiceAsPaidMutation,
   useUpdateInvoiceDetailsMutation,
+  useCreateInvoiceMutation,
 } = businessApi;

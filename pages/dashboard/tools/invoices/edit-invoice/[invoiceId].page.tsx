@@ -179,6 +179,7 @@ const EditInvoice: NextPageWithLayout = () => {
             handleSubmit,
             setFieldValue,
             dirty,
+            isSubmitting,
           }) => {
             return (
               <Form
@@ -408,7 +409,7 @@ const EditInvoice: NextPageWithLayout = () => {
                   </div>
                   <Button
                     loading={isLoading}
-                    disabled={!dirty}
+                    disabled={!dirty || isSubmitting}
                     click={handleSubmit}
                     title="Update Invoice"
                     iconPosition="right"
