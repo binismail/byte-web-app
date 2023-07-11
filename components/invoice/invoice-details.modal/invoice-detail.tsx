@@ -1,125 +1,314 @@
-import profile from '../../../public/image/profile.jpg';
-import Avatar from '../../shared/avatar/avatar';
-import Badge from '../../shared/badge/badge';
+import Image from 'next/image';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { isEmpty } from '../../../helpers/is-emtpy';
+import { useGetSingleInvoiceQuery } from '../../../lib/services/businessApi';
+import { InvoiceDetailsType } from '../../../pages/dashboard/tools/invoices/invoices.types';
 import ByteIcon from '../../shared/icon/byte.icon';
+import IconShadow from '../../shared/icon/icon-shadow';
+import LoadingState from '../../shared/loading-state';
+import Modal from '../../shared/modal/modal';
+import DeleteInvoice from './delete-invoice';
 import styles from './invoice-detail.module.scss';
+import MarkAsPaid from './mark-as-paid';
+import MoreInfo from './more-info';
 
-const InvoiceDetail: React.FC<any> = () => {
+type InvoiceDetailsProps = {
+  invoiceId: string;
+  setInvoiceDetailsState: Dispatch<SetStateAction<boolean>>;
+};
+
+const InvoiceDetail = ({
+  invoiceId,
+  setInvoiceDetailsState,
+}: InvoiceDetailsProps) => {
+  // STATES
+  const [moreModalState, setMoreModalState] = useState(false);
+  const [deleteModalState, setDeleteModalState] = useState(false);
+  const [markPaidState, setMarkPaidState] = useState(false);
+  const [invoiceDetails, setInvoiceDetails] =
+    useState<InvoiceDetailsType | null>(null);
+  const [isService, setIsService] = useState(false);
+
+  // HANDLERS
+  const toggleDeleteModal = () => {
+    setMoreModalState(false);
+    setDeleteModalState(true);
+  };
+  const toggleMarkAsPaid = () => {
+    setMoreModalState(false);
+    setMarkPaidState(true);
+  };
+
+  // HOOKS
+  const { data, isLoading, isSuccess } = useGetSingleInvoiceQuery(invoiceId, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  // SIDE EFFECTS
+  useEffect(() => {
+    if (isSuccess && !isEmpty(data?.data) && data?.data !== null) {
+      const singleInvoice: InvoiceDetailsType = data?.data;
+      setInvoiceDetails(singleInvoice);
+      setIsService(singleInvoice.type === 'service');
+    }
+  }, [isSuccess, data]);
+
   return (
-    <div className="modal">
-      <div className={styles.container}>
-        <div className="flex flex-space-between flex-align-center">
-          <div className="flex">
-            <div className="mr-sm-2">
-              <ByteIcon icon="close-circle" size="18" />
-            </div>
+    <>
+      <Modal width_styling="30vw">
+        {isLoading ? (
+          <LoadingState heightTailwind="h-[70vh]" />
+        ) : !isEmpty(invoiceDetails) && invoiceDetails != null ? (
+          <>
+            {moreModalState && (
+              <MoreInfo
+                invoiceId={invoiceId}
+                setMoreModalState={setMoreModalState}
+                onDeleteClick={toggleDeleteModal}
+                onMarkAsReadClick={toggleMarkAsPaid}
+              />
+            )}
+            {deleteModalState && (
+              <DeleteInvoice
+                setInvoiceDetailsState={setInvoiceDetailsState}
+                invoiceId={invoiceId}
+                cancelClick={() => setDeleteModalState(false)}
+                setDeleteModalState={setDeleteModalState}
+              />
+            )}
+            {markPaidState && (
+              <MarkAsPaid
+                setInvoiceDetailsState={setInvoiceDetailsState}
+                invoiceId={invoiceId}
+                cancelClick={() => setMarkPaidState(false)}
+                setMarkPaidState={setMarkPaidState}
+                isService={isService}
+              />
+            )}
+            <div className="h-[80vh] w-full overflow-auto flex items-center justify-center">
+              <div className={styles.container}>
+                {/* header */}
+                <div className="w-full flex justify-between items-center gap-2">
+                  <div className="inline-flex items-center gap-1">
+                    <div
+                      onClick={() => setInvoiceDetailsState(false)}
+                      className="mr-sm-2"
+                    >
+                      <ByteIcon icon="close-circle" size="18" />
+                    </div>
 
-            <ByteIcon icon="more" size="18" />
-          </div>
-          <p className="text-strong">#1029324</p>
-        </div>
-
-        <div className={styles.cardByte}>
-          <div className="flex flex-space-between">
-            <div>
-              <p className={`${styles.amount} + weight-400`}>Amount due</p>
-              <p className="text-h5 text-white mt-0">₦127,271.49</p>
-            </div>
-            <Badge label="Unpaid" color="warning" />
-          </div>
-          <div className={styles.divider}></div>
-          <div className="flex flex-space-between flex-align-center mt-md-1 ">
-            <div className="flex flex-align-center">
-              <div>
-                <Avatar src={profile} size="40px" alt="profile" />
-              </div>
-
-              <div>
-                <label className="text-value text-white">Fife Animashaun</label>
-                <p className="text-label mt-0 mb-0 text-primary-01">
-                  0814 112 3456
-                </p>
-              </div>
-            </div>
-            <ByteIcon icon="arrow-right-3" size="18" color="var(--white)" />
-          </div>
-        </div>
-        <div className={styles.invoiceContent}>
-          <div className="flex flex-space-between">
-            <p className="text-secton-items">Items:</p>
-            <p className="text-byte">Go to sales record</p>
-          </div>
-
-          <div>
-            <div className="flex flex-space-between ">
-              <div>
-                <label className="text-value text-neutral-09">
-                  Apple iWatch
-                </label>
-                <p className="text-label mt-0 text-neutral-06 ">
-                  x1 @ ₦127,271.49
-                </p>
-              </div>
-              <p className=" text-value text-neutral-08 mt-0 ">₦127,271.49</p>
-            </div>
-
-            <div className="flex flex-space-between">
-              <div>
-                <label className="text-value text-neutral-09 ">
-                  Lightning charger cable
-                </label>
-                <p className="text-label mt-0 text-neutral-06">
-                  x1 @ ₦127,271.49
-                </p>
-              </div>
-              <p className="text-value text-neutral-08 mt-0">₦127,271.49</p>
-            </div>
-            <div className="flex flex-space-between ">
-              <div>
-                <label className="text-value text-neutral-09">
-                  61W Macbook Charger
-                </label>
-                <p className="text-label mt-0 text-neutral-06">
-                  x1 @ ₦127,271.49
-                </p>
-              </div>
-              <p className="text-value text-neutral-08 mt-0 ">₦127,271.49</p>
-            </div>
-
-            <hr></hr>
-            <div>
-              <div className="flex flex-space-between ">
-                <div>
-                  <p className="text-label mt-0 text-neutral-06">Subtotal</p>
+                    <ByteIcon
+                      onClick={() => setMoreModalState(true)}
+                      icon="more"
+                      size="18"
+                    />
+                  </div>
+                  <p className="text-strong">{`#${invoiceDetails.num}`}</p>
                 </div>
-                <p className="text-value text-neutral-08 mt-0 ">₦127,271.49</p>
-              </div>
-              <div className="flex flex-space-between ">
-                <div>
-                  <p className="text-label mt-0 text-neutral-06">Tax (7.5%) </p>
+
+                {/* card heading */}
+                <div className={styles.cardByte}>
+                  <div className="flex flex-space-between">
+                    <div className="inline-flex flex-col gap-1">
+                      <p className={`${styles.amount} + weight-400`}>
+                        Amount due
+                      </p>
+                      <p className="text-h5 text-white mt-0">{`₦${invoiceDetails.totalAmount.toLocaleString(
+                        'en-US'
+                      )}`}</p>
+                    </div>
+                    <span
+                      className={`${styles.status} h-fit ${
+                        invoiceDetails.status === 'paid'
+                          ? styles.paid
+                          : invoiceDetails.status === 'unpaid'
+                          ? styles.unpaid
+                          : styles.overdue
+                      }`}
+                    >
+                      {' '}
+                      {invoiceDetails.status}
+                    </span>
+                  </div>
+
+                  {/* divider */}
+                  <div className={styles.divider}></div>
+
+                  {/* customer info */}
+                  <div className="flex flex-space-between flex-align-center ">
+                    <div className="flex w-full items-center gap-3">
+                      {/* image */}
+                      {invoiceDetails?.customer?.image ? (
+                        <span className="rounded-[50%] bg-[#F0F2F5] h-[40px] w-[40px] inline-flex items-center justify-center">
+                          <Image
+                            className="rounded-[50%]"
+                            height="40px"
+                            width="40px"
+                            src={invoiceDetails?.customer?.image as string}
+                            alt=""
+                          />
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center justify-center">
+                          <IconShadow
+                            icon="d-cube-scan"
+                            color="var(--neutral06)"
+                            size="16"
+                            className="grey small"
+                          />
+                        </span>
+                      )}
+
+                      {/* name and number */}
+                      <div>
+                        <label className="text-value text-white">
+                          {invoiceDetails?.customer?.name}
+                        </label>
+                        <p className="text-label mt-0 mb-0 text-primary-01">
+                          {invoiceDetails?.customer?.phone}
+                        </p>
+                      </div>
+                    </div>
+                    <ByteIcon
+                      icon="arrow-right-3"
+                      size="18"
+                      color="var(--white)"
+                    />
+                  </div>
                 </div>
-                <p className="text-value text-neutral-08 mt-0 ">₦127,271.49</p>
-              </div>
-              <div className="flex flex-space-between ">
-                <div>
-                  <p className="text-label mt-0 text-neutral-06">
-                    Discount (10%){' '}
-                  </p>
+
+                {/* container */}
+                <div className="w-full flex flex-col">
+                  {/* card items */}
+                  <div className={styles.invoiceContent}>
+                    <div className="flex flex-space-between">
+                      <p className="text-[#808691] text-base font-normal">
+                        Items:
+                      </p>
+                      <p className="text-base text-[#6A78D1] font-normal">
+                        Go to sales record
+                      </p>
+                    </div>
+
+                    {/* content */}
+                    <div className="flex flex-col gap-3 w-full">
+                      {isService
+                        ? invoiceDetails.services.map((service, index) => (
+                            <div
+                              key={index}
+                              className="flex flex-col gap-1 w-full"
+                            >
+                              <div className="flex w-full items-start justify-between">
+                                <p className="text-value text-neutral-09 w-[60%]">
+                                  {service.name}
+                                </p>
+                                <p className=" text-value w-[30%] text-neutral-08 mt-0 ">
+                                  ₦{service.cost.toLocaleString('en-US')}
+                                </p>
+                              </div>
+                              <p className="text-label mt-0 text-neutral-06 ">
+                                {`Tax (${service.taxPercentage}%)`}
+                              </p>
+                            </div>
+                          ))
+                        : invoiceDetails.products.map((product, index) => (
+                            <div
+                              key={index}
+                              className="flex flex-col gap-1 w-full"
+                            >
+                              <div className="flex w-full items-start justify-between">
+                                <p className="text-value text-neutral-09 w-[60%]">
+                                  {product.name}
+                                </p>
+                                <p className=" text-value text-neutral-08 w-[30%] mt-0 ">
+                                  ₦{product.unitPrice.toLocaleString('en-US')}
+                                </p>
+                              </div>
+                              <p className="text-label mt-0 text-neutral-06 ">
+                                {`x${product.quantity} @ ₦
+                                ${(
+                                  product.quantity * product.unitPrice
+                                ).toLocaleString('en-US')}`}
+                              </p>
+                            </div>
+                          ))}
+
+                      {/* horizontal line */}
+                      <hr className="my-2" />
+
+                      {/* totals */}
+                      <div className="flex flex-col gap-2">
+                        <div className="flex justify-between items-center gap-2">
+                          <p className="text-label mt-0 text-neutral-06">
+                            Subtotal
+                          </p>
+                          <p className="text-value text-neutral-08 mt-0 ">
+                            {`₦${invoiceDetails.subTotal.toLocaleString(
+                              'en-US'
+                            )}`}
+                          </p>
+                        </div>
+                        <div className="flex justify-between items-center gap-2">
+                          <p className="text-label mt-0 text-neutral-06">
+                            {/* Tax (7.5%){' '} */}
+                            Tax
+                          </p>
+                          <p className="text-value text-neutral-08 mt-0 ">
+                            {`₦${invoiceDetails.taxAmount.toLocaleString(
+                              'en-US'
+                            )}`}
+                          </p>
+                        </div>
+                        {invoiceDetails.discountPercentage && (
+                          <div className="flex justify-between items-center gap-2">
+                            <p className="text-label mt-0 text-neutral-06">
+                              Discount ({invoiceDetails.discountPercentage}%){' '}
+                            </p>
+                            <p className=" text-value text-neutral-08 mt-0 ">
+                              {`₦${invoiceDetails.discountAmount.toLocaleString(
+                                'en-US'
+                              )}`}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* total */}
+                  <div className={styles.footer}>
+                    <div className="flex flex-space-between">
+                      <p className={styles.small}>Total</p>
+                      <p
+                        className={styles.footerAmount}
+                      >{`₦${invoiceDetails.totalAmount.toLocaleString(
+                        'en-US'
+                      )}`}</p>
+                    </div>
+                  </div>
                 </div>
-                <p className=" text-value text-neutral-08 mt-0 ">₦127,271.49</p>
               </div>
             </div>
-          </div>
-        </div>
+          </>
+        ) : (
+          <div className="w-full h-[70vh] text-gray-400 flex flex-col pt-2">
+            <div className="w-full flex items-center gap-2">
+              <div
+                onClick={() => setInvoiceDetailsState(false)}
+                className="mr-sm-2"
+              >
+                <ByteIcon icon="close-circle" size="18" />
+              </div>
+            </div>
 
-        <div className={styles.footer}>
-          <div className="flex flex-space-between">
-            <p className={styles.small}>Total</p>
-            <p className={styles.footerAmount}>₦201,987.82</p>
+            {/* content */}
+            <div className="w-full h-full flex items-center justify-center">
+              No data!
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+        )}
+      </Modal>
+    </>
   );
 };
 

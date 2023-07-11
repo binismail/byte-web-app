@@ -1,21 +1,46 @@
-.container {
-  border-radius: 16px;
-  margin-top: var(--space-md-1);
-}
+// .container {
+//   border-radius: 16px;
+//   margin-top: var(--space-md-1);
+// }
+
 .table {
   border-collapse: collapse;
   width: 100%;
-  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  // height: 60vh;
+  padding-bottom: 20px;
+  overflow: auto;
+  // border-radius: 16px;
 }
 
-.td,
 .th {
+  border-bottom: 3px solid #5864ae;
+  font-size: 14px;
+  font-weight: 400;
+  color: #5864ae;
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: left;
+  width: fit-content;
+}
+
+.td {
   // border: 1px solid #dddddd;
+  // text-align: left;
+  // padding: 8px;
+  // height: 72px;
+  // border-bottom: 1px solid var(--neutral03);
+  // color: #565a63;
   text-align: left;
-  padding: 8px;
   height: 72px;
   border-bottom: 1px solid var(--neutral03);
-  color: #565a63;
+  color: var(--byte);
+  display: inline-flex;
+  align-items: center;
+  justify-content: left;
+  gap: 8px;
 }
 
 .header {
@@ -27,10 +52,10 @@
   color: #565a63;
 }
 
-.tr:nth-child(even) {
-  border-bottom: 1px solid var(--neutral03);
-  height: 4rem;
-}
+// .tr:nth-child(even) {
+//   border-bottom: 1px solid var(--neutral03);
+//   height: 4rem;
+// }
 
 .tranIcon {
   padding: 10px;
@@ -46,15 +71,22 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
-  color: var(--neutral08);
+  // color: var(--neutral08);
+  color: #30333b;
 }
 
 .subDescription {
+  // font-weight: 400;
+  // font-size: 14px;
+  // line-height: 20px;
+  // color: var(--neutral07);
+  // opacity: 0.8;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  color: var(--neutral07);
-  opacity: 0.8;
+  // color: var(--neutral07);
+  // opacity: 0.8;
+  color: #565a63;
 }
 
 .status {

@@ -71,7 +71,11 @@ const InventoryTable: React.FC<IInventoryTable> = ({
         {/* body */}
         <tbody className="w-full flex flex-col text-left">
           {loading ? (
-            <LoadingState />
+            <tr className="w-full h-full flex items-center justify-center">
+              <td>
+                <LoadingState />
+              </td>
+            </tr>
           ) : !isEmpty(contents) ? (
             contents
               ?.sort((a: any, b: any) =>
@@ -84,10 +88,10 @@ const InventoryTable: React.FC<IInventoryTable> = ({
                     setProductDetailsState(true);
                   }}
                   key={i}
-                  className="grid grid-cols-[1.2fr_3.2fr_2fr_1.3fr_2.3fr] h-[72px] text-center content-center w-full"
+                  className="grid grid-cols-[1.2fr_3.2fr_2fr_1.3fr_2.3fr] h-[72px] text-center content-center w-full cursor-pointer"
                 >
                   <td className={styles.td}>
-                    <p className={styles.subDescription}> {content.num}</p>
+                    <p className={styles.subDescription}>{`#${content.num}`}</p>
                   </td>
 
                   <td className={`${styles.td} inline-flex items-center gap-2`}>
@@ -148,9 +152,9 @@ const InventoryTable: React.FC<IInventoryTable> = ({
                 </tr>
               ))
           ) : (
-            <section className="w-full h-[50vh] text-gray-400 fontt-sm flex items-center justify-center">
-              No data!
-            </section>
+            <tr className="w-full h-[50vh] text-gray-400 fontt-sm flex items-center justify-center">
+              <td>No data!</td>
+            </tr>
           )}
         </tbody>
       </table>

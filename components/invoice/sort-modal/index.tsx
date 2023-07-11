@@ -22,23 +22,33 @@ const SortModal = ({
   // DATA INITIALIZATION
   const sortItems = [
     {
-      content: 'Sort by availability',
+      content: 'Sort by status',
       id: 1,
-      sortData: 'productQuantityRemaining',
+      sortData: 'status',
     },
     {
-      content: 'Sort by data stocked/restocked',
-      id: 4,
-      sortData: 'createdAt',
-    },
-    {
-      content: 'Sort by price',
+      content: 'Sort by date issued',
       id: 2,
-      sortData: 'unitCostPrice',
+      sortData: 'issuedDate',
     },
     {
-      content: 'Sort by product ID',
+      content: 'Sort by expiry date',
       id: 3,
+      sortData: 'dueDate',
+    },
+    {
+      content: 'Sort by amount due',
+      id: 4,
+      sortData: 'totalAmount',
+    },
+    {
+      content: 'Sort by customer name',
+      id: 5,
+      sortData: 'name',
+    },
+    {
+      content: 'Sort by invoice number',
+      id: 5,
       sortData: 'num',
     },
   ];
@@ -55,15 +65,8 @@ const SortModal = ({
 
   //   HANDLERS
   const handleSortClick = (filterName: string) => {
-    if (filterName === 'productQuantityRemaining') {
-      setFilter(filterName);
-      setAscending(false);
-      setSortModalStatus(false);
-    } else {
-      setFilter(filterName);
-      setAscending(true);
-      setSortModalStatus(false);
-    }
+    setFilter(filterName);
+    setSortModalStatus(false);
   };
   const handleAscendingClick = (isAscending: boolean) => {
     setAscending(isAscending);
