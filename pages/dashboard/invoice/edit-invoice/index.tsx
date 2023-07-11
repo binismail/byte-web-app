@@ -6,7 +6,6 @@ import Button from '../../../../components/shared/butttons/button/button';
 import Checkbox from '../../../../components/shared/checkbox/checkbox';
 import Input from '../../../../components/shared/input/input/input';
 import PhoneInput from '../../../../components/shared/input/phone-input/phone-input';
-import TotalAmount from '../../../../components/total amount/total-amount';
 import { NextPageWithLayout } from '../../../_app.page';
 import styles from './index.module.scss';
 
@@ -82,9 +81,7 @@ const EditInvoice: NextPageWithLayout = () => {
         </div>
       </div>
 
-      <div className="my-md-1 ">
-        <TotalAmount value="N20,000.00" />
-      </div>
+      <div className="my-md-1 ">{/* <TotalAmount value="N20,000.00" /> */}</div>
       <Button
         title="Preview Invoice"
         iconPosition="right"
