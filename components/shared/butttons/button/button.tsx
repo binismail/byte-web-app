@@ -33,6 +33,10 @@ const Button: React.FC<IButton> = ({
       color = styles.btnLight;
       break;
 
+    case 'btnWarning':
+      color = styles.btnWarning;
+      break;
+
     default:
       break;
   }

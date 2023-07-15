@@ -6,14 +6,25 @@ type ModalPropType = {
   closeModal?: () => void;
   header?: string;
   children?: ReactNode;
+  width_styling?: string;
 };
 
-const Modal = ({ closeModal, header, children }: ModalPropType) => {
+const Modal = ({
+  closeModal,
+  header,
+  children,
+  width_styling = '30vw',
+}: ModalPropType) => {
   // const { closeModal, header, } = props;
 
   return (
     <div className={styles.overlay}>
-      <div className={styles.content}>
+      <div
+        style={{
+          width: width_styling,
+        }}
+        className={styles.content}
+      >
         <div className="flex flex-space-between">
           <div></div>
           {header && (

@@ -6,7 +6,6 @@ import Button from '../../../components/shared/butttons/button/button';
 import SearchInput from '../../../components/shared/input/search-input/search-input';
 import SuccessModal from '../../../components/shared/modal/components/success/success.modal';
 import Modal from '../../../components/shared/modal/modal';
-import InvoiceTable from '../../../components/shared/table/invoice-table/invoice-table';
 import { NextPageWithLayout } from '../../_app.page';
 
 export interface IInvoice {
@@ -81,9 +80,7 @@ const Invoice: NextPageWithLayout = () => {
         />
         <Filter placeholder="" value="Filter" />
       </div>
-      <div>
-        <InvoiceTable header={header} contents={contents} />
-      </div>
+      <div>{/* <InvoiceTable header={header} contents={contents} /> */}</div>
     </div>
   );
 };

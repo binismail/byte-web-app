@@ -17,6 +17,7 @@ import {
   ResolveBankType,
 } from '../../pages/dashboard/home/home.types';
 import { UpdateInventoryType } from '../../pages/dashboard/tools/inventory-management/inventory.types';
+import { SingleInvoiceDetailsType } from '../../pages/dashboard/tools/invoices/invoices.types';
 import baseUrl from '../endpoints.json';
 import { logout, setNewTokenCredentials } from '../redux/authSlice/authSlice';
 import { AppState } from '../redux/store';
@@ -121,6 +122,7 @@ export const businessApi = createApi({
     // 'User Information',
     // 'FundWallet',
     'Inventory',
+    'Invoices',
   ],
   endpoints: (builder) => ({
     // GET USER INFORMATION
@@ -318,10 +320,61 @@ export const businessApi = createApi({
       }),
       invalidatesTags: ['Inventory'],
     }),
+
+    // INVOICES
+    getInvoices: builder.query<any, void>({
+      query: () => baseUrl.business.invoice,
+      providesTags: ['Invoices'],
+    }),
+    getSingleInvoice: builder.query<any, string>({
+      query: (invoiceId: string) => `${baseUrl.business.invoice}/${invoiceId}`,
+      providesTags: ['Invoices'],
+    }),
+    deleteInvoice: builder.mutation<any, string>({
+      query: (invoiceId: string) => ({
+        url: `${baseUrl.business.invoice}/${invoiceId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Invoices'],
+    }),
+    markInvoiceAsPaid: builder.mutation<
+      any,
+      { invoiceId: string; type: string }
+    >({
+      query: (body: { invoiceId: string; type: string }) => ({
+        url: `${baseUrl.business.invoice}/${body.invoiceId}`,
+        method: 'PUT',
+        body: {
+          type: body.type,
+          status: 'paid',
+        },
+      }),
+      invalidatesTags: ['Invoices'],
+    }),
+    updateInvoiceDetails: builder.mutation<
+      any,
+      { data: SingleInvoiceDetailsType; invoiceId: string }
+    >({
+      query: (body: { data: SingleInvoiceDetailsType; invoiceId: string }) => ({
+        url: `${baseUrl.business.invoice}/${body.invoiceId}`,
+        method: 'PUT',
+        body: body.data,
+      }),
+      invalidatesTags: ['Invoices'],
+    }),
+    createInvoice: builder.mutation<any, SingleInvoiceDetailsType>({
+      query: (body: SingleInvoiceDetailsType) => ({
+        url: baseUrl.business.invoice,
+        method: 'POST',
+        body: body,
+      }),
+      invalidatesTags: ['Invoices'],
+    }),
   }),
 });
 
 export const {
+  // AUTH
   useLoginMutation,
   useRegisterMutation,
   useLogoutUserMutation,
@@ -329,6 +382,8 @@ export const {
   useVerifyNumberMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
+
+  // PAYMENTS
   useGetBanksQuery,
   useConfirmBankAccountQuery,
   useMakePaymentMutation,
@@ -336,6 +391,8 @@ export const {
   useGetUserInformationQuery,
   useGetWalletInfoQuery,
   useFundWalletMutation,
+
+  // INVENTORIES
   useGetInventoriesQuery,
   useGetSingleInventoryQuery,
   useDeleteProductMutation,
@@ -343,4 +400,12 @@ export const {
   useUpdateInventoryMutation,
   useUpdateProductQuantityMutation,
   useUpdateProductSalesCountMutation,
+
+  // INVOICES
+  useGetInvoicesQuery,
+  useGetSingleInvoiceQuery,
+  useDeleteInvoiceMutation,
+  useMarkInvoiceAsPaidMutation,
+  useUpdateInvoiceDetailsMutation,
+  useCreateInvoiceMutation,
 } = businessApi;

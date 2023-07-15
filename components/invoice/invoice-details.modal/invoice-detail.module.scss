@@ -1,12 +1,21 @@
 .container {
-  padding: 20px;
-  margin-bottom: var(--space-md-3);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 24px;
+  padding-block: 24px;
+  padding-inline: 16px;
+  overflow: auto;
+  width: 100%;
 }
 
 .invoiceContent {
   background: var(--neutral01);
   padding: 16px;
-  margin-top: 16px;
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .cardByte {
@@ -14,6 +23,9 @@
   background-color: var(--byte);
   width: 100%;
   padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .amount {
@@ -44,4 +56,29 @@
 
 .footerAmount {
   font-weight: 600;
+}
+
+.status {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.paid {
+  background-color: var(--success-light);
+  color: var(--success);
+}
+
+.unpaid {
+  background-color: var(--warning-light);
+  color: var(--warning-dark);
+}
+
+.overdue {
+  background-color: var(--danger-light);
+  color: var(--danger-dark);
 }

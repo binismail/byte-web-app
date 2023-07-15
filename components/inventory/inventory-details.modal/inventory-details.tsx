@@ -65,7 +65,7 @@ const InventoryDetails = ({
       })
       .catch((error: any) => {
         console.log(error);
-        toast.error(error?.data?.message || `Counldn't delete this product`);
+        toast.error(error?.data?.message || `Couldn't delete this product`);
       });
   };
   const handleEditProduct = () => {
