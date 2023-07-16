@@ -15,7 +15,7 @@ const Records: NextPageWithLayout = () => {
 
   //   SIDE EFFECTS
   useEffect(() => {
-    const id = parseInt(`${router.query.recordId}`);
+    const id = parseInt(`${router.query.recordType}`);
     setRecordTab(id || 1);
   }, [router]);
 

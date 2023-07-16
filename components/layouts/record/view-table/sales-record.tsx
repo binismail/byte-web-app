@@ -1,4 +1,5 @@
 import { Sort } from 'iconsax-react';
+import { useRouter } from 'next/router';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useGetRecordsQuery } from '../../../../lib/services/businessApi';
 import {
@@ -26,6 +27,9 @@ const SalesRecords = (props: Props) => {
   const { data, isLoading, isSuccess } = useGetRecordsQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
+
+  // DATA INITIALIZATION
+  const router = useRouter();
 
   // SIDE EFFECTS
   useEffect(() => {
@@ -65,7 +69,7 @@ const SalesRecords = (props: Props) => {
         <div className="w-full flex items-center justify-between">
           {/* add inventory */}
           <Button
-            // click={() => setCreateInvoiceModalState(true)}
+            click={() => router.push('/dashboard/tools/record/create/sales')}
             type="large"
             icon="add"
             color="btnPrimary"

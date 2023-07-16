@@ -406,6 +406,14 @@ export const businessApi = createApi({
       }),
       invalidatesTags: ['Records'],
     }),
+    createRecord: builder.mutation<any, SalesRecordDetailsType>({
+      query: (body: SalesRecordDetailsType) => ({
+        url: baseUrl.business.record,
+        method: 'POST',
+        body: body,
+      }),
+      invalidatesTags: ['Records'],
+    }),
   }),
 });
 
@@ -450,4 +458,5 @@ export const {
   useDeleteRecordMutation,
   useGetSingleRecordQuery,
   useUpdateRecordMutation,
+  useCreateRecordMutation,
 } = businessApi;
