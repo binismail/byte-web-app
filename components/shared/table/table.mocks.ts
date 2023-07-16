@@ -2,7 +2,8 @@ import { ITable } from './table';
 
 const base: ITable = {
   header: [],
-  content: [],
+  transactions: [],
+  loading: false,
 };
 
 export const mockTableProps = {
