@@ -111,14 +111,14 @@ const TransactionTable = ({ header, transactions, loading }: ITable) => {
               </span>
 
               {/* texts */}
-              <td className="inline-flex flex-col gap-1 text-center">
+              <span className="inline-flex flex-col gap-1 text-center">
                 <span className="text-[#1C1C1E] text-sm font-normal">
                   No Transaction History
                 </span>
                 <span className="text-sm font-normal text-[#8E8E93]">
                   Make your first Transaction
                 </span>
-              </td>
+              </span>
             </td>
           </tr>
         )}
