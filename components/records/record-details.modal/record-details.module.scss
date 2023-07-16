@@ -1,10 +1,12 @@
 .container {
   padding: 20px;
-  margin-bottom: var(--space-md-3);
   .copy {
     font-weight: 400;
     font-size: 13px;
     line-height: 16px;
     color: var(--primary05);
   }
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }

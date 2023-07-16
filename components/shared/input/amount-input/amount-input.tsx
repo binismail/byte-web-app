@@ -8,6 +8,7 @@ export interface IAmountInput {
   onBlur?: FocusEventHandler<HTMLInputElement>;
   onFocus?: FocusEventHandler<HTMLInputElement>;
   name?: string;
+  disabled?: boolean;
 }
 
 const AmountInput = ({
@@ -18,6 +19,7 @@ const AmountInput = ({
   onBlur,
   onFocus,
   name,
+  disabled,
 }: IAmountInput) => {
   return (
     <div className={styles.container}>
@@ -26,6 +28,7 @@ const AmountInput = ({
           <div className="text-[#565A63]">₦</div>
         </div>
         <input
+          disabled={disabled}
           name={name}
           onBlur={onBlur}
           onFocus={onFocus}

@@ -109,6 +109,7 @@ const Dashboard: NextPageWithLayout = () => {
             name="edit-2"
             iconColor="#D595A6"
             size="20"
+            path="/dashboard/tools/record?recordId=1"
           />
           <QuickLinkCard
             path="/dashboard/tools/inventory-management"
@@ -132,6 +133,7 @@ const Dashboard: NextPageWithLayout = () => {
             name="receipt-edit"
             iconColor="#19A97B"
             size="20"
+            path="/dashboard/tools/record?recordId=2"
           />
         </div>
       </div>

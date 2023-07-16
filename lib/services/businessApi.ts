@@ -18,6 +18,10 @@ import {
 } from '../../pages/dashboard/home/home.types';
 import { UpdateInventoryType } from '../../pages/dashboard/tools/inventory-management/inventory.types';
 import { SingleInvoiceDetailsType } from '../../pages/dashboard/tools/invoices/invoices.types';
+import {
+  ExpenseRecordDetailsType,
+  SalesRecordDetailsType,
+} from '../../pages/dashboard/tools/record/records.types';
 import baseUrl from '../endpoints.json';
 import { logout, setNewTokenCredentials } from '../redux/authSlice/authSlice';
 import { AppState } from '../redux/store';
@@ -123,6 +127,7 @@ export const businessApi = createApi({
     // 'FundWallet',
     'Inventory',
     'Invoices',
+    'Records',
   ],
   endpoints: (builder) => ({
     // GET USER INFORMATION
@@ -370,6 +375,37 @@ export const businessApi = createApi({
       }),
       invalidatesTags: ['Invoices'],
     }),
+
+    // RECORDS
+    getRecords: builder.query<any, void>({
+      query: () => baseUrl.business.record,
+      providesTags: ['Records'],
+    }),
+    deleteRecord: builder.mutation<any, string>({
+      query: (recordId: string) => ({
+        url: `${baseUrl.business.record}/${recordId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Records'],
+    }),
+    getSingleRecord: builder.query<any, string>({
+      query: (recordId: string) => `${baseUrl.business.record}/${recordId}`,
+      providesTags: ['Records'],
+    }),
+    updateRecord: builder.mutation<
+      any,
+      {
+        data: ExpenseRecordDetailsType | SalesRecordDetailsType;
+        recordId: string;
+      }
+    >({
+      query: (body: { data: ExpenseRecordDetailsType; recordId: string }) => ({
+        url: `${baseUrl.business.record}/${body.recordId}`,
+        method: 'PUT',
+        body: body.data,
+      }),
+      invalidatesTags: ['Records'],
+    }),
   }),
 });
 
@@ -408,4 +444,10 @@ export const {
   useMarkInvoiceAsPaidMutation,
   useUpdateInvoiceDetailsMutation,
   useCreateInvoiceMutation,
+
+  // RECORDS
+  useGetRecordsQuery,
+  useDeleteRecordMutation,
+  useGetSingleRecordQuery,
+  useUpdateRecordMutation,
 } = businessApi;

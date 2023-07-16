@@ -226,7 +226,7 @@ const EditInvoice: NextPageWithLayout = () => {
                   <div className="flex w-[40%] flex-col border p-4 border-[#E6EAED] rounded-2xl gap-4 h-fit">
                     {/* title */}
                     <p className="w-full p-4 border-b border-[#D0D6DB] text-sm text-[#5864AE]">
-                      Product details
+                      Customer Details
                     </p>
 
                     {/* content */}
@@ -273,7 +273,7 @@ const EditInvoice: NextPageWithLayout = () => {
                   <div className="flex w-[60%] h-fit flex-col border p-4 border-[#E6EAED] rounded-2xl gap-4">
                     {/* title */}
                     <p className="w-full p-4 border-b border-[#D0D6DB] text-sm text-[#5864AE]">
-                      Product details
+                      Other Information
                     </p>
 
                     {/* content */}
