@@ -1,8 +1,12 @@
+import { SalesRecordType } from '../../../../pages/dashboard/tools/record/records.types';
 import { IRecordTable } from './record-table';
 
-const base: IRecordTable = {
+const base: IRecordTable<SalesRecordType> = {
   header: [],
-  contents: [],
+  records: [],
+  filter: '',
+  isAscending: true,
+  loading: false,
 };
 
 export const mockRecordTableProps = {
