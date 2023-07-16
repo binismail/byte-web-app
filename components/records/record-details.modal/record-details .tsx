@@ -4,6 +4,8 @@ import { isEmpty } from '../../../helpers/is-emtpy';
 import { useGetSingleRecordQuery } from '../../../lib/services/businessApi';
 import {
   ExpenseRecordDetailsType,
+  RecordProduct,
+  RecordService,
   SalesRecordDetailsType,
 } from '../../../pages/dashboard/tools/record/records.types';
 import ByteIcon from '../../shared/icon/byte.icon';
@@ -125,40 +127,44 @@ const RecordDetails = ({
                   {/* list */}
                   <ul className="w-full flex flex-col gap-3 border-b border-[#D0D6DB] pb-3">
                     {isService
-                      ? recordDetails.services.map((service, index) => (
-                          <li
-                            key={index}
-                            className="flex w-full items-start justify-between"
-                          >
-                            <p className="text-value text-neutral-09 w-[60%]">
-                              {service.name}
-                            </p>
-                            <p className=" text-value w-[30%] text-neutral-08 mt-0 ">
-                              ₦{service.cost.toLocaleString('en-US')}
-                            </p>
-                          </li>
-                        ))
-                      : recordDetails.products.map((product, index) => (
-                          <li
-                            key={index}
-                            className="flex flex-col gap-1 w-full"
-                          >
-                            <div className="flex w-full items-start justify-between">
+                      ? (recordDetails.services as RecordService[]).map(
+                          (service, index) => (
+                            <li
+                              key={index}
+                              className="flex w-full items-start justify-between"
+                            >
                               <p className="text-value text-neutral-09 w-[60%]">
-                                {product.name}
+                                {service.name}
                               </p>
-                              <p className=" text-value text-neutral-08 w-[30%] mt-0 ">
-                                ₦{product.unitPrice.toLocaleString('en-US')}
+                              <p className=" text-value w-[30%] text-neutral-08 mt-0 ">
+                                ₦{service.cost.toLocaleString('en-US')}
                               </p>
-                            </div>
-                            <p className="text-label mt-0 text-neutral-06 ">
-                              {`x${product.quantity} @ ₦
+                            </li>
+                          )
+                        )
+                      : (recordDetails.products as RecordProduct[]).map(
+                          (product, index) => (
+                            <li
+                              key={index}
+                              className="flex flex-col gap-1 w-full"
+                            >
+                              <div className="flex w-full items-start justify-between">
+                                <p className="text-value text-neutral-09 w-[60%]">
+                                  {product.name}
+                                </p>
+                                <p className=" text-value text-neutral-08 w-[30%] mt-0 ">
+                                  ₦{product.unitPrice.toLocaleString('en-US')}
+                                </p>
+                              </div>
+                              <p className="text-label mt-0 text-neutral-06 ">
+                                {`x${product.quantity} @ ₦
                                 ${(
                                   product.quantity * product.unitPrice
                                 ).toLocaleString('en-US')}`}
-                            </p>
-                          </li>
-                        ))}
+                              </p>
+                            </li>
+                          )
+                        )}
                   </ul>
                 </div>
 
