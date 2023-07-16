@@ -6,7 +6,6 @@ import TopCustomer from '../../../components/payment/top-customer/top-costumer';
 import Button from '../../../components/shared/butttons/button/button';
 import ByteIcon from '../../../components/shared/icon/byte.icon';
 import Modal from '../../../components/shared/modal/modal';
-import Table from '../../../components/shared/table/table';
 import { NextPageWithLayout } from '../../_app.page';
 
 export interface IPayment {
@@ -99,7 +98,7 @@ const Payment: NextPageWithLayout = () => {
             <ByteIcon color="var(--byte)" icon="arrow-right-1" size={20} />
           </div>
         </div>
-        <Table />
+        {/* <Table /> */}
       </div>
     </div>
   );

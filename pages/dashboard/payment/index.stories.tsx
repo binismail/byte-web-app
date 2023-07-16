@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import Payment, { IPayment } from '.';
 import { mockPaymentProps } from './index.mocks';
-import Payment, { IPayment } from './index.page';
 
 export default {
   title: 'templates/Payment',
