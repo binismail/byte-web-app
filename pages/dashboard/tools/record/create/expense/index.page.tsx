@@ -1,6 +1,8 @@
 import { ReactElement, useState } from 'react';
 import DashboardLayout from '../../../../../../components/layouts/dashboard-layout';
 import Layout from '../../../../../../components/layouts/layout';
+import CreateProductRecord from '../../../../../../components/layouts/record/create-record/expense/create-product-record';
+import CreateServiceRecord from '../../../../../../components/layouts/record/create-record/expense/create-service-record';
 import { NextPageWithLayout } from '../../../../../_app.page';
 
 const CreateExpenseRecord: NextPageWithLayout = () => {
@@ -20,7 +22,7 @@ const CreateExpenseRecord: NextPageWithLayout = () => {
               : 'text-[#808691]'
           }`}
         >
-          Product Details
+          Item details
         </button>
 
         {/* service detials */}
@@ -32,14 +34,13 @@ const CreateExpenseRecord: NextPageWithLayout = () => {
               : 'text-[#808691]'
           }`}
         >
-          Service Records
+          Service details
         </button>
       </div>
 
       {/* content */}
       <main className="flex w-full h-full">
-        {/* {activeTab === 1 ? <CreateProductRecord /> : <CreateServiceRecord />} */}
-        Create expense record
+        {activeTab === 1 ? <CreateProductRecord /> : <CreateServiceRecord />}
       </main>
     </section>
   );

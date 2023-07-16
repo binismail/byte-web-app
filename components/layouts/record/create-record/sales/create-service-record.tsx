@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { useCreateRecordMutation } from '../../../../../lib/services/businessApi';
+import { SalesRecordDetailsType } from '../../../../../pages/dashboard/tools/record/records.types';
 import SalesServiceWidget from '../../../../records/sales/sales-service-widget';
 import Button from '../../../../shared/butttons/button/button';
 import Checkbox from '../../../../shared/checkbox/checkbox';
@@ -39,7 +40,8 @@ const CreateServiceRecord = () => {
           ],
         }}
         onSubmit={(values) => {
-          createRecord(values)
+          const salesRecordData: SalesRecordDetailsType = { ...values };
+          createRecord(salesRecordData)
             .unwrap()
             .then(() => {
               toast.success(`Sales record created successfully!`);

@@ -3,7 +3,10 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { useCreateRecordMutation } from '../../../../../lib/services/businessApi';
-import { RecordProduct } from '../../../../../pages/dashboard/tools/record/records.types';
+import {
+  RecordProduct,
+  SalesRecordDetailsType,
+} from '../../../../../pages/dashboard/tools/record/records.types';
 import SalesProductWidget from '../../../../records/sales/sales-product-widget';
 import Button from '../../../../shared/butttons/button/button';
 import Checkbox from '../../../../shared/checkbox/checkbox';
@@ -43,7 +46,8 @@ const CreateProductRecord = () => {
           ],
         }}
         onSubmit={(values) => {
-          createRecord(values)
+          const salesRecordData: SalesRecordDetailsType = { ...values };
+          createRecord(salesRecordData)
             .unwrap()
             .then(() => {
               toast.success(`Sales record created successfully!`);

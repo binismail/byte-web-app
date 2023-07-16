@@ -406,8 +406,11 @@ export const businessApi = createApi({
       }),
       invalidatesTags: ['Records'],
     }),
-    createRecord: builder.mutation<any, SalesRecordDetailsType>({
-      query: (body: SalesRecordDetailsType) => ({
+    createRecord: builder.mutation<
+      any,
+      SalesRecordDetailsType | ExpenseRecordDetailsType
+    >({
+      query: (body: SalesRecordDetailsType | ExpenseRecordDetailsType) => ({
         url: baseUrl.business.record,
         method: 'POST',
         body: body,
