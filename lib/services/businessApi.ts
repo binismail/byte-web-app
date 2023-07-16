@@ -128,6 +128,7 @@ export const businessApi = createApi({
     'Inventory',
     'Invoices',
     'Records',
+    'Transactions',
   ],
   endpoints: (builder) => ({
     // GET USER INFORMATION
@@ -152,6 +153,7 @@ export const businessApi = createApi({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['Transactions'],
     }),
 
     // WALLET
@@ -167,6 +169,7 @@ export const businessApi = createApi({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['Transactions'],
     }),
 
     // AUTHENTICATION
@@ -417,6 +420,12 @@ export const businessApi = createApi({
       }),
       invalidatesTags: ['Records'],
     }),
+
+    // TRANSACTIONS
+    getTransactions: builder.query<any, void>({
+      query: () => baseUrl.businessPocket.transactions,
+      providesTags: ['Transactions'],
+    }),
   }),
 });
 
@@ -462,4 +471,7 @@ export const {
   useGetSingleRecordQuery,
   useUpdateRecordMutation,
   useCreateRecordMutation,
+
+  // TRANSACTIONS
+  useGetTransactionsQuery,
 } = businessApi;
