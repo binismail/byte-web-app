@@ -19,7 +19,7 @@ const TransactionHistory = () => {
   // SIDE EFFECTS
   useEffect(() => {
     if (isSuccess && !isEmpty(data?.data)) {
-      setTransactions({ ...data.data });
+      setTransactions(data.data);
     }
   }, [isSuccess, data]);
 
@@ -39,7 +39,10 @@ const TransactionHistory = () => {
       </div>
 
       {/* table */}
-      <TransactionTable transactions={transactions} loading={isLoading} />
+      <TransactionTable
+        transactions={transactions !== null ? transactions : []}
+        loading={isLoading}
+      />
     </div>
   );
 };
