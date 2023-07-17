@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { RotatingLines } from 'react-loader-spinner';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import {
   logout,
@@ -103,7 +104,13 @@ const RouteGuard = (props: {
     children
   ) : (
     <div className="w-[100vw] h-[100vh] bg-white text-gray-600 font-normal text-base flex items-center justify-center">
-      Please wait...
+      <RotatingLines
+        strokeColor="#6A78D1"
+        strokeWidth="5"
+        animationDuration="0.8"
+        width="45"
+        visible={true}
+      />
     </div>
   );
 };
