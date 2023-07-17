@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { ReactElement, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import InvoiceProduct from '../../../../../components/invoice/edit-invoice-components/invoice-product';
+import CreateInvoiceProduct from '../../../../../components/invoice/create-invoice/create-invoice-product';
 import InvoiceService from '../../../../../components/invoice/edit-invoice-components/invoice-service';
 import DashboardLayout from '../../../../../components/layouts/dashboard-layout';
 import Layout from '../../../../../components/layouts/layout';
@@ -20,7 +20,7 @@ import {
   useUpdateInvoiceDetailsMutation,
 } from '../../../../../lib/services/businessApi';
 import { NextPageWithLayout } from '../../../../_app.page';
-import { InvoiceDetailsType } from '../invoices.types';
+import { InvoiceDetailsType, Product } from '../invoices.types';
 
 const EditInvoice: NextPageWithLayout = () => {
   // STATES
@@ -205,16 +205,26 @@ const EditInvoice: NextPageWithLayout = () => {
                   ) : (
                     <FieldArray
                       name="products"
-                      render={({ push, remove }) => (
-                        <InvoiceProduct
-                          values={values}
-                          push={push}
-                          remove={remove}
-                          isEditMode={true}
-                          handleChange={handleChange}
-                          handleBlur={handleBlur}
-                          setFieldValue={setFieldValue}
-                        />
+                      render={({ push, remove, replace }) => (
+                        <>
+                          {values?.products !== undefined &&
+                            (values?.products as Product[]).map(
+                              (product, index) => (
+                                <CreateInvoiceProduct
+                                  key={index}
+                                  product={product}
+                                  productIndex={index}
+                                  values={values}
+                                  push={push}
+                                  replace={replace}
+                                  remove={remove}
+                                  handleChange={handleChange}
+                                  handleBlur={handleBlur}
+                                  setFieldValue={setFieldValue}
+                                />
+                              )
+                            )}
+                        </>
                       )}
                     />
                   )}
@@ -226,7 +236,7 @@ const EditInvoice: NextPageWithLayout = () => {
                   <div className="flex w-[40%] flex-col border p-4 border-[#E6EAED] rounded-2xl gap-4 h-fit">
                     {/* title */}
                     <p className="w-full p-4 border-b border-[#D0D6DB] text-sm text-[#5864AE]">
-                      Product details
+                      Customer Details
                     </p>
 
                     {/* content */}
@@ -273,7 +283,7 @@ const EditInvoice: NextPageWithLayout = () => {
                   <div className="flex w-[60%] h-fit flex-col border p-4 border-[#E6EAED] rounded-2xl gap-4">
                     {/* title */}
                     <p className="w-full p-4 border-b border-[#D0D6DB] text-sm text-[#5864AE]">
-                      Product details
+                      Other Information
                     </p>
 
                     {/* content */}

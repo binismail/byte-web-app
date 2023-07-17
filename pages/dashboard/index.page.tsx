@@ -1,6 +1,7 @@
 import { WalletMoney } from 'iconsax-react';
 import { ReactElement, useState } from 'react';
 import QuickLinkCard from '../../components/cards/quicklink.card';
+import TransactionHistory from '../../components/home/transaction-history';
 import WalletBalance from '../../components/home/wallet-balance/wallet-balance';
 import DashboardLayout from '../../components/layouts/dashboard-layout';
 import FundWalletLayout from '../../components/layouts/home/fund-wallet-layout';
@@ -10,7 +11,6 @@ import Button from '../../components/shared/butttons/button/button';
 import FailedModal from '../../components/shared/modal/components/failed/failed.modal';
 import SuccessModal from '../../components/shared/modal/components/success/success.modal';
 import Modal from '../../components/shared/modal/modal';
-import Table from '../../components/shared/table/table';
 import { NextPageWithLayout } from '../_app.page';
 
 export interface IDashboard {
@@ -109,6 +109,7 @@ const Dashboard: NextPageWithLayout = () => {
             name="edit-2"
             iconColor="#D595A6"
             size="20"
+            path="/dashboard/tools/record?recordType=1"
           />
           <QuickLinkCard
             path="/dashboard/tools/inventory-management"
@@ -132,17 +133,13 @@ const Dashboard: NextPageWithLayout = () => {
             name="receipt-edit"
             iconColor="#19A97B"
             size="20"
+            path="/dashboard/tools/record?recordType=2"
           />
         </div>
       </div>
 
       {/* Transaction History */}
-      <div className="w-full flex flex-col gap-2">
-        <p className="font-normal text-xl text-[#30333B]">
-          Transaction-history
-        </p>
-        <Table />
-      </div>
+      <TransactionHistory />
     </div>
   );
 };
