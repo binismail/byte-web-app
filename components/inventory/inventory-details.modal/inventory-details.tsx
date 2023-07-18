@@ -1,17 +1,14 @@
 import Image from 'next/image';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import { isEmpty } from '../../../helpers/is-emtpy';
-import {
-  useDeleteProductMutation,
-  useGetSingleInventoryQuery,
-} from '../../../lib/services/businessApi';
+import { useGetSingleInventoryQuery } from '../../../lib/services/businessApi';
 import { InventoryDetailsType } from '../../../pages/dashboard/tools/inventory-management/inventory.types';
 import Button from '../../shared/butttons/button/button';
 import ByteIcon from '../../shared/icon/byte.icon';
 import IconShadow from '../../shared/icon/icon-shadow';
 import LoadingState from '../../shared/loading-state';
 import Modal from '../../shared/modal/modal';
+import DeleteInventory from './delete-inventory';
 import MoreInfo from './more-info';
 
 type InventoryDetailsProps = {
@@ -25,6 +22,7 @@ const InventoryDetails = ({
   productId,
 }: InventoryDetailsProps) => {
   // STATES
+  const [deleteModalState, setDeleteModalState] = useState(false);
   const [moreModalState, setMoreModalState] = useState(false);
   const [inventoryDetails, setInventoryDetails] =
     useState<InventoryDetailsType>({
@@ -51,22 +49,11 @@ const InventoryDetails = ({
   const { data, isLoading, isSuccess } = useGetSingleInventoryQuery(productId, {
     refetchOnMountOrArgChange: true,
   });
-  const [deleteProduct, { isLoading: isDeleteLoading }] =
-    useDeleteProductMutation();
 
   // HANDLERS
-  const handleDeleteProduct = () => {
-    deleteProduct(productId)
-      .unwrap()
-      .then(() => {
-        setProductDetailsState(false);
-        setMoreModalState(false);
-        toast.success(`Product deleted successfully!`);
-      })
-      .catch((error: any) => {
-        console.log(error);
-        toast.error(error?.data?.message || `Couldn't delete this product`);
-      });
+  const toggleDeleteModal = () => {
+    setMoreModalState(false);
+    setDeleteModalState(true);
   };
   const handleEditProduct = () => {
     setProductDetailsState(false);
@@ -88,10 +75,17 @@ const InventoryDetails = ({
           <>
             {moreModalState && (
               <MoreInfo
-                isLoading={isDeleteLoading}
                 setMoreModalState={setMoreModalState}
-                onDeleteClick={handleDeleteProduct}
+                onDeleteClick={toggleDeleteModal}
                 onEditProductBtnClick={handleEditProduct}
+              />
+            )}
+            {deleteModalState && (
+              <DeleteInventory
+                setProductDetailsState={setProductDetailsState}
+                productId={productId}
+                cancelClick={() => setDeleteModalState(false)}
+                setDeleteModalState={setDeleteModalState}
               />
             )}
             {/* container */}
