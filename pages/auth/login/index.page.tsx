@@ -3,6 +3,7 @@ import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import Button from '../../../components/shared/butttons/button/button';
@@ -10,8 +11,11 @@ import FormError from '../../../components/shared/form-error/form-error';
 import Header from '../../../components/shared/header/header';
 import Input from '../../../components/shared/input/input/input';
 import PasswordInput from '../../../components/shared/input/password-input/password-input';
-import { useAppDispatch } from '../../../hooks/hooks';
-import { setCredentials } from '../../../lib/redux/authSlice/authSlice';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
+import {
+  selectLoggedIn,
+  setCredentials,
+} from '../../../lib/redux/authSlice/authSlice';
 import { useLoginMutation } from '../../../lib/services/businessApi';
 import logo from '../../../public/logo.svg';
 import homeStyles from '../../../styles/home.module.scss';
@@ -26,7 +30,30 @@ const Login: NextPage = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [login, { isLoading }] = useLoginMutation();
+  const isLoggedIn = useAppSelector(selectLoggedIn);
 
+  // STATES
+  const [redirectLoading, setRedirectLoading] = useState(true);
+
+  // SIDE EFFECTS
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/dashboard');
+    } else {
+      setRedirectLoading(false);
+    }
+  }, [isLoggedIn, router]);
+
+  // RETURNED JSX: REDIRECT TO DASHBOARD IF USER IS LOGGED-IN
+  if (redirectLoading) {
+    return (
+      <div className="w-[100vw] h-[100vh] bg-white text-gray-600 font-normal text-base flex items-center justify-center">
+        <Image src="/logo.svg" alt="logo" width="120px" height="120px" />
+      </div>
+    );
+  }
+
+  // RETURNED FORMIK COMPONENT: IF USER ISN'T LOGGED-IN
   return (
     <Formik
       enableReinitialize

@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { RotatingLines } from 'react-loader-spinner';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import {
   logout,
@@ -22,15 +23,18 @@ const publicPaths = [
 const RouteGuard = (props: {
   children: ReactElement<unknown, string | JSXElementConstructor<unknown>>;
 }) => {
+  // DATA INITIALIZATION
   const { children } = props;
-
   const router = useRouter();
-  const [authorized, setAuthorized] = useState(false);
   const isLoggedIn = useAppSelector(selectLoggedIn);
   const [logoutUser] = useLogoutUserMutation();
   const userId = useAppSelector(selectUserId);
   const dispatch = useAppDispatch();
 
+  // STATES
+  const [authorized, setAuthorized] = useState(false);
+
+  // SIDE EFFECTS
   useEffect(() => {
     const authCheck = () => {
       if (!isLoggedIn && !publicPaths.includes(router.asPath.split('?')[0])) {
@@ -59,51 +63,21 @@ const RouteGuard = (props: {
     };
   }, [dispatch, isLoggedIn, logoutUser, router, userId]);
 
-  // defining authCheck function
-  // function authCheck(url: string) {
-  //   // redirect to login page if accessing a private page and not logged in
-  //   const publicPaths = [
-  //     '/auth/login',
-  //     '/auth/register',
-  //     '/onboarding/verify-phone/verifyphone',
-  //     '/onboarding/forgotpassword/forgotpassword',
-  //   ];
-  //   const path = url.split('?')[0];
-  //   if (!isLoggedIn && !publicPaths.includes(path)) {
-  //     setAuthorized(false);
-  //     logoutUser({
-  //       userId,
-  //     })
-  //       .unwrap()
-  //       .then(() => {
-  //         router.push({
-  //           pathname: '/auth/login',
-  //           query: { returnUrl: router.asPath },
-  //         });
-  //         dispatch(logout());
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //         router.push({
-  //           pathname: '/auth/login',
-  //           query: { returnUrl: router.asPath },
-  //         });
-  //         dispatch(logout());
-  //       });
-  //   } else {
-  //     setAuthorized(true);
-  //   }
-  // }
-
+  // CHILDREN RENDER
   if (isLoggedIn) {
     return children;
   }
-
   return authorized ? (
     children
   ) : (
     <div className="w-[100vw] h-[100vh] bg-white text-gray-600 font-normal text-base flex items-center justify-center">
-      Please wait...
+      <RotatingLines
+        strokeColor="#6A78D1"
+        strokeWidth="5"
+        animationDuration="0.8"
+        width="45"
+        visible={true}
+      />
     </div>
   );
 };

@@ -19,7 +19,7 @@ const Tools: NextPageWithLayout<any> = () => {
           cardBg="bg-[#EFF1FA]"
           iconBg="bg-[#5864AE]"
           IconSelect={Book}
-          path=""
+          path="/dashboard/tools/record?recordType=1"
         />
         <ToolsCard
           header="Inventory"

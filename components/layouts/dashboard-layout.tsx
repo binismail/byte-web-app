@@ -4,6 +4,7 @@ import logo from '../../public/logo.svg';
 import { Briefcase, CardPos, Home2, LogoutCurve, People } from 'iconsax-react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { RotatingLines } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 import Modal from '../../components/shared/modal/modal';
 import VerifyPhone from '../../components/verify-phone/verify-phone';
@@ -51,7 +52,7 @@ const DashboardLayout = ({
   } = useGetUserInformationQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
-  const [logoutUser, { isLoading }] = useLogoutUserMutation();
+  const [logoutUser, { isLoading: logoutLoading }] = useLogoutUserMutation();
 
   // SIDE EFFETS
   useEffect(() => {
@@ -104,8 +105,15 @@ const DashboardLayout = ({
 
         {/* LOGOUT */}
         <div className="flex w-[70%] ml-auto mt-auto">
-          {isLoading ? (
-            <span className="font-normal text-base text-[#6A78D1]">
+          {logoutLoading ? (
+            <span className="font-normal inline-flex items-center gap-2 text-base text-[#6A78D1]">
+              <RotatingLines
+                strokeColor="#6A78D1"
+                strokeWidth="4"
+                animationDuration="0.75"
+                width="24"
+                visible={true}
+              />
               Siging out...
             </span>
           ) : (
