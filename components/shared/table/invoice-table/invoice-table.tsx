@@ -21,6 +21,13 @@ const InvoiceTable = ({
   loading,
   isAscending,
 }: IInvoiceTable) => {
+  // DATA INITIALIZATION
+  const localeTimeOptions: Intl.DateTimeFormatOptions = {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  };
+
   // STATES
   const [invoiceDetailsState, setInvoiceDetailsState] =
     useState<boolean>(false);
@@ -136,7 +143,10 @@ const InvoiceTable = ({
                   <td className={styles.td}>
                     <p className={styles.subDescription}>
                       {' '}
-                      {new Date(content.dueDate).toLocaleDateString()}
+                      {`${new Date(content.dueDate).toLocaleString(
+                        'en-UK',
+                        localeTimeOptions
+                      )}`}
                     </p>
                   </td>
 
@@ -144,7 +154,10 @@ const InvoiceTable = ({
                   <td className={styles.td}>
                     <p className={styles.subDescription}>
                       {' '}
-                      {new Date(content.issuedDate).toLocaleDateString()}
+                      {`${new Date(content.issuedDate).toLocaleString(
+                        'en-UK',
+                        localeTimeOptions
+                      )}`}
                     </p>
                   </td>
 

@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { isEmpty } from '../../../helpers/is-emtpy';
 import { useGetSingleInvoiceQuery } from '../../../lib/services/businessApi';
 import { InvoiceDetailsType } from '../../../pages/dashboard/tools/invoices/invoices.types';
+import Button from '../../shared/butttons/button/button';
 import ByteIcon from '../../shared/icon/byte.icon';
 import IconShadow from '../../shared/icon/icon-shadow';
 import LoadingState from '../../shared/loading-state';
@@ -21,6 +22,13 @@ const InvoiceDetail = ({
   invoiceId,
   setInvoiceDetailsState,
 }: InvoiceDetailsProps) => {
+  // DATA INITIALIZATION
+  const localeTimeOptions: Intl.DateTimeFormatOptions = {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  };
+
   // STATES
   const [moreModalState, setMoreModalState] = useState(false);
   const [deleteModalState, setDeleteModalState] = useState(false);
@@ -85,7 +93,7 @@ const InvoiceDetail = ({
                 isService={isService}
               />
             )}
-            <div className="h-[80vh] w-full overflow-auto flex items-center justify-center">
+            <div className="h-[85vh] w-full overflow-auto flex items-center justify-center py-4">
               <div className={styles.container}>
                 {/* header */}
                 <div className="w-full flex justify-between items-center gap-2">
@@ -151,7 +159,7 @@ const InvoiceDetail = ({
                       ) : (
                         <span className="inline-flex items-center justify-center">
                           <IconShadow
-                            icon="d-cube-scan"
+                            icon="user"
                             color="var(--neutral06)"
                             size="16"
                             className="grey small"
@@ -249,17 +257,14 @@ const InvoiceDetail = ({
                           </p>
                         </div>
                         <div className="flex justify-between items-center gap-2">
-                          <p className="text-label mt-0 text-neutral-06">
-                            {/* Tax (7.5%){' '} */}
-                            Tax
-                          </p>
+                          <p className="text-label mt-0 text-neutral-06">Tax</p>
                           <p className="text-value text-neutral-08 mt-0 ">
                             {`₦${invoiceDetails.taxAmount.toLocaleString(
                               'en-US'
                             )}`}
                           </p>
                         </div>
-                        {invoiceDetails.discountPercentage && (
+                        {invoiceDetails.discountPercentage > 0 ? (
                           <div className="flex justify-between items-center gap-2">
                             <p className="text-label mt-0 text-neutral-06">
                               Discount ({invoiceDetails.discountPercentage}%){' '}
@@ -270,7 +275,7 @@ const InvoiceDetail = ({
                               )}`}
                             </p>
                           </div>
-                        )}
+                        ) : null}
                       </div>
                     </div>
                   </div>
@@ -285,6 +290,60 @@ const InvoiceDetail = ({
                         'en-US'
                       )}`}</p>
                     </div>
+                  </div>
+                </div>
+
+                {/* footer: more information */}
+                <div className="flex flex-col w-full gap-4">
+                  {/* date issue adn due date */}
+                  <div className="grid grid-cols-2 gap-x-2 items-center px-3">
+                    <div className="inline-flex flex-col gap-1">
+                      <span className="text-label text-neutral-06">
+                        Date issued
+                      </span>
+                      <p className="text-value mt-0 text-neutral-09">
+                        {`${new Date(invoiceDetails.issuedDate).toLocaleString(
+                          'en-UK',
+                          localeTimeOptions
+                        )}`}
+                      </p>
+                    </div>
+                    <div className="inline-flex flex-col gap-1">
+                      <span className="text-label text-neutral-06">
+                        Expiry date{' '}
+                      </span>
+                      <p className="text-value mt-0 text-neutral-09">
+                        {`${new Date(invoiceDetails.dueDate).toLocaleString(
+                          'en-UK',
+                          localeTimeOptions
+                        )}`}
+                      </p>
+                    </div>{' '}
+                  </div>
+
+                  {/* payment method */}
+                  <div className="inline-flex flex-col gap-1 px-3">
+                    <span className="text-label text-neutral-06">
+                      Payment methods{' '}
+                    </span>
+                    <span className="text-value mt-0 text-neutral-09">
+                      {invoiceDetails.paymentMethod}
+                    </span>
+                  </div>
+
+                  {/* buttons */}
+                  <div className="flex flex-col w-full items-stretch gap-3 mt-2">
+                    <Button
+                      // loading={isLoading}
+                      // disabled={!dirty || isSubmitting || !isValid}
+                      // click={() => setPreviewInvoiceState(true)}
+                      // click={handleSubmit}
+                      title="Share Invoice"
+                      iconPosition="right"
+                      icon="invoice"
+                      type="block"
+                      color="btnPrimary"
+                    />
                   </div>
                 </div>
               </div>
