@@ -2,6 +2,7 @@ import { Formik } from 'formik';
 import Image from 'next/image';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import Select from 'react-select';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { isEmpty } from '../../../helpers/is-emtpy';
@@ -66,6 +67,16 @@ const CreateInventory = ({ setAddProductState }: Props) => {
       console.log('event: ', event);
     },
   });
+  const categories = [
+    {
+      label: 'Maintenance',
+      value: 'maintenance',
+    },
+    {
+      label: 'Sales item',
+      value: 'sales-item',
+    },
+  ];
 
   // SIDE EFFECTS
   useEffect(() => {
@@ -91,10 +102,6 @@ const CreateInventory = ({ setAddProductState }: Props) => {
           productQuantityStocked: '',
         }}
         onSubmit={(values) => {
-          // const data = {
-          //   ...values,
-          //   productImage: pickedImage.name || null,
-          // };
           createInventory(values)
             .unwrap()
             .then((data: any) => {
@@ -102,7 +109,6 @@ const CreateInventory = ({ setAddProductState }: Props) => {
               toast.success(data?.message || `Product created successfully!`);
             })
             .catch((error: any) => {
-              console.log(error);
               toast.error(
                 error?.data?.message || `Failed to create new Inventory`
               );
@@ -131,6 +137,7 @@ const CreateInventory = ({ setAddProductState }: Props) => {
           handleBlur,
           handleSubmit,
           setFieldValue,
+          isSubmitting,
         }) => {
           return (
             <div className="h-[80vh] overflow-auto w-full flex items-center justify-center pt-2 pb-3">
@@ -239,13 +246,28 @@ const CreateInventory = ({ setAddProductState }: Props) => {
 
                     <div className="form-group">
                       <label>Category</label>
-                      <Input
-                        placeholder="Enter category"
-                        type="text"
+                      <Select
+                        classNames={{
+                          control: (state) =>
+                            state.isFocused
+                              ? 'border-red-600 h-[48px] w-full mt-1 !rounded-xl'
+                              : 'border-grey-300 h-[48px] w-full mt-1 !rounded-xl',
+                          indicatorSeparator: () => '!bg-transparent',
+                          valueContainer: () => '!px-3',
+                        }}
                         name="productCategory"
-                        value={values.productCategory}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
+                        value={categories.find(
+                          (cateogry) =>
+                            cateogry.value === values.productCategory
+                        )}
+                        onChange={(selectedOption) => {
+                          setFieldValue(
+                            'productCategory',
+                            selectedOption?.value || ''
+                          );
+                        }}
+                        placeholder="Select category"
+                        options={categories}
                       />
                       {touched.productCategory && errors.productCategory && (
                         <FormError message={errors.productCategory as string} />
@@ -269,6 +291,7 @@ const CreateInventory = ({ setAddProductState }: Props) => {
 
                     <div className="w-full flex flex-col items-stretch">
                       <Button
+                        disabled={isLoading || isSubmitting}
                         loading={isLoading}
                         click={handleSubmit}
                         title="Add product to inventory"

@@ -1,6 +1,7 @@
 import { Formik } from 'formik';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import Select from 'react-select';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { isEmpty } from '../../../helpers/is-emtpy';
@@ -91,6 +92,16 @@ const EditInventory = ({ setEditProductState, productId }: Props) => {
       console.log('event: ', event);
     },
   });
+  const categories = [
+    {
+      label: 'Maintenance',
+      value: 'maintenance',
+    },
+    {
+      label: 'Sales item',
+      value: 'sales-item',
+    },
+  ];
 
   // HOOKS
   const { data, isSuccess } = useGetSingleInventoryQuery(productId, {
@@ -145,7 +156,6 @@ const EditInventory = ({ setEditProductState, productId }: Props) => {
               toast.success(data?.message || `Product updated successfully!`);
             })
             .catch((error: any) => {
-              console.log(error);
               toast.error(error?.data?.message || `Failed to update Inventory`);
             });
           console.log(values);
@@ -173,6 +183,8 @@ const EditInventory = ({ setEditProductState, productId }: Props) => {
           handleBlur,
           handleSubmit,
           setFieldValue,
+          isSubmitting,
+          dirty,
         }) => {
           return (
             <>
@@ -278,13 +290,28 @@ const EditInventory = ({ setEditProductState, productId }: Props) => {
 
                       <div className="form-group">
                         <label>Category</label>
-                        <Input
-                          placeholder="Enter category"
-                          type="text"
+                        <Select
+                          classNames={{
+                            control: (state) =>
+                              state.isFocused
+                                ? 'border-red-600 h-[48px] w-full mt-1 !rounded-xl'
+                                : 'border-grey-300 h-[48px] w-full mt-1 !rounded-xl',
+                            indicatorSeparator: () => '!bg-transparent',
+                            valueContainer: () => '!px-3',
+                          }}
                           name="productCategory"
-                          value={values.productCategory}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
+                          value={categories.find(
+                            (cateogry) =>
+                              cateogry.value === values.productCategory
+                          )}
+                          onChange={(selectedOption) => {
+                            setFieldValue(
+                              'productCategory',
+                              selectedOption?.value || ''
+                            );
+                          }}
+                          placeholder="Select category"
+                          options={categories}
                         />
                         {touched.productCategory && errors.productCategory && (
                           <FormError
@@ -310,6 +337,7 @@ const EditInventory = ({ setEditProductState, productId }: Props) => {
 
                       <div className="w-full flex flex-col items-stretch">
                         <Button
+                          disabled={isLoading || !dirty || isSubmitting}
                           loading={isLoading}
                           click={handleSubmit}
                           title="Update stock"
