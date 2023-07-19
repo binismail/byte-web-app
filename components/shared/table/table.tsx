@@ -44,12 +44,12 @@ const TransactionTable = ({ header, transactions, loading }: ITable) => {
                 className={`justify-start inline-flex items-center gap-3 text-left h-[72px] border-b border-[#E6EAED] pr-3 mr-1`}
               >
                 {transaction.transType === 'payment' ? (
-                  <span className="p-[10px] rounded-[50%] inline-flex items-center justify-center bg-[#FFE5EB]">
-                    <Transmit size="24" color="#CF4F66" />
-                  </span>
-                ) : (
                   <span className="p-[10px] rounded-[50%] inline-flex items-center justify-center bg-[#DBFFF2]">
                     <Receive size="24" color="#19A97B" />
+                  </span>
+                ) : (
+                  <span className="p-[10px] rounded-[50%] inline-flex items-center justify-center bg-[#FFE5EB]">
+                    <Transmit size="24" color="#CF4F66" />
                   </span>
                 )}
               </td>
@@ -72,8 +72,8 @@ const TransactionTable = ({ header, transactions, loading }: ITable) => {
                 <p
                   className={`${
                     transaction.transType === 'payment'
-                      ? 'text-[#CF4F66]'
-                      : 'text-[#19A97B]'
+                      ? 'text-[#19A97B]'
+                      : 'text-[#CF4F66]'
                   } font-normal text-sm`}
                 >{`₦${transaction.amount.toLocaleString('en-US')}`}</p>
                 <p className="font-normal text-sm text-[#565A63]">Amount</p>
