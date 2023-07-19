@@ -120,7 +120,7 @@ const Dashboard: NextPageWithLayout = () => {
             size="20"
           />
           <QuickLinkCard
-            path="/dashboard/tools/invoices"
+            path="/dashboard/tools/invoices/create-invoice"
             title="Create invoice"
             color="var(--neon)"
             name="receipt-text"
