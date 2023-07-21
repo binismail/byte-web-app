@@ -12,7 +12,7 @@ const CreateInvoiceModal = ({ closeModal }: Props) => {
 
   return (
     <Modal header={' '} closeModal={closeModal}>
-      <div className="w-full flex flex-col px-2 py-5 gap-6">
+      <div className="w-full flex flex-col px-2 py-5 gap-8">
         {/* texts */}
         <div className=" text-center flex flex-col gap-1">
           {/* title*/}
@@ -26,14 +26,15 @@ const CreateInvoiceModal = ({ closeModal }: Props) => {
           </p>
         </div>
 
-        {/* buttona*/}
-        <div className="grid grid-cols-2 items-center gap-x-4 w-full h-full">
+        {/* buttons*/}
+        <div className="flex items-end justify-center w-full h-full">
+          {/* create invoice from scratch */}
           <button
             onClick={() => {
               router.push('/dashboard/tools/invoices/create-invoice');
               closeModal();
             }}
-            className="flex flex-col w-full items-center justify-center h-full gap-4 px-2 text-sm py-4 text-[#6A78D1] rounded-xl bg-[#E1E4F680]"
+            className="flex flex-col w-[15vw] items-center justify-center h-[20vh] gap-4 px-2 text-sm py-4 text-[#6A78D1] rounded-xl bg-[#E1E4F680]"
           >
             {/* icon */}
             <span className="p-4 rounded-[50%] inline-flex items-center justify-center bg-[#6A78D1]">
@@ -43,15 +44,17 @@ const CreateInvoiceModal = ({ closeModal }: Props) => {
             {/* text */}
             <p>From scratch</p>
           </button>
-          <button className="flex flex-col w-full items-center justify-center h-full gap-4 px-2 text-sm py-4 text-[#6A78D1] rounded-xl bg-[#E1E4F680]">
-            {/* icon */}
+
+          {/* create invoice from sales record */}
+          {/* <button className="flex flex-col w-full items-center justify-center h-full gap-4 px-2 text-sm py-4 text-[#6A78D1] rounded-xl bg-[#E1E4F680]">
+            icon
             <span className="p-4 rounded-[50%] inline-flex items-center justify-center bg-[#6A78D1]">
               <Document size="20" color="#FFF" variant="Bold" />
             </span>
 
-            {/* text */}
+            text
             <p>From sales record</p>
-          </button>
+          </button> */}
         </div>
       </div>
     </Modal>

@@ -6,18 +6,18 @@ const MakePayment: React.FC<any> = ({ onClickLeft, onClickRight }) => {
     <div className="modal">
       <div className={styles.container}>
         <div onClick={onClickLeft} className={styles.cardSelect}>
-          <div className="icon-shadow byte small flex flex-center">
+          <div className="icon-shadow byte h-[48px] w-[48px] flex flex-center">
             <ByteIcon
               style={{ marginTop: '0px' }}
               icon="send-2"
-              size={16}
+              size={24}
               color="var(--primary01)"
             />{' '}
           </div>
-          <p>Send money</p>
+          <p className="font-normal text-base">Send money</p>
         </div>
 
-        <div onClick={onClickRight} className={styles.cardSelect}>
+        {/* <div onClick={onClickRight} className={styles.cardSelect}>
           <div className="icon-shadow byte small flex flex-center">
             <ByteIcon
               style={{ marginTop: '0px' }}
@@ -27,7 +27,7 @@ const MakePayment: React.FC<any> = ({ onClickLeft, onClickRight }) => {
             />{' '}
           </div>
           <p>Pay bills</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );

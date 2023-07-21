@@ -39,7 +39,7 @@ const Tools: NextPageWithLayout<any> = () => {
         />
         <ToolsCard
           header="Debt management"
-          description="Manage expected repayments"
+          description="Coming soon!"
           cardBg="bg-[#FFECDB]"
           iconBg="bg-[#944A05]"
           IconSelect={EmptyWalletTick}
