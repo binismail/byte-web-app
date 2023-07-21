@@ -184,6 +184,7 @@ const CreateInvoiceProduct = ({
                 {'Unit price'}
               </span>
               <AmountInput
+                disabled={addFromInventory}
                 name={`products[${productIndex}].unitPrice`}
                 onChange={handleChange}
                 onBlur={handleBlur}

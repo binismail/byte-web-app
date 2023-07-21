@@ -1,8 +1,18 @@
-import Image from 'next/image';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { toPng } from 'html-to-image';
+import jsPDF from 'jspdf';
+import NextImage from 'next/image';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { isEmpty } from '../../../helpers/is-emtpy';
 import { useGetSingleInvoiceQuery } from '../../../lib/services/businessApi';
 import { InvoiceDetailsType } from '../../../pages/dashboard/tools/invoices/invoices.types';
+import Button from '../../shared/butttons/button/button';
 import ByteIcon from '../../shared/icon/byte.icon';
 import IconShadow from '../../shared/icon/icon-shadow';
 import LoadingState from '../../shared/loading-state';
@@ -21,6 +31,13 @@ const InvoiceDetail = ({
   invoiceId,
   setInvoiceDetailsState,
 }: InvoiceDetailsProps) => {
+  // DATA INITIALIZATION
+  const localeTimeOptions: Intl.DateTimeFormatOptions = {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  };
+
   // STATES
   const [moreModalState, setMoreModalState] = useState(false);
   const [deleteModalState, setDeleteModalState] = useState(false);
@@ -28,6 +45,7 @@ const InvoiceDetail = ({
   const [invoiceDetails, setInvoiceDetails] =
     useState<InvoiceDetailsType | null>(null);
   const [isService, setIsService] = useState(false);
+  const [downloadInvoiceLoading, setDownloadInvoiceLoading] = useState(false);
 
   // HANDLERS
   const toggleDeleteModal = () => {
@@ -38,6 +56,67 @@ const InvoiceDetail = ({
     setMoreModalState(false);
     setMarkPaidState(true);
   };
+  // invoice ref
+  const invoiceRef = useRef<HTMLDivElement>(null);
+
+  // download invoice
+  const downloadInvoiceAsPDF = useCallback(() => {
+    if (invoiceRef.current === null) {
+      return;
+    }
+
+    // start
+    setDownloadInvoiceLoading(true);
+
+    // filter excluded elements
+    const filter = (node: HTMLElement) => {
+      const exclusionClasses = ['remove-me', 'secret-div'];
+      return !exclusionClasses.some((classname) =>
+        node.classList?.contains(classname)
+      );
+    };
+
+    // convert to png
+    toPng(invoiceRef.current, { cacheBust: true, filter: filter })
+      .then((dataUrl) => {
+        // build to pdf
+        const customPageWidth = 150;
+        const customPageHeight = 280;
+
+        // Create a new jsPDF instance with custom page dimensions
+        const pdf = new jsPDF('p', 'mm', [customPageWidth, customPageHeight]);
+
+        // Add the image to the PDF with the custom page size
+        pdf.addImage(
+          dataUrl,
+          'PNG',
+          10,
+          10,
+          customPageWidth - 20,
+          customPageHeight - 20
+        );
+
+        // Add watermark text or image
+        const watermarkImage = new Image();
+        watermarkImage.src = '/logo.png';
+        pdf.addImage(
+          watermarkImage,
+          'PNG',
+          customPageWidth - 35,
+          7,
+          23,
+          15 * 0.75
+        );
+
+        // Save the PDF
+        pdf.save(`invoice-${invoiceDetails?.num || '1'}_Byte`);
+        setDownloadInvoiceLoading(false);
+      })
+      .catch((err) => {
+        setDownloadInvoiceLoading(false);
+        console.log(err);
+      });
+  }, [invoiceRef]);
 
   // HOOKS
   const { data, isLoading, isSuccess } = useGetSingleInvoiceQuery(invoiceId, {
@@ -85,207 +164,260 @@ const InvoiceDetail = ({
                 isService={isService}
               />
             )}
-            <div className="h-[80vh] w-full overflow-auto flex items-center justify-center">
+            <div className="h-[85vh] w-full overflow-auto flex items-center justify-center py-4">
+              {/* container */}
               <div className={styles.container}>
-                {/* header */}
-                <div className="w-full flex justify-between items-center gap-2">
-                  <div className="inline-flex items-center gap-1">
-                    <div
-                      onClick={() => setInvoiceDetailsState(false)}
-                      className="mr-sm-2"
-                    >
-                      <ByteIcon icon="close-circle" size="18" />
-                    </div>
+                {/* invoice content */}
+                <div ref={invoiceRef} className="flex flex-col w-full gap-4">
+                  {/* header */}
+                  <div className="w-full flex justify-between items-center gap-2">
+                    <div className="inline-flex items-center gap-1 remove-me">
+                      <div
+                        onClick={() => setInvoiceDetailsState(false)}
+                        className="mr-sm-2"
+                      >
+                        <ByteIcon icon="close-circle" size="18" />
+                      </div>
 
-                    <ByteIcon
-                      onClick={() => setMoreModalState(true)}
-                      icon="more"
-                      size="18"
-                    />
-                  </div>
-                  <p className="text-strong">{`#${invoiceDetails.num}`}</p>
-                </div>
-
-                {/* card heading */}
-                <div className={styles.cardByte}>
-                  <div className="flex flex-space-between">
-                    <div className="inline-flex flex-col gap-1">
-                      <p className={`${styles.amount} + weight-400`}>
-                        Amount due
-                      </p>
-                      <p className="text-h5 text-white mt-0">{`₦${invoiceDetails.totalAmount.toLocaleString(
-                        'en-US'
-                      )}`}</p>
+                      <ByteIcon
+                        onClick={() => setMoreModalState(true)}
+                        icon="more"
+                        size="18"
+                      />
                     </div>
-                    <span
-                      className={`${styles.status} h-fit ${
-                        invoiceDetails.status === 'paid'
-                          ? styles.paid
-                          : invoiceDetails.status === 'unpaid'
-                          ? styles.unpaid
-                          : styles.overdue
-                      }`}
-                    >
-                      {' '}
-                      {invoiceDetails.status}
-                    </span>
+                    <p className="text-strong">{`#${invoiceDetails.num}`}</p>
                   </div>
 
-                  {/* divider */}
-                  <div className={styles.divider}></div>
+                  {/* card heading */}
+                  <div className={styles.cardByte}>
+                    <div className="flex flex-space-between">
+                      <div className="inline-flex flex-col gap-1">
+                        <p className={`${styles.amount} + weight-400`}>
+                          Amount due
+                        </p>
+                        <p className="text-h5 text-white mt-0">{`₦${invoiceDetails.totalAmount.toLocaleString(
+                          'en-US'
+                        )}`}</p>
+                      </div>
+                      <span
+                        className={`${styles.status} h-fit ${
+                          invoiceDetails.status === 'paid'
+                            ? styles.paid
+                            : invoiceDetails.status === 'unpaid'
+                            ? styles.unpaid
+                            : styles.overdue
+                        }`}
+                      >
+                        {' '}
+                        {invoiceDetails.status}
+                      </span>
+                    </div>
 
-                  {/* customer info */}
-                  <div className="flex flex-space-between flex-align-center ">
-                    <div className="flex w-full items-center gap-3">
-                      {/* image */}
-                      {invoiceDetails?.customer?.image ? (
-                        <span className="rounded-[50%] bg-[#F0F2F5] h-[40px] w-[40px] inline-flex items-center justify-center">
-                          <Image
-                            className="rounded-[50%]"
-                            height="40px"
-                            width="40px"
-                            src={invoiceDetails?.customer?.image as string}
-                            alt=""
-                          />
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center justify-center">
-                          <IconShadow
-                            icon="d-cube-scan"
-                            color="var(--neutral06)"
-                            size="16"
-                            className="grey small"
-                          />
-                        </span>
-                      )}
+                    {/* divider */}
+                    <div className={styles.divider}></div>
 
-                      {/* name and number */}
-                      <div>
-                        <label className="text-value text-white">
-                          {invoiceDetails?.customer?.name}
-                        </label>
-                        <p className="text-label mt-0 mb-0 text-primary-01">
-                          {invoiceDetails?.customer?.phone}
+                    {/* customer info */}
+                    <div className="flex flex-space-between flex-align-center ">
+                      <div className="flex w-full items-center gap-3">
+                        {/* image */}
+                        {invoiceDetails?.customer?.image ? (
+                          <span className="rounded-[50%] bg-[#F0F2F5] h-[40px] w-[40px] inline-flex items-center justify-center">
+                            <NextImage
+                              className="rounded-[50%]"
+                              height="40px"
+                              width="40px"
+                              src={invoiceDetails?.customer?.image as string}
+                              alt=""
+                            />
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center justify-center">
+                            <IconShadow
+                              icon="user"
+                              color="var(--neutral06)"
+                              size="16"
+                              className="grey small"
+                            />
+                          </span>
+                        )}
+
+                        {/* name and number */}
+                        <div>
+                          <label className="text-value text-white">
+                            {invoiceDetails?.customer?.name}
+                          </label>
+                          <p className="text-label mt-0 mb-0 text-primary-01">
+                            {invoiceDetails?.customer?.phone}
+                          </p>
+                        </div>
+                      </div>
+                      <ByteIcon
+                        icon="arrow-right-3"
+                        size="18"
+                        color="var(--white)"
+                      />
+                    </div>
+                  </div>
+
+                  {/* container */}
+                  <div className="w-full flex flex-col">
+                    {/* card items */}
+                    <div className={styles.invoiceContent}>
+                      <div className="flex flex-space-between">
+                        <p className="text-[#808691] text-base font-normal">
+                          Items:
+                        </p>
+                        <p className="text-base text-[#6A78D1] font-normal">
+                          Go to sales record
                         </p>
                       </div>
-                    </div>
-                    <ByteIcon
-                      icon="arrow-right-3"
-                      size="18"
-                      color="var(--white)"
-                    />
-                  </div>
-                </div>
 
-                {/* container */}
-                <div className="w-full flex flex-col">
-                  {/* card items */}
-                  <div className={styles.invoiceContent}>
-                    <div className="flex flex-space-between">
-                      <p className="text-[#808691] text-base font-normal">
-                        Items:
-                      </p>
-                      <p className="text-base text-[#6A78D1] font-normal">
-                        Go to sales record
-                      </p>
-                    </div>
-
-                    {/* content */}
-                    <div className="flex flex-col gap-3 w-full">
-                      {isService
-                        ? invoiceDetails.services.map((service, index) => (
-                            <div
-                              key={index}
-                              className="flex flex-col gap-1 w-full"
-                            >
-                              <div className="flex w-full items-start justify-between">
-                                <p className="text-value text-neutral-09 w-[60%]">
-                                  {service.name}
-                                </p>
-                                <p className=" text-value w-[30%] text-neutral-08 mt-0 ">
-                                  ₦{service.cost.toLocaleString('en-US')}
+                      {/* content */}
+                      <div className="flex flex-col gap-3 w-full">
+                        {isService
+                          ? invoiceDetails.services.map((service, index) => (
+                              <div
+                                key={index}
+                                className="flex flex-col gap-1 w-full"
+                              >
+                                <div className="flex w-full items-start justify-between">
+                                  <p className="text-value text-neutral-09 w-[60%]">
+                                    {service.name}
+                                  </p>
+                                  <p className=" text-value w-[30%] text-neutral-08 mt-0 ">
+                                    ₦{service.cost.toLocaleString('en-US')}
+                                  </p>
+                                </div>
+                                <p className="text-label mt-0 text-neutral-06 ">
+                                  {`Tax (${service.taxPercentage}%)`}
                                 </p>
                               </div>
-                              <p className="text-label mt-0 text-neutral-06 ">
-                                {`Tax (${service.taxPercentage}%)`}
-                              </p>
-                            </div>
-                          ))
-                        : invoiceDetails.products.map((product, index) => (
-                            <div
-                              key={index}
-                              className="flex flex-col gap-1 w-full"
-                            >
-                              <div className="flex w-full items-start justify-between">
-                                <p className="text-value text-neutral-09 w-[60%]">
-                                  {product.name}
-                                </p>
-                                <p className=" text-value text-neutral-08 w-[30%] mt-0 ">
-                                  ₦{product.unitPrice.toLocaleString('en-US')}
+                            ))
+                          : invoiceDetails.products.map((product, index) => (
+                              <div
+                                key={index}
+                                className="flex flex-col gap-1 w-full"
+                              >
+                                <div className="flex w-full items-start justify-between">
+                                  <p className="text-value text-neutral-09 w-[60%]">
+                                    {product.name}
+                                  </p>
+                                  <p className=" text-value text-neutral-08 w-[30%] mt-0 ">
+                                    ₦{product.unitPrice.toLocaleString('en-US')}
+                                  </p>
+                                </div>
+                                <p className="text-label mt-0 text-neutral-06 ">
+                                  {`x${product.quantity} @ ₦
+                                  ${(
+                                    product.quantity * product.unitPrice
+                                  ).toLocaleString('en-US')}`}
                                 </p>
                               </div>
-                              <p className="text-label mt-0 text-neutral-06 ">
-                                {`x${product.quantity} @ ₦
-                                ${(
-                                  product.quantity * product.unitPrice
-                                ).toLocaleString('en-US')}`}
-                              </p>
-                            </div>
-                          ))}
+                            ))}
 
-                      {/* horizontal line */}
-                      <hr className="my-2" />
+                        {/* horizontal line */}
+                        <hr className="my-2" />
 
-                      {/* totals */}
-                      <div className="flex flex-col gap-2">
-                        <div className="flex justify-between items-center gap-2">
-                          <p className="text-label mt-0 text-neutral-06">
-                            Subtotal
-                          </p>
-                          <p className="text-value text-neutral-08 mt-0 ">
-                            {`₦${invoiceDetails.subTotal.toLocaleString(
-                              'en-US'
-                            )}`}
-                          </p>
-                        </div>
-                        <div className="flex justify-between items-center gap-2">
-                          <p className="text-label mt-0 text-neutral-06">
-                            {/* Tax (7.5%){' '} */}
-                            Tax
-                          </p>
-                          <p className="text-value text-neutral-08 mt-0 ">
-                            {`₦${invoiceDetails.taxAmount.toLocaleString(
-                              'en-US'
-                            )}`}
-                          </p>
-                        </div>
-                        {invoiceDetails.discountPercentage && (
+                        {/* totals */}
+                        <div className="flex flex-col gap-2">
                           <div className="flex justify-between items-center gap-2">
                             <p className="text-label mt-0 text-neutral-06">
-                              Discount ({invoiceDetails.discountPercentage}%){' '}
+                              Subtotal
                             </p>
-                            <p className=" text-value text-neutral-08 mt-0 ">
-                              {`₦${invoiceDetails.discountAmount.toLocaleString(
+                            <p className="text-value text-neutral-08 mt-0 ">
+                              {`₦${invoiceDetails.subTotal.toLocaleString(
                                 'en-US'
                               )}`}
                             </p>
                           </div>
-                        )}
+                          <div className="flex justify-between items-center gap-2">
+                            <p className="text-label mt-0 text-neutral-06">
+                              Tax
+                            </p>
+                            <p className="text-value text-neutral-08 mt-0 ">
+                              {`₦${invoiceDetails.taxAmount.toLocaleString(
+                                'en-US'
+                              )}`}
+                            </p>
+                          </div>
+                          {invoiceDetails.discountPercentage > 0 ? (
+                            <div className="flex justify-between items-center gap-2">
+                              <p className="text-label mt-0 text-neutral-06">
+                                Discount ({invoiceDetails.discountPercentage}%){' '}
+                              </p>
+                              <p className=" text-value text-neutral-08 mt-0 ">
+                                {`₦${invoiceDetails.discountAmount.toLocaleString(
+                                  'en-US'
+                                )}`}
+                              </p>
+                            </div>
+                          ) : null}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* total */}
+                    <div className={styles.footer}>
+                      <div className="flex flex-space-between">
+                        <p className={styles.small}>Total</p>
+                        <p
+                          className={styles.footerAmount}
+                        >{`₦${invoiceDetails.totalAmount.toLocaleString(
+                          'en-US'
+                        )}`}</p>
                       </div>
                     </div>
                   </div>
 
-                  {/* total */}
-                  <div className={styles.footer}>
-                    <div className="flex flex-space-between">
-                      <p className={styles.small}>Total</p>
-                      <p
-                        className={styles.footerAmount}
-                      >{`₦${invoiceDetails.totalAmount.toLocaleString(
-                        'en-US'
-                      )}`}</p>
+                  {/* date issue adn due date */}
+                  <div className="grid grid-cols-2 gap-x-2 items-center px-3">
+                    <div className="inline-flex flex-col gap-1">
+                      <span className="text-label text-neutral-06">
+                        Date issued
+                      </span>
+                      <p className="text-value mt-0 text-neutral-09">
+                        {`${new Date(invoiceDetails.issuedDate).toLocaleString(
+                          'en-UK',
+                          localeTimeOptions
+                        )}`}
+                      </p>
                     </div>
+                    <div className="inline-flex flex-col gap-1">
+                      <span className="text-label text-neutral-06">
+                        Expiry date{' '}
+                      </span>
+                      <p className="text-value mt-0 text-neutral-09">
+                        {`${new Date(invoiceDetails.dueDate).toLocaleString(
+                          'en-UK',
+                          localeTimeOptions
+                        )}`}
+                      </p>
+                    </div>{' '}
                   </div>
+
+                  {/* payment method */}
+                  <div className="inline-flex flex-col gap-1 px-3">
+                    <span className="text-label text-neutral-06">
+                      Payment methods{' '}
+                    </span>
+                    <span className="text-value mt-0 text-neutral-09">
+                      {invoiceDetails.paymentMethod}
+                    </span>
+                  </div>
+                </div>
+
+                {/* buttons */}
+                <div className="flex flex-col w-full items-stretch gap-3">
+                  <Button
+                    disabled={downloadInvoiceLoading}
+                    loading={downloadInvoiceLoading}
+                    click={downloadInvoiceAsPDF}
+                    title="Download Invoice as PDF"
+                    iconPosition="right"
+                    icon="invoice"
+                    type="large"
+                    color="btnPrimary"
+                  />
                 </div>
               </div>
             </div>

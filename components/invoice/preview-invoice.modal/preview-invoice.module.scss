@@ -1,18 +1,27 @@
 .container {
-  padding: 20px;
-  margin-bottom: var(--space-md-3);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 24px;
+  padding-block: 24px;
+  padding-inline: 16px;
+  overflow: auto;
+  width: 100%;
 }
 
 .invoiceContent {
   background: var(--neutral01);
   padding: 16px;
-  margin-top: 16px;
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .cardByte {
   border-radius: 16px;
   width: 100%;
-  padding: 16px;
+  // padding: 16px;
 }
 
 .amount {
@@ -28,7 +37,6 @@
   width: 100%;
   height: 1px;
   background-color: var(--neutral04);
-  margin: var(--space-md-1) 0px 0px;
 }
 
 .footer {

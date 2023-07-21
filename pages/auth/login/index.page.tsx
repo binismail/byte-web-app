@@ -38,11 +38,12 @@ const Login: NextPage = () => {
   // SIDE EFFECTS
   useEffect(() => {
     if (isLoggedIn) {
-      router.push('/dashboard');
+      const { returnUrl } = router.query;
+      router.push(returnUrl ? `${returnUrl}` : '/dashboard');
     } else {
       setRedirectLoading(false);
     }
-  }, [isLoggedIn, router]);
+  }, []);
 
   // RETURNED JSX: REDIRECT TO DASHBOARD IF USER IS LOGGED-IN
   if (redirectLoading) {

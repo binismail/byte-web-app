@@ -48,7 +48,7 @@ const SortModal = ({
     },
     {
       content: 'Sort by invoice number',
-      id: 5,
+      id: 6,
       sortData: 'num',
     },
   ];
