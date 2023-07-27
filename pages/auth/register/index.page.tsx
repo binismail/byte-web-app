@@ -30,7 +30,11 @@ const Register: NextPage = () => {
   // STATES
   const [progress, setProgress] = useState<number>(1);
 
-  // SIDE EFFECTS
+  // SIDE EFFECT
+  useEffect(() => {
+    // Prefetch the login page
+    router.prefetch('/auth/login');
+  }, [router]);
   useEffect(() => {
     if (progress === 3) {
       const phone = getItem('phone', 'session');

@@ -1,7 +1,7 @@
 import { Form, Formik } from 'formik';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 import Select from 'react-select';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
@@ -111,6 +111,12 @@ const EditBusinessInfo: NextPageWithLayout = () => {
 
   // HOOKS
   const [updateBusinessInfo, { isLoading }] = useUpdateBusinessInfoMutation();
+
+  // SIDE EFFECTS
+  useEffect(() => {
+    // Prefetch the settings page
+    router.prefetch('/dashboard/settings');
+  }, [router]);
 
   return (
     <div>

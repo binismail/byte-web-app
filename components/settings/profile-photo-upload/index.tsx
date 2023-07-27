@@ -88,6 +88,10 @@ const ProfilePhotoUpload = () => {
 
   // SIDE EFFECTS
   useEffect(() => {
+    // Prefetch the settings page
+    router.prefetch('/dashboard/settings');
+  }, [router]);
+  useEffect(() => {
     setHasImage(!isEmpty(userDetails.image));
   }, []);
   useEffect(() => {

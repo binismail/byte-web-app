@@ -4,13 +4,10 @@ import Layout from '../../../../components/layouts/layout';
 import ByteIcon from '../../../../components/shared/icon/byte.icon';
 
 import Head from 'next/head';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { NextPageWithLayout } from '../../../_app.page';
 
 const Privacy: NextPageWithLayout = () => {
-  // DATA INITIALIZATION
-  const router = useRouter();
-
   return (
     <div>
       <Head>
@@ -19,29 +16,26 @@ const Privacy: NextPageWithLayout = () => {
       </Head>
 
       {/* content */}
-      <div
-        onClick={() =>
-          router.push('/dashboard/settings/privacy/change-password')
-        }
-        className="container-border-rounded mt-md-2 cursor-pointer"
-      >
-        <div className="flex flex-space-between">
-          {/* texts */}
-          <div className="flex flex-col gap-1 my-4">
-            <p className="text-sm font-normal text-[#30333B]">
-              Change password
-            </p>
-            <p className="text-[#808691] text-[13px] font-normal">
-              Change your account password
-            </p>
-          </div>
+      <Link href="/dashboard/settings/privacy/change-password">
+        <div className="container-border-rounded mt-md-2 cursor-pointer">
+          <div className="flex flex-space-between">
+            {/* texts */}
+            <div className="flex flex-col gap-1 my-4">
+              <p className="text-sm font-normal text-[#30333B]">
+                Change password
+              </p>
+              <p className="text-[#808691] text-[13px] font-normal">
+                Change your account password
+              </p>
+            </div>
 
-          {/* arrow */}
-          <div className="flex flex-align-center">
-            <ByteIcon icon="arrow-right-21" color="grey" size={16} />
+            {/* arrow */}
+            <div className="flex flex-align-center">
+              <ByteIcon icon="arrow-right-21" color="grey" size={16} />
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };

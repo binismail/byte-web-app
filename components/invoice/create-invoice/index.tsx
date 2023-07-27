@@ -1,5 +1,6 @@
 import { Document } from 'iconsax-react';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import Modal from '../../shared/modal/modal';
 
 type Props = {
@@ -9,6 +10,12 @@ type Props = {
 const CreateInvoiceModal = ({ closeModal }: Props) => {
   // DATA INITIALIZATION
   const router = useRouter();
+
+  // SIDE EFFECTS
+  useEffect(() => {
+    // Prefetch the create invoice page
+    router.prefetch('/dashboard/tools/invoices/create-invoice');
+  }, [router]);
 
   return (
     <Modal header={' '} closeModal={closeModal}>

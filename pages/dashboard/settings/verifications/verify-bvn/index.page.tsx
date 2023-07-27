@@ -1,7 +1,7 @@
 import { Form, Formik } from 'formik';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import DashboardLayout from '../../../../../components/layouts/dashboard-layout';
@@ -18,6 +18,12 @@ const VerifyBvn: NextPageWithLayout = () => {
 
   // DATA INITIALIZATION
   const router = useRouter();
+
+  // SIDE EFFECTS
+  useEffect(() => {
+    // Prefetch the verifications page
+    router.prefetch('/dashboard/settings/verifications');
+  }, [router]);
 
   return (
     <div>

@@ -1,7 +1,7 @@
 import { Form, Formik } from 'formik';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 import * as Yup from 'yup';
 import DashboardLayout from '../../../../../components/layouts/dashboard-layout';
 import Layout from '../../../../../components/layouts/layout';
@@ -19,6 +19,12 @@ const ChangePassword: NextPageWithLayout = () => {
 
   // HOOKS
   const [updatePassword, { isLoading }] = useUpdatePasswordMutation();
+
+  // SIDE EFFECTS
+  useEffect(() => {
+    // Prefetch the settings page
+    router.prefetch('/dashboard/settings');
+  }, [router]);
 
   return (
     <div>

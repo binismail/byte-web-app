@@ -74,6 +74,10 @@ const EditProfile: NextPageWithLayout = () => {
 
   // SIDE EFFECTS
   useEffect(() => {
+    // Prefetch the settings page
+    router.prefetch('/dashboard/settings');
+  }, [router]);
+  useEffect(() => {
     setPickedImage(files[0] as PickedImageType);
   }, [files]);
 
