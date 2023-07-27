@@ -1,4 +1,4 @@
-import { IPayment } from '.';
+import { IPayment } from './index.page';
 
 const base: IPayment = {
   sampleTextProp: 'Hello world!',
