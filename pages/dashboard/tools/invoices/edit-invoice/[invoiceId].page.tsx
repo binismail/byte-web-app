@@ -205,7 +205,6 @@ const EditInvoice: NextPageWithLayout = () => {
               handleSubmit,
               setFieldValue,
               dirty,
-              isSubmitting,
               isValid,
             }) => {
               return (
@@ -226,7 +225,6 @@ const EditInvoice: NextPageWithLayout = () => {
                       handleSubmit={handleSubmit}
                       isLoading={isLoading}
                       dirty={dirty}
-                      isSubmitting={isSubmitting}
                       isValid={isValid}
                       values={values}
                       isService={isService}
@@ -487,9 +485,7 @@ const EditInvoice: NextPageWithLayout = () => {
                         />
                       </div>
                       <Button
-                        disabled={
-                          !dirty || isSubmitting || isLoading || !isValid
-                        }
+                        disabled={!dirty || isLoading || !isValid}
                         click={() => setPreviewInvoiceState(true)}
                         title="Preview Invoice"
                         iconPosition="right"

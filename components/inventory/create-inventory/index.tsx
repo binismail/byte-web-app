@@ -137,7 +137,7 @@ const CreateInventory = ({ setAddProductState }: Props) => {
           handleBlur,
           handleSubmit,
           setFieldValue,
-          isSubmitting,
+          isValid,
         }) => {
           return (
             <div className="h-[80vh] overflow-auto w-full flex items-center justify-center pt-2 pb-3">
@@ -291,7 +291,7 @@ const CreateInventory = ({ setAddProductState }: Props) => {
 
                     <div className="w-full flex flex-col items-stretch">
                       <Button
-                        disabled={isLoading || isSubmitting}
+                        disabled={isLoading || !isValid}
                         loading={isLoading}
                         click={handleSubmit}
                         title="Add product to inventory"

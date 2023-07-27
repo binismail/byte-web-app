@@ -14,7 +14,6 @@ type PreviewInvoiceType = {
   onClose: () => void;
   isLoading: boolean;
   dirty: boolean;
-  isSubmitting: boolean;
   isValid: boolean;
   handleSubmit: (e?: FormEvent<HTMLFormElement> | undefined) => void;
   // values: {
@@ -41,7 +40,6 @@ function PreviewInvoice({
   isService,
   handleSubmit,
   dirty,
-  isSubmitting,
   isValid,
   isLoading,
 }: PreviewInvoiceType) {
@@ -226,7 +224,7 @@ function PreviewInvoice({
               />
               <Button
                 loading={isLoading}
-                disabled={!dirty || isSubmitting || !isValid}
+                disabled={!dirty || isLoading || !isValid}
                 // click={() => setPreviewInvoiceState(true)}
                 click={handleSubmit}
                 title="Generate Invoice"

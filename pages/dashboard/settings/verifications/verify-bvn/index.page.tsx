@@ -56,15 +56,7 @@ const VerifyBvn: NextPageWithLayout = () => {
             .required('Required'),
         })}
       >
-        {({
-          values,
-          touched,
-          errors,
-          handleChange,
-          handleBlur,
-          isValid,
-          isSubmitting,
-        }) => {
+        {({ values, touched, errors, handleChange, handleBlur, isValid }) => {
           return (
             <Form>
               <div className="w-full flex flex-col gap-6 py-6 px-4 border border-[#E6EAED] rounded-2xl">
@@ -95,7 +87,7 @@ const VerifyBvn: NextPageWithLayout = () => {
                 </label>
                 <div className="w-full grid grid-cols-4">
                   <Button
-                    disabled={!isValid || isSubmitting || isLoading}
+                    disabled={!isValid || isLoading}
                     title="Verify BVN"
                     type="large"
                     color="btnPrimary"
