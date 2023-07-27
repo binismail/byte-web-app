@@ -33,6 +33,11 @@ const SalesRecords = (props: Props) => {
 
   // SIDE EFFECTS
   useEffect(() => {
+    // Prefetch the salesrecord page
+    router.prefetch('/dashboard/tools/record/create/sales');
+  }, [router]);
+  // populate records
+  useEffect(() => {
     if (isSuccess) {
       setRecords(data.data);
     }

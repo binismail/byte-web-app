@@ -1,5 +1,5 @@
 import { Edit2, TickSquare, Trash } from 'iconsax-react';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { Dispatch, SetStateAction } from 'react';
 import Modal from '../../shared/modal/modal';
 
@@ -16,24 +16,22 @@ const MoreInfo = ({
   onMarkAsReadClick,
   invoiceId,
 }: Props) => {
-  // DATA INITIALIZATION
-  const router = useRouter();
-
   return (
     <Modal header={'More'} closeModal={() => setMoreModalState(false)}>
       {/* container */}
       <ul className="w-full flex flex-col gap-2 py-4">
         {/* edit details */}
-        <li
-          onClick={() => {
-            router.push(`/dashboard/tools/invoices/edit-invoice/${invoiceId}`);
-            setMoreModalState(false);
-          }}
-          className="text-[#30333B] text-sm font-normal inline-flex items-center gap-4 py-2 px-2 rounded-md active:bg-gray-300"
-        >
-          <Edit2 variant="Bold" size="20" color="#30333B" />
-          Edit product details
-        </li>
+        <Link href={`/dashboard/tools/invoices/edit-invoice/${invoiceId}`}>
+          <li
+            onClick={() => {
+              setMoreModalState(false);
+            }}
+            className="text-[#30333B] text-sm font-normal inline-flex items-center gap-4 py-2 px-2 rounded-md active:bg-gray-300"
+          >
+            <Edit2 variant="Bold" size="20" color="#30333B" />
+            Edit product details
+          </li>
+        </Link>
 
         {/* mark as paid */}
         <li

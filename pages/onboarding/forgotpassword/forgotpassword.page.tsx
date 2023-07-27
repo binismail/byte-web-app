@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Button from '../../../components/shared/butttons/button/button';
 import Input from '../../../components/shared/input/input/input';
 import logo from '../../../public/logo.svg';
@@ -14,65 +15,71 @@ export interface IForgotPassword {
 
 const ForgotPassword: NextPage = () => {
   return (
-    <div className={''}>
-      <div className={homeStyles.gridFull}>
-        <div className={styles.container}>
-          {true && (
-            <div className="flex flex-col">
-              <Image src={logo} alt="logo" width="100px" height="100px" />
-              <div className="flex-container">
-                <div className="icon-shadow flex flex-center">
-                  <Image src={key} alt="key" width="32px" height="32px" />
+    <div>
+      <Head>
+        <title>Forgot password - Byte</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <div className={''}>
+        <div className={homeStyles.gridFull}>
+          <div className={styles.container}>
+            {true && (
+              <div className="flex flex-col">
+                <Image src={logo} alt="logo" width="100px" height="100px" />
+                <div className="flex-container">
+                  <div className="icon-shadow flex flex-center">
+                    <Image src={key} alt="key" width="32px" height="32px" />
+                  </div>
                 </div>
-              </div>
 
-              <div className="mb-md-3">
-                <p className="text-h5 text-center">Forgot Password?</p>
-                <text className={styles.subtitle}>
-                  No worries we’ll send you reset instructions.
-                </text>
-              </div>
-              <div className="form-group ">
-                <label>Email</label>
-                <Input placeholder="Enter your email" value="" type="text" />
-              </div>
-              <div className="form-group ">
-                <Button color="btnPrimary" title="Reset password" />
-              </div>
-              <p className="link text-center mb-md-3 ">Back to log in</p>
-            </div>
-          )}
-          {false && (
-            <div className="form-container">
-              <div className="flex-container">
-                <div className="icon-shadow flex flex-center">
-                  <Image src={key} alt="key" width="32px" height="32px" />
+                <div className="mb-md-3">
+                  <p className="text-h5 text-center">Forgot Password?</p>
+                  <text className={styles.subtitle}>
+                    No worries we’ll send you reset instructions.
+                  </text>
                 </div>
+                <div className="form-group ">
+                  <label>Email</label>
+                  <Input placeholder="Enter your email" value="" type="text" />
+                </div>
+                <div className="form-group ">
+                  <Button color="btnPrimary" title="Reset password" />
+                </div>
+                <p className="link text-center mb-md-3 ">Back to log in</p>
               </div>
+            )}
+            {false && (
+              <div className="form-container">
+                <div className="flex-container">
+                  <div className="icon-shadow flex flex-center">
+                    <Image src={key} alt="key" width="32px" height="32px" />
+                  </div>
+                </div>
 
-              <div className="mb-md-3">
-                <p className="text-h5 text-center">Check your email</p>
-                <p className={styles.subtitle}>
-                  We sent a password resent link to
+                <div className="mb-md-3">
+                  <p className="text-h5 text-center">Check your email</p>
+                  <p className={styles.subtitle}>
+                    We sent a password resent link to
+                  </p>
+                </div>
+
+                <p className="text-center text-body-lg-bold">
+                  pappimistrol@gmail.com
+                </p>
+
+                <div className="form-group ">
+                  <Button color="btnPrimary" title="Open email " />
+                </div>
+                <p className=" text-center mb-md-3 ">
+                  Didn’r receive emai?
+                  <span className="link strong"> Click to resend</span>
                 </p>
               </div>
-
-              <p className="text-center text-body-lg-bold">
-                pappimistrol@gmail.com
-              </p>
-
-              <div className="form-group ">
-                <Button color="btnPrimary" title="Open email " />
-              </div>
-              <p className=" text-center mb-md-3 ">
-                Didn’r receive emai?
-                <span className="link strong"> Click to resend</span>
-              </p>
-            </div>
-          )}
-        </div>
-        <div className={styles.background}>
-          <div className={styles.side}></div>
+            )}
+          </div>
+          <div className={styles.background}>
+            <div className={styles.side}></div>
+          </div>
         </div>
       </div>
     </div>

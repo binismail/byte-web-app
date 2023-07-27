@@ -10,6 +10,7 @@ export interface IInput {
   onFocus?: FocusEventHandler<HTMLInputElement>;
   className?: any;
   readOnly?: boolean;
+  disabled?: boolean;
 }
 
 const Input: React.FC<IInput> = ({
@@ -21,9 +22,11 @@ const Input: React.FC<IInput> = ({
   name,
   value,
   readOnly,
+  disabled,
 }) => {
   return (
     <input
+      disabled={disabled}
       readOnly={readOnly}
       className={styles.input}
       placeholder={placeholder}

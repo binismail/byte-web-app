@@ -1,4 +1,5 @@
 import { Sort } from 'iconsax-react';
+import Head from 'next/head';
 import { ChangeEvent, ReactElement, useEffect, useState } from 'react';
 import CreateInvoiceModal from '../../../../components/invoice/create-invoice';
 import SortModal from '../../../../components/invoice/sort-modal';
@@ -34,70 +35,76 @@ const Invoices: NextPageWithLayout = () => {
   }, [isSuccess, data]);
 
   return (
-    <div className="w-full flex flex-col gap-4">
-      {/* MODALS */}
-      {sortModalStatus && (
-        <SortModal
-          setAscending={setAscending}
-          ascending={ascending}
-          setFilter={setFilter}
-          filter={filter}
-          setSortModalStatus={setSortModalStatus}
-        />
-      )}
-      {createInvoiceModalState && (
-        <CreateInvoiceModal
-          closeModal={() => {
-            setCreateInvoiceModalState(false);
-          }}
-        />
-      )}
-
-      {/* search input and button container */}
-      <section className="flex flex-col w-full gap-4">
-        {/* search bar */}
-        <div className="w-full flex flex-col items-stretch">
-          <SearchInput
-            value={searchInput}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setSearchInput(e.target.value)
-            }
-            type="text"
-            placeholder="Find an invoice"
+    <div>
+      <Head>
+        <title>Invoices - Byte</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <div className="w-full flex flex-col gap-4">
+        {/* MODALS */}
+        {sortModalStatus && (
+          <SortModal
+            setAscending={setAscending}
+            ascending={ascending}
+            setFilter={setFilter}
+            filter={filter}
+            setSortModalStatus={setSortModalStatus}
           />
-        </div>
-
-        {/* buttons */}
-        <div className="w-full flex items-center justify-between">
-          {/* add inventory */}
-          <Button
-            click={() => setCreateInvoiceModalState(true)}
-            type="large"
-            icon="add"
-            color="btnPrimary"
-            title="Create an invoice"
-          />
-
-          {/* sort */}
-          <span
-            onClick={() => setSortModalStatus((prevState) => !prevState)}
-            className="text-[#B2B8C2] text-sm font-normal inline-flex items-center gap-2 px-6 py-4 hover:bg-gray-100 cursor-pointer rounded-xl border border-[#B2B8C2]"
-          >
-            <Sort size="20" color="#B2B8C2" />
-            Sort
-          </span>
-        </div>
-      </section>
-
-      {/* invoice table */}
-      <InvoiceTable
-        loading={isLoading}
-        isAscending={ascending}
-        filter={filter}
-        contents={invoices.filter((content: InvoiceDetailsType) =>
-          content?.customer?.name?.toLocaleLowerCase()?.includes(searchInput)
         )}
-      />
+        {createInvoiceModalState && (
+          <CreateInvoiceModal
+            closeModal={() => {
+              setCreateInvoiceModalState(false);
+            }}
+          />
+        )}
+
+        {/* search input and button container */}
+        <section className="flex flex-col w-full gap-4">
+          {/* search bar */}
+          <div className="w-full flex flex-col items-stretch">
+            <SearchInput
+              value={searchInput}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setSearchInput(e.target.value)
+              }
+              type="text"
+              placeholder="Find an invoice"
+            />
+          </div>
+
+          {/* buttons */}
+          <div className="w-full flex items-center justify-between">
+            {/* add inventory */}
+            <Button
+              click={() => setCreateInvoiceModalState(true)}
+              type="large"
+              icon="add"
+              color="btnPrimary"
+              title="Create an invoice"
+            />
+
+            {/* sort */}
+            <span
+              onClick={() => setSortModalStatus((prevState) => !prevState)}
+              className="text-[#B2B8C2] text-sm font-normal inline-flex items-center gap-2 px-6 py-4 hover:bg-gray-100 cursor-pointer rounded-xl border border-[#B2B8C2]"
+            >
+              <Sort size="20" color="#B2B8C2" />
+              Sort
+            </span>
+          </div>
+        </section>
+
+        {/* invoice table */}
+        <InvoiceTable
+          loading={isLoading}
+          isAscending={ascending}
+          filter={filter}
+          contents={invoices.filter((content: InvoiceDetailsType) =>
+            content?.customer?.name?.toLocaleLowerCase()?.includes(searchInput)
+          )}
+        />
+      </div>
     </div>
   );
 };
