@@ -4,6 +4,15 @@
  * @type {import('next').NextConfig}
  **/
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/dashboard',
+        permanent: true,
+      },
+    ];
+  },
   reactStrictMode: true,
   swcMinify: true,
   pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js'],

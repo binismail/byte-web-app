@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import {
   JSXElementConstructor,
@@ -5,7 +6,6 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { RotatingLines } from 'react-loader-spinner';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import {
   logout,
@@ -71,13 +71,7 @@ const RouteGuard = (props: {
     children
   ) : (
     <div className="w-[100vw] h-[100vh] bg-white text-gray-600 font-normal text-base flex items-center justify-center">
-      <RotatingLines
-        strokeColor="#6A78D1"
-        strokeWidth="5"
-        animationDuration="0.8"
-        width="45"
-        visible={true}
-      />
+      <Image src="/logo.svg" alt="logo" width="120px" height="120px" />
     </div>
   );
 };
