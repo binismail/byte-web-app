@@ -41,7 +41,7 @@ const DashboardLayout = ({
 
   // DATA INITIALIZATION
   const router = useRouter();
-  const userId = useAppSelector(selectUserId);
+  const userId: string = useAppSelector(selectUserId);
   const dispatch = useAppDispatch();
 
   // HOOKS
@@ -98,7 +98,7 @@ const DashboardLayout = ({
           {/* NETWORK */}
           <ActiveLink
             href={'/dashboard/settings'}
-            text="Network"
+            text="Settings"
             Icon={People}
           />
         </ul>

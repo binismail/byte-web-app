@@ -1,46 +1,64 @@
 import { ReactElement } from 'react';
 
-import Link from 'next/link';
+import { Call, Messages3, Sms, Whatsapp } from 'iconsax-react';
+import Head from 'next/head';
 import DashboardLayout from '../../../../components/layouts/dashboard-layout';
 import Layout from '../../../../components/layouts/layout';
-import MenuItem from '../../../../components/menu-item/menu-item';
+import ContactusMenuItem from '../../../../components/settings/contactus-menu-item';
 import { NextPageWithLayout } from '../../../_app.page';
 
-const Home: NextPageWithLayout<any> = () => {
+const ContactUs: NextPageWithLayout<any> = () => {
   return (
-    <div className="flex flex-container-left gap-1">
-      <Link href="/dashboard/settings/edit-profile" passHref legacyBehavior>
-        <MenuItem
-          icon="message-3"
+    <div>
+      <Head>
+        <title>Contact us - Byte</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <div className="w-full grid grid-cols-4 gap-6">
+        <ContactusMenuItem
+          Icon={Messages3}
           title="Chat with us"
-          description=" Talk to us via the Byte app"
+          href="https://twitter.com/joinbyte"
+          targetBlank={true}
+          variant="Bold"
+          description=" Reach us via Twitter"
         />
-      </Link>
-      <MenuItem
-        icon="sms"
-        title="Send us an email"
-        description="Send us an email via help@byte "
-      />
-      <MenuItem
-        icon="whatsapp"
-        title="Reach us via WhatsApp"
-        description=" Chat with us on Whatsapp"
-      />
-      <MenuItem
-        icon="call"
-        title="Call us"
-        description=" Call our helpdesk for further info or complaints"
-      />
+        <ContactusMenuItem
+          Icon={Sms}
+          href="mailto:support@joinbyte.co"
+          variant="Bold"
+          title="Email"
+          targetBlank={true}
+          description="Send us an email"
+        />
+        <ContactusMenuItem
+          Icon={Whatsapp}
+          href="https://wa.me/message/GBHGOXVAFON6H1"
+          variant="Bold"
+          title="Reach us via WhatsApp"
+          targetBlank={true}
+          description="React us via WhatsApp"
+        />
+        <ContactusMenuItem
+          Icon={Call}
+          href="tel:+2349165953131"
+          variant="Bold"
+          title="Call us"
+          description="Call our helpdesk for further info or complaints"
+        />
+      </div>
     </div>
   );
 };
 
-Home.getLayout = function getLayout(page: ReactElement) {
+ContactUs.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
-      <DashboardLayout>{page}</DashboardLayout>
+      <DashboardLayout enableBackBtn={true} headerTitle="Contact us">
+        {page}
+      </DashboardLayout>
     </Layout>
   );
 };
 
-export default Home;
+export default ContactUs;

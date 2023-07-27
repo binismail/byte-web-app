@@ -116,24 +116,12 @@ const baseQueryWithReauth: BaseQueryFn<
 export const businessApi = createApi({
   reducerPath: 'businessApi',
   baseQuery: baseQueryWithReauth,
-  tagTypes: [
-    // 'AuthUser',
-    // 'Banks',
-    // 'BankAccount',
-    // 'Send Money',
-    // 'VirtualBank',
-    // 'Wallet',
-    // 'User Information',
-    // 'FundWallet',
-    'Inventory',
-    'Invoices',
-    'Records',
-    'Transactions',
-  ],
+  tagTypes: ['Inventory', 'Invoices', 'Records', 'Transactions', 'UserDetails'],
   endpoints: (builder) => ({
     // GET USER INFORMATION
     getUserInformation: builder.query<any, void>({
       query: () => baseUrl.business.getBusinessDetails,
+      providesTags: ['UserDetails'],
     }),
 
     // PAYMENT/TRANSFER MONEY TO BANK
@@ -426,6 +414,66 @@ export const businessApi = createApi({
       query: () => baseUrl.businessPocket.transactions,
       providesTags: ['Transactions'],
     }),
+
+    // SETTINGS
+    updateBusinessAdmin: builder.mutation<any, FormData>({
+      query: (body: FormData) => {
+        // return request payload
+        return {
+          url: baseUrl.business.updateBusinessAdminDetails,
+          method: 'PUT',
+          body: body,
+          formData: true,
+        };
+      },
+      invalidatesTags: ['UserDetails'],
+    }),
+    updateBusinessImage: builder.mutation<any, FormData>({
+      query: (body: FormData) => ({
+        url: baseUrl.business.updateProfilePicture,
+        method: 'PUT',
+        body: body,
+        formData: true,
+      }),
+      invalidatesTags: ['UserDetails'],
+    }),
+    updateBusinessInfo: builder.mutation<any, any>({
+      query: (body: any) => ({
+        url: baseUrl.business.updateDetail,
+        method: 'PUT',
+        body: body,
+      }),
+      invalidatesTags: ['UserDetails'],
+    }),
+    updatePassword: builder.mutation<
+      any,
+      {
+        currentPassword: string;
+        newPassword: string;
+      }
+    >({
+      query: (body: { currentPassword: string; newPassword: string }) => ({
+        url: baseUrl.business.updatePassword,
+        method: 'PUT',
+        body: body,
+      }),
+      invalidatesTags: ['UserDetails'],
+    }),
+    togglePushNotification: builder.mutation<any, void>({
+      query: () => ({
+        url: baseUrl.business.togglePushNotificationStatus,
+        method: 'PUT',
+      }),
+      invalidatesTags: ['UserDetails'],
+    }),
+    verifyBvn: builder.mutation<any, string>({
+      query: (data) => ({
+        url: baseUrl.authentication.verifyBvn,
+        method: 'POST',
+        body: { bvn: data },
+      }),
+      invalidatesTags: ['UserDetails'],
+    }),
   }),
 });
 
@@ -474,4 +522,12 @@ export const {
 
   // TRANSACTIONS
   useGetTransactionsQuery,
+
+  // SETTINGS
+  useUpdateBusinessAdminMutation,
+  useUpdateBusinessImageMutation,
+  useUpdateBusinessInfoMutation,
+  useUpdatePasswordMutation,
+  useTogglePushNotificationMutation,
+  useVerifyBvnMutation,
 } = businessApi;

@@ -3,21 +3,40 @@ import DashboardLayout from '../../../../components/layouts/dashboard-layout';
 import Layout from '../../../../components/layouts/layout';
 import ByteIcon from '../../../../components/shared/icon/byte.icon';
 
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { NextPageWithLayout } from '../../../_app.page';
 
-export interface IPrivacy {}
+const Privacy: NextPageWithLayout = () => {
+  // DATA INITIALIZATION
+  const router = useRouter();
 
-const Privacy: NextPageWithLayout<IPrivacy> = () => {
   return (
     <div>
-      <div className="container-border-rounded mt-md-2">
+      <Head>
+        <title>Privacy & security - Byte</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+
+      {/* content */}
+      <div
+        onClick={() =>
+          router.push('/dashboard/settings/privacy/change-password')
+        }
+        className="container-border-rounded mt-md-2 cursor-pointer"
+      >
         <div className="flex flex-space-between">
-          <div className="mx-md-1 my-md-2">
-            <p className="text-strong mb-0">Change password</p>
-            <div className="flex mt-0">
-              <p className="text-label ">Change your account password</p>
-            </div>
+          {/* texts */}
+          <div className="flex flex-col gap-1 my-4">
+            <p className="text-sm font-normal text-[#30333B]">
+              Change password
+            </p>
+            <p className="text-[#808691] text-[13px] font-normal">
+              Change your account password
+            </p>
           </div>
+
+          {/* arrow */}
           <div className="flex flex-align-center">
             <ByteIcon icon="arrow-right-21" color="grey" size={16} />
           </div>
@@ -30,7 +49,9 @@ const Privacy: NextPageWithLayout<IPrivacy> = () => {
 Privacy.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
-      <DashboardLayout>{page}</DashboardLayout>
+      <DashboardLayout enableBackBtn={true} headerTitle="Privacy & security">
+        {page}
+      </DashboardLayout>
     </Layout>
   );
 };
