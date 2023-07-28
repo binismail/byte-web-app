@@ -138,7 +138,6 @@ const ServiceDetails = (props: Props) => {
           handleSubmit,
           setFieldValue,
           dirty,
-          isSubmitting,
           isValid,
         }) => {
           return (
@@ -159,7 +158,6 @@ const ServiceDetails = (props: Props) => {
                   handleSubmit={handleSubmit}
                   isLoading={isLoading}
                   dirty={dirty}
-                  isSubmitting={isSubmitting}
                   isValid={isValid}
                   values={values}
                   isService={Object.prototype.hasOwnProperty.call(
@@ -384,7 +382,7 @@ const ServiceDetails = (props: Props) => {
                     />
                   </div>
                   <Button
-                    disabled={!dirty || isSubmitting || isLoading || !isValid}
+                    disabled={!dirty || isLoading || !isValid}
                     click={() => setPreviewInvoiceState(true)}
                     title="Preview Invoice"
                     iconPosition="right"

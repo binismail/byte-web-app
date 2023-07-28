@@ -84,7 +84,6 @@ const ChangePassword: NextPageWithLayout = () => {
           handleBlur,
           dirty,
           isValid,
-          isSubmitting,
         }) => {
           return (
             <Form className="flex w-full flex-col gap-6 py-6 px-4 rounded-2xl border border-[#E6EAED]">
@@ -144,7 +143,7 @@ const ChangePassword: NextPageWithLayout = () => {
               {/* button */}
               <div className="w-full grid grid-cols-4">
                 <Button
-                  disabled={!dirty || !isValid || isLoading || isSubmitting}
+                  disabled={!dirty || !isValid || isLoading}
                   loading={isLoading}
                   title="Save Changes"
                   type="large"

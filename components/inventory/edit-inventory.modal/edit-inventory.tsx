@@ -183,7 +183,6 @@ const EditInventory = ({ setEditProductState, productId }: Props) => {
           handleBlur,
           handleSubmit,
           setFieldValue,
-          isSubmitting,
           dirty,
         }) => {
           return (
@@ -337,7 +336,7 @@ const EditInventory = ({ setEditProductState, productId }: Props) => {
 
                       <div className="w-full flex flex-col items-stretch">
                         <Button
-                          disabled={isLoading || !dirty || isSubmitting}
+                          disabled={isLoading || !dirty}
                           loading={isLoading}
                           click={handleSubmit}
                           title="Update stock"

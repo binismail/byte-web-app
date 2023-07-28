@@ -111,7 +111,6 @@ const Login: NextPage = () => {
           handleBlur,
           handleSubmit,
           isValid,
-          isSubmitting,
         }) => {
           return (
             <div className={''}>
@@ -160,7 +159,7 @@ const Login: NextPage = () => {
                     <div className="mt-10 mb-6">
                       <Button
                         click={handleSubmit}
-                        disabled={isLoading || isSubmitting || !isValid}
+                        disabled={isLoading || !isValid}
                         color="btnPrimary"
                         title="Continue"
                         type="block"

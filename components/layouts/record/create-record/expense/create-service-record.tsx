@@ -68,7 +68,6 @@ const CreateServiceRecord = () => {
           handleSubmit,
           setFieldValue,
           dirty,
-          isSubmitting,
         }) => {
           return (
             <Form
@@ -156,7 +155,7 @@ const CreateServiceRecord = () => {
 
                 <Button
                   loading={isLoading}
-                  disabled={!dirty || isSubmitting}
+                  disabled={!dirty || isLoading}
                   click={handleSubmit}
                   title="Create Invoice"
                   iconPosition="right"
