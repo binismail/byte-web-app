@@ -95,12 +95,7 @@ const Login: NextPage = () => {
           companyEmail: Yup.string()
             .email('invalid email address')
             .required('Email is required'),
-          password: Yup.string()
-            .required('password is required')
-            .min(8, 'password must be at least 8 characters long')
-            .matches(/\d/, 'password must contain a number')
-            .matches(/[a-z]/, 'password must contain a lowercase letter')
-            .matches(/[A-Z]/, 'password must contain an uppercase letter'),
+          password: Yup.string().required('password is required'),
         })}
       >
         {({
@@ -123,7 +118,7 @@ const Login: NextPage = () => {
                       subtitle={'We need information about you'}
                     ></Header>
                     <div className="form-group">
-                      <label>Business name</label>
+                      <label>Company Email</label>
                       <Input
                         name={'companyEmail'}
                         value={values.companyEmail}
