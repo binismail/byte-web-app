@@ -32,7 +32,7 @@
     "QRkitDetails": "businesses/QRkitDetails",
     "orderQRkit": "businesses/orderQRkit",
     "acceptQRkit": "businesses/acceptQRkit",
-    "getAnalytics": "businesses/analytics?daysCount=",
+    "getAnalytics": "businesses/analytics",
     "record": "businesses/records",
     "invoice": "businesses/invoices",
     "inventory": "businesses/inventories",
