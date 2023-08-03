@@ -15,6 +15,10 @@ import {
   PaymentAnalyticsRootType,
 } from './payement.types';
 
+export interface IPayment {
+  sampleTextProp: string;
+}
+
 const Payment: NextPageWithLayout = () => {
   // DATA INITIALIZATION: CURRENT DATA
   const currentDate = new Date().toLocaleDateString('en-CA');
