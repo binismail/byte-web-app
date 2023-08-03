@@ -1,4 +1,4 @@
-import { Receive } from 'iconsax-react';
+import { Receive, Transmit } from 'iconsax-react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ReactElement, useEffect, useState } from 'react';
@@ -62,6 +62,7 @@ const Payment: NextPageWithLayout = () => {
                 Sales and Expenses
               </h3>
 
+              {/* Cards */}
               <div className="grid grid-cols-4 items-center gap-x-6 w-full">
                 <CompareSalesCard
                   date={endDate as string}
@@ -76,7 +77,7 @@ const Payment: NextPageWithLayout = () => {
                 <CompareSalesCard
                   date={endDate as string}
                   title="Expense"
-                  Icon={Receive}
+                  Icon={Transmit}
                   iconColor="#944A05"
                   count={
                     businessAnalytics?.records.expenses
@@ -98,7 +99,7 @@ const Payment: NextPageWithLayout = () => {
                 <CompareSalesCard
                   date={startDate as string}
                   title="Expense"
-                  Icon={Receive}
+                  Icon={Transmit}
                   iconColor="#944A05"
                   count={
                     businessAnalytics?.records.expenses

@@ -61,8 +61,8 @@ const Payment: NextPageWithLayout = () => {
 
   // API CALL HOOK
   const params = new URLSearchParams();
-  params.append('previousDate', previousDate);
-  params.append('currentDate', currentDate);
+  params.append('previousDate', `${previousDate}`);
+  params.append('currentDate', `${currentDate}`);
   params.append('type', type);
   const paramsUrl = params.toString();
   const {
