@@ -474,6 +474,12 @@ export const businessApi = createApi({
       }),
       invalidatesTags: ['UserDetails'],
     }),
+
+    // PAYMENTS ANALYTICS
+    getAnalytics: builder.query<any, string>({
+      query: (url) => `${baseUrl.business.getAnalytics}?${url}`,
+      providesTags: ['Inventory', 'Records', 'Transactions'],
+    }),
   }),
 });
 
@@ -530,4 +536,7 @@ export const {
   useUpdatePasswordMutation,
   useTogglePushNotificationMutation,
   useVerifyBvnMutation,
+
+  // PAYMENTS ANALYTICS
+  useGetAnalyticsQuery,
 } = businessApi;

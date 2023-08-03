@@ -1,20 +1,84 @@
+import { WalletMoney } from 'iconsax-react';
 import Head from 'next/head';
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useMemo, useState } from 'react';
 import DashboardLayout from '../../../components/layouts/dashboard-layout';
 import Layout from '../../../components/layouts/layout';
-import Chart from '../../../components/payment/chart/chart';
-import TopCustomer from '../../../components/payment/top-customer/top-costumer';
-import Button from '../../../components/shared/butttons/button/button';
-import ByteIcon from '../../../components/shared/icon/byte.icon';
-import Modal from '../../../components/shared/modal/modal';
+import AnalyticsContents from '../../../components/layouts/payment/analytics-contents';
+import AnalyticsTab from '../../../components/payment/analytics-tab';
+import TransactionBalance from '../../../components/payment/transaction-balance';
+import { isEmpty } from '../../../helpers/is-emtpy';
+import { subtractFromDate } from '../../../helpers/subtract-from-date';
+import { useGetAnalyticsQuery } from '../../../lib/services/businessApi';
 import { NextPageWithLayout } from '../../_app.page';
+import {
+  BusinessAnalyticsType,
+  PaymentAnalyticsRootType,
+} from './payement.types';
 
 export interface IPayment {
   sampleTextProp: string;
 }
 
 const Payment: NextPageWithLayout = () => {
-  const [status, setStatus] = useState(false);
+  // DATA INITIALIZATION: CURRENT DATA
+  const currentDate = new Date().toLocaleDateString('en-CA');
+
+  // STATES
+  const [businessAnalytics, setBusinessAnalytics] =
+    useState<PaymentAnalyticsRootType | null>();
+  const [type, setType] = useState<BusinessAnalyticsType>('day');
+  const [isSent, setIsSent] = useState<boolean>(false);
+
+  // HOOKS
+  const previousDate = useMemo(() => {
+    let newPrevDate;
+    if (type === 'day') {
+      newPrevDate = subtractFromDate(new Date(currentDate), {
+        days: 1,
+      }).toLocaleDateString('en-CA');
+
+      return newPrevDate;
+    } else if (type === 'month') {
+      newPrevDate = subtractFromDate(new Date(currentDate), {
+        months: 1,
+      }).toLocaleDateString('en-CA');
+
+      return newPrevDate;
+    } else if (type === 'year') {
+      newPrevDate = subtractFromDate(new Date(currentDate), {
+        years: 1,
+      }).toLocaleDateString('en-CA');
+
+      return newPrevDate;
+    } else {
+      newPrevDate = subtractFromDate(new Date(currentDate), {
+        days: 1,
+      }).toLocaleDateString('en-CA');
+
+      return newPrevDate;
+    }
+  }, [type]);
+
+  // API CALL HOOK
+  const params = new URLSearchParams();
+  params.append('previousDate', previousDate);
+  params.append('currentDate', currentDate);
+  params.append('type', type);
+  const paramsUrl = params.toString();
+  const {
+    data,
+    isLoading: getBusinessAnalyticsLoading,
+    isError,
+  } = useGetAnalyticsQuery(paramsUrl, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  // SIDE EFFECTS
+  useEffect(() => {
+    if (!isError && !isEmpty(data)) {
+      setBusinessAnalytics(data?.data);
+    }
+  }, [data, isError]);
 
   return (
     <div>
@@ -22,89 +86,45 @@ const Payment: NextPageWithLayout = () => {
         <title>Payment - Byte</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div>
-        {status && (
-          <Modal
-            closeModal={() => setStatus(false)}
-            header={'Make a payment'}
-          ></Modal>
-        )}
-        <div className="home-header">
-          <p className="balance-title">
-            {' '}
-            <ByteIcon
-              style={{ marginBottom: '-4px' }}
-              icon="wallet-21"
-              size={20}
-              color="var(--primary08)"
-            />
-            <span>Byte Pocket</span>
-          </p>
-          <p className="balance text-h4">
-            ₦150,000.00<span></span>
-          </p>
-          <div className="flex gap">
-            <Button
-              icon="receipt-text"
-              type="large"
-              title="Fund wallet"
-              color="btnLight"
-            />
-            <Button
-              icon="link-circle1"
-              type="large"
-              click={() => {
-                setStatus(true);
-              }}
-              title="Payment link"
-              color="btnPrimary"
-            />
 
-            <Button
-              icon="receipt-2"
-              iconColor="var(--white)"
-              type="large"
-              click={() => {
-                setStatus(true);
-              }}
-              title="QR Payment"
-              color="btnPrimary"
-            />
+      {/* main */}
+      <div className="flex flex-col gap-4 pb-10">
+        {/* Header container */}
+        <div className="flex w-full flex-col">
+          {/* icon container */}
+          <div className="flex gap-2 items-center">
+            {/* icon */}
+            <WalletMoney size="12" color="#353C69" variant="Bold" />
+
+            {/* title */}
+            <p className="font-normal text-base text-[#353C69]">Transactions</p>
           </div>
+
+          {/* Balance Amount */}
+          <TransactionBalance
+            loading={getBusinessAnalyticsLoading}
+            balance={
+              isSent
+                ? businessAnalytics?.transactions.inbound.currentInboundPayments
+                : businessAnalytics?.transactions.outbound
+                    .currentOutboundPayments
+            }
+          />
         </div>
-        {/* <div className={styles.grid} ></div> */}
-        <p className="text-h6" style={{ marginBottom: '10px' }}>
-          Analytics
-        </p>
-        <div className="chart-table">
-          <div className="flex gap-1 mb-md-2 mt-md-2">
-            <div className="chart">
-              <Chart title="Inflow" />
-            </div>
-            <div className="chart">
-              <Chart title="Outflow" />
-            </div>
-          </div>
 
-          <div className="flex gap-1">
-            <div className="w-50">
-              <TopCustomer title={'Top customers'} />
-            </div>
-            <div className="w-50">
-              <TopCustomer title={'Top Product'} />
-            </div>
-            <div className="products"></div>
-          </div>
-          <p className="text-h6" style={{ marginBottom: '-10px' }}>
-            Transaction-history
-          </p>
-          <div className="float-right">
-            <div className="flex gap-1">
-              <p className="mt-0 mb-0 text-byte"> View all</p>
-              <ByteIcon color="var(--byte)" icon="arrow-right-1" size={20} />
-            </div>
-          </div>
-          {/* <Table /> */}
+        {/* Tabs */}
+        <div className="w-full flex flex-col gap-8">
+          <AnalyticsTab isSent={isSent} setIsSent={setIsSent} />
+          <AnalyticsContents
+            previousDate={previousDate}
+            currentDate={currentDate}
+            setType={setType}
+            periodType={type}
+            businessAnalytics={businessAnalytics as PaymentAnalyticsRootType}
+            getAnalyticsLoading={getBusinessAnalyticsLoading}
+            isAnalyticsEmpty={isEmpty(businessAnalytics)}
+            isSent={isSent}
+          />
         </div>
       </div>
     </div>
