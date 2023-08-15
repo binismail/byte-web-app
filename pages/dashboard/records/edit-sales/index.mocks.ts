@@ -1,4 +1,4 @@
-import { IEditSales } from './index';
+import { IEditSales } from '.';
 
 const base: IEditSales = {
   sampleTextProp: 'Hello world!',

@@ -1,0 +1,37 @@
+.dat_time_picker_root {
+  & > input {
+    height: 48px;
+    width: 100%;
+    border: 1px solid var(--neutral06);
+    border-radius: 12px;
+    padding: 12px;
+    margin-top: 4px;
+
+    &:focus {
+      outline: none;
+      border: 1px solid var(--neutral06);
+    }
+  }
+
+  & > div {
+    width: 90%;
+    bottom: 100%;
+    border-radius: 16px;
+    box-shadow: 0.25px 0.25px 8px rgba(0, 0, 0, 0.1);
+    border: 0.5px solid var(--neutral06);
+    padding-block: 20px;
+
+    & > div {
+      margin: auto;
+    }
+  }
+}
+
+// .dat_time_picker_root > input {
+//   height: 48px;
+//   width: 100%;
+//   border: 1px solid var(--neutral06);
+//   border-radius: 12px;
+//   padding: 12px;
+//   margin-top: 4px;
+// }

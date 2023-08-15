@@ -1,41 +1,64 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { AppState } from "../store";
-import { HYDRATE } from "next-redux-wrapper";
+import { AnyAction, PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { HYDRATE } from 'next-redux-wrapper';
+import { AppState } from '../store';
 
 // Type for our state
 export interface AuthState {
-  authState: boolean;
+  loggedIn: boolean;
+  userId: string;
+  role: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 // Initial state
 const initialState: AuthState = {
-  authState: false,
+  loggedIn: false,
+  userId: '',
+  role: '',
+  accessToken: '',
+  refreshToken: '',
 };
 
 // Actual Slice
 export const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
-    // Action to set the authentication status
-    setAuthState(state, action) {
-      state.authState = action.payload;
-    },
-  },
-
-  // Special reducer for hydrating the state. Special case for next-redux-wrapper
-  extraReducers: {
-    [HYDRATE]: (state, action) => {
+    setCredentials(state, { payload }: PayloadAction<AuthState>) {
       return {
         ...state,
-        ...action.payload.auth,
+        ...payload,
       };
     },
+    setNewTokenCredentials(state, { payload }: PayloadAction<AuthState>) {
+      return {
+        ...state,
+        ...payload,
+      };
+    },
+    logout: () => initialState,
+  },
+  extraReducers: (builder) => {
+    builder.addCase(HYDRATE, (state, action: AnyAction) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    });
   },
 });
 
-export const { setAuthState } = authSlice.actions;
+// Actions
+export const { setCredentials, logout, setNewTokenCredentials } =
+  authSlice.actions;
 
-export const selectAuthState = (state: AppState) => state.auth.authState;
+// Selectors
+export const selectLoggedIn = (state: AppState) => state.auth.loggedIn;
+export const selectRole = (state: AppState) => state.auth.role;
+export const selectRefreshToken = (state: AppState) => state.auth.refreshToken;
+export const selectAccessToken = (state: AppState) => state.auth.accessToken;
+export const selectUserId = (state: AppState) => state.auth.userId;
 
+// Reducer
 export default authSlice.reducer;

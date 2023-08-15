@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import EditSales, { IEditSales } from './index';
+import EditSales, { IEditSales } from '.';
 import { mockEditSalesProps } from './index.mocks';
 
 export default {

@@ -1,22 +1,49 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import { authSlice } from "./authSlice/authSlice";
-import { createWrapper } from "next-redux-wrapper";
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/dist/query';
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+  persistReducer,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { businessApi } from '../services/businessApi';
+import { authSlice } from './authSlice/authSlice';
+import { userDetailsSlice } from './userDetailsSlice/userDetailsSlice';
 
-const makeStore = () =>
-  configureStore({
-    reducer: {
-      [authSlice.name]: authSlice.reducer,
-    },
-    devTools: true,
-  });
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: [authSlice.name, userDetailsSlice.name],
+  version: 1,
+};
 
-export type AppStore = ReturnType<typeof makeStore>;
-export type AppState = ReturnType<AppStore["getState"]>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  AppState,
-  unknown,
-  Action
->;
+// combining reducers
+const rootReducers = combineReducers({
+  [authSlice.name]: authSlice.reducer,
+  [businessApi.reducerPath]: businessApi.reducer,
+  [userDetailsSlice.name]: userDetailsSlice.reducer,
+});
 
-export const wrapper = createWrapper<AppStore>(makeStore);
+// persisted reducers
+const persistedReducer = persistReducer(persistConfig, rootReducers);
+
+// store definition
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(businessApi.middleware),
+  devTools: process.env.NODE_ENV !== 'production',
+});
+
+// (setupListener) required for refetchOnFocus/refetchOnReconnect behaviors
+export type AppDispatch = typeof store.dispatch;
+export type AppState = ReturnType<typeof store.getState>;
+setupListeners(store.dispatch);

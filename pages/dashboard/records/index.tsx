@@ -1,15 +1,12 @@
-import React, { ReactElement, useState } from 'react';
+import { ReactElement, useState } from 'react';
 
-import { NextPageWithLayout } from '../../_app';
-import Layout from '../../../components/layouts/layout';
-import DashboardLayout from '../../../components/layouts/dashboard-layout';
-import Tabs from '../../../components/shared/tabs/tabs';
-import SearchInput from '../../../components/shared/input/search-input/search-input';
-import Button from '../../../components/shared/butttons/button/button';
 import Filter from '../../../components/filter/filter';
-import RecordTable from '../../../components/shared/table/record-table/record-table';
-import Modal from '../../../components/shared/modal/modal';
-import RecordDetails from './components/record-details.modal/record-details ';
+import DashboardLayout from '../../../components/layouts/dashboard-layout';
+import Layout from '../../../components/layouts/layout';
+import Button from '../../../components/shared/butttons/button/button';
+import SearchInput from '../../../components/shared/input/search-input/search-input';
+import Tabs from '../../../components/shared/tabs/tabs';
+import { NextPageWithLayout } from '../../_app.page';
 
 export interface IRecords {
   sampleTextProp: string;
@@ -39,11 +36,11 @@ const Records: NextPageWithLayout = () => {
 
   return (
     <div>
-      {status && (
+      {/* {status && (
         <Modal closeModal={() => setStatus(false)} header={''}>
           <RecordDetails />
         </Modal>
-      )}
+      )} */}
       <div className="mb-md-2">
         <Tabs
           label={['Sales', 'Expense']}
@@ -65,11 +62,9 @@ const Records: NextPageWithLayout = () => {
             setStatus(true);
           }}
         />
-        <Filter placeholder='' value="Filter" />
+        <Filter placeholder="" value="Filter" />
       </div>
-      <div>
-        <RecordTable header={header} contents={contents} />
-      </div>
+      <div>{/* <RecordTable header={header} contents={contents} /> */}</div>
     </div>
   );
 };

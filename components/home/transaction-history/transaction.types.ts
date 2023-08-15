@@ -1,0 +1,28 @@
+export type TransactionHistoryType = {
+  status: string;
+  chargeAmount: number;
+  transComment: string;
+  transCommission: any;
+  merchant: string;
+  currency: string;
+  paymentMethod: string;
+  transDesc: string;
+  isReversal: boolean;
+  isReversed: boolean;
+  dealIcon: any;
+  isGrey: boolean;
+  isPrivate: boolean;
+  electricityPurchasedCode: any;
+  _id: string;
+  senderID: number;
+  receiverID: number;
+  senderName: string;
+  receiverName: string;
+  transRef: string;
+  amount: number;
+  totalAmount: number;
+  transType: string;
+  transID: number;
+  createdAt: string;
+  updatedAt: string;
+};

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import ByteIcon from '../shared/icon/byte.icon';
 import styles from './quicklink.card.module.scss';
 export interface IQuickLinkCard {
@@ -6,6 +7,7 @@ export interface IQuickLinkCard {
   name: string;
   size: string;
   iconColor: string;
+  path?: string;
 }
 
 const QuickLinkCard: React.FC<IQuickLinkCard> = ({
@@ -14,12 +16,15 @@ const QuickLinkCard: React.FC<IQuickLinkCard> = ({
   name,
   size,
   iconColor,
+  path = '',
 }) => {
   return (
-    <div style={{ backgroundColor: color }} className={styles.quicklinkCard}>
-      <ByteIcon icon={name} color={iconColor} size={size} />
-      <p className={styles.quicklinkTitle}> {title}</p>
-    </div>
+    <Link href={path}>
+      <div style={{ backgroundColor: color }} className={styles.quicklinkCard}>
+        <ByteIcon icon={name} color={iconColor} size={size} />
+        <p className={styles.quicklinkTitle}> {title}</p>
+      </div>
+    </Link>
   );
 };
 

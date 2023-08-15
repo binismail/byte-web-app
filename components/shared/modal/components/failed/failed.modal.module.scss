@@ -1,6 +1,10 @@
 .container {
   padding: 20px;
-  margin-bottom: var(--space-md-3);
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 8px;
   .copy {
     font-weight: 400;
     font-size: 13px;

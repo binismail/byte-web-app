@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import Login, { ILogin } from '.';
+import Login, { ILogin } from './index.page';
 import { mockLoginProps } from './login.mocks';
 
 export default {

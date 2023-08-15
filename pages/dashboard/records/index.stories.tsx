@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import Records, { IRecords } from './index';
+import Records, { IRecords } from '.';
 import { mockRecordsProps } from './index.mocks';
 
 export default {

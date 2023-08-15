@@ -2,12 +2,15 @@ import Button from '../../../butttons/button/button';
 import ByteIcon from '../../../icon/byte.icon';
 import styles from './success.modal.module.scss';
 export interface ISuccess {
-  title: string;
+  title?: string;
   message: string;
   cta?: boolean;
-  closeModal: any;
+  closeModal?: any;
   buttonTitle?: string;
   buttonColor?: string;
+  buttonOnClick?: () => void;
+  buttonDisabled?: boolean;
+  buttonLoading?: boolean;
 }
 const SuccessModal: React.FC<ISuccess> = ({
   title,
@@ -16,6 +19,9 @@ const SuccessModal: React.FC<ISuccess> = ({
   closeModal,
   buttonTitle = 'Done',
   buttonColor = 'btnPrimary',
+  buttonOnClick,
+  buttonDisabled,
+  buttonLoading,
 }) => {
   return (
     <div className="modal">
@@ -42,13 +48,22 @@ const SuccessModal: React.FC<ISuccess> = ({
             />
           </svg>
         </div>
-        <div>
+        <div className="flex flex-col gap-1 w-full">
           <p className="text-strong text-center">{title}</p>
-          <p className="text-section-subtitle text-center">{message}</p>
+          <p className="text-section-subtitle text-center text-[#565A63]">
+            {message}
+          </p>
           <div>
             {(cta || buttonTitle) && (
               <div className="form-group mb-2">
-                <Button color={buttonColor} title={buttonTitle} type="block" />
+                <Button
+                  disabled={buttonDisabled}
+                  loading={buttonLoading}
+                  click={buttonOnClick}
+                  color={buttonColor}
+                  title={buttonTitle}
+                  type="block"
+                />
               </div>
             )}
           </div>

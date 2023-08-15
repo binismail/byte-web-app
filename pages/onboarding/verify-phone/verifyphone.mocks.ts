@@ -1,4 +1,4 @@
-import { IVerifyPhone } from './verifyphone';
+import { IVerifyPhone } from './verifyphone.page';
 
 const base: IVerifyPhone = {
   sampleTextProp: 'Hello world!',

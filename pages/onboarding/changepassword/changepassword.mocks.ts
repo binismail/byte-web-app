@@ -1,4 +1,4 @@
-import { IChangePassword } from './changepassword';
+import { IChangePassword } from './changepassword.page';
 
 const base: IChangePassword = {
   sampleTextProp: 'Hello world!',

@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { SalesRecordType } from '../../../../pages/dashboard/tools/record/records.types';
 import RecordTable, { IRecordTable } from './record-table';
 import { mockRecordTableProps } from './record-table.mocks';
 
@@ -19,4 +20,4 @@ export const Base = Template.bind({});
 
 Base.args = {
   ...mockRecordTableProps.base,
-} as IRecordTable;
+} as IRecordTable<SalesRecordType>;
