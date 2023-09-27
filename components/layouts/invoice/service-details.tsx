@@ -59,9 +59,7 @@ const ServiceDetails = () => {
 
   // DATA INITIALIZATION
   // const router = useRouter();
-  useEffect(() => {
-    console.log(setInvoiceDetails);
-  });
+
 
   return (
     <div className="h-full w-full flex items-center justify-center">

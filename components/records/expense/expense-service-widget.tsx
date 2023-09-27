@@ -35,7 +35,7 @@ const ExpenseServiceWidget = ({
   // SIDE EFFECTS
   useEffect(() => {
     setFieldValue('totalAmount', totalCost);
-  }, [totalCost]);
+  }, [totalCost, setFieldValue]);
 
   return (
     <>

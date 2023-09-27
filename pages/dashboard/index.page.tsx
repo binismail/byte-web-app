@@ -167,6 +167,7 @@ const Dashboard: NextPageWithLayout = () => {
             <div className="w-[14rem] h-[14rem] bg-[#F0F2F5] mb-4"></div>
             <div className="w-[14rem] h-[14rem] bg-[#F0F2F5]"></div>
           </div>
+          <div></div>
         </div>
       </div>
     </div>

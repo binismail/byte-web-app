@@ -1,5 +1,5 @@
 import { FieldArray, Form, Formik } from 'formik';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { useCreateInvoiceMutation } from '../../../lib/services/businessApi';
@@ -61,9 +61,7 @@ const ProductDetails = () => {
   // DATA INITIALIZATION
   // const router = useRouter()
 
-  useEffect(() => {
-    console.log(setInvoiceDetails);
-  });
+
 
   return (
     <div className="h-full w-full flex items-center justify-center">

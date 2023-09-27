@@ -72,7 +72,7 @@ const ExpenseProductWidget = ({
   // SIDE EFFECTS
   useEffect(() => {
     setFieldValue('totalAmount', totalPrice);
-  }, [totalPrice]);
+  }, [totalPrice, setFieldValue]);
 
   //   populate inventory options
   useEffect(() => {

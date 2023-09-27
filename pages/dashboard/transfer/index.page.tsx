@@ -42,7 +42,7 @@ const Transfer: NextPageWithLayout = () => {
       // setBusinessAnalytics(data?.data);
       console.log(successModal, errorModal);
     }
-  }, [data, isError]);
+  }, [data, isError, successModal, errorModal]);
 
   return (
     <div>

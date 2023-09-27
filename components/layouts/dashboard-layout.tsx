@@ -65,7 +65,7 @@ const DashboardLayout = ({
     if (!getUserDetailsError && !isEmpty(userDetails)) {
       dispatch(setUserDetails(userDetails?.data));
     }
-  }, [userDetails, getUserDetailsError]);
+  }, [userDetails, getUserDetailsError, dispatch]);
 
   return (
     <div className="max-h-[98vh] w-full flex">
