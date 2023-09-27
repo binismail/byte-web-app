@@ -64,7 +64,7 @@ const ThirdRegStep = ({
     return () => {
       clearInterval(interval);
     };
-  }, [seconds]);
+  }, [seconds, minutes]);
 
   //   HANDLERS
   const resendOTP = () => {
