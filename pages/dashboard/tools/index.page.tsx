@@ -41,7 +41,7 @@ const Tools: NextPageWithLayout<any> = () => {
             cardBg="bg-[#DBFFF2]"
             iconBg="bg-[#19A97B]"
             IconSelect={Chart21}
-            path=""
+            path="/dashboard/payment"
           />
           <ToolsCard
             header="Debt management"

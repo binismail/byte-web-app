@@ -41,7 +41,7 @@ const Register: NextPage = () => {
       const phone = getItem('phone', 'session');
       setStoredPhone(phone);
     }
-  }, [progress]);
+  }, [progress, getItem]);
 
   return (
     <div>

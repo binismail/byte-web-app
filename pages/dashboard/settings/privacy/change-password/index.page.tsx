@@ -43,6 +43,7 @@ const ChangePassword: NextPageWithLayout = () => {
         }}
         onSubmit={(values) => {
           const { repeatPassword, ...formData } = values;
+          console.log(repeatPassword);
           // make request
           updatePassword(formData)
             .unwrap()

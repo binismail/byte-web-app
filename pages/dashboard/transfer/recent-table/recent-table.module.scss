@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  border-bottom: 1px solid;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+.tab {
+  display: flex;
+  p {
+    width: 80px;
+  }
+}

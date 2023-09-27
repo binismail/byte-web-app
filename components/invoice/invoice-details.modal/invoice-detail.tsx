@@ -116,7 +116,7 @@ const InvoiceDetail = ({
         setDownloadInvoiceLoading(false);
         console.log(err);
       });
-  }, [invoiceRef]);
+  }, [invoiceRef, invoiceDetails?.num]);
 
   // HOOKS
   const { data, isLoading, isSuccess } = useGetSingleInvoiceQuery(invoiceId, {

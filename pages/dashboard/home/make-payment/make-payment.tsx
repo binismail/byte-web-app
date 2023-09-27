@@ -1,7 +1,7 @@
 import ByteIcon from '../../../../components/shared/icon/byte.icon';
 import styles from './make-payment.module.scss';
 
-const MakePayment: React.FC<any> = ({ onClickLeft, onClickRight }) => {
+const MakePayment: React.FC<any> = ({ onClickLeft }) => {
   return (
     <div className="modal">
       <div className={styles.container}>

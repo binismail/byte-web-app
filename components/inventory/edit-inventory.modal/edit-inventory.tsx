@@ -90,6 +90,7 @@ const EditInventory = ({ setEditProductState, productId }: Props) => {
       setError("file shouldn't be more than 5mb");
       console.log('files: ', fileRejections);
       console.log('event: ', event);
+      console.log(error, pickedImage, getRootProps, getInputProps);
     },
   });
   const categories = [

@@ -22,7 +22,7 @@ const ActiveLink = ({ ...props }: ActiveLinkProps) => {
   return (
     <Link {...props}>
       <li
-        className={`inline-flex items-center gap-3 ${className} cursor-pointer`}
+        className={`inline-flex items-center gap-6 ${className} cursor-pointer`}
       >
         <props.Icon
           size="20"

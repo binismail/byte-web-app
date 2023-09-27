@@ -17,9 +17,7 @@ import styles from './send-money.module.scss';
 import VerifyAccountName from './verify-account-name';
 
 const SendMoney: React.FC<any> = ({
-  isAccountCorrect,
   onNextClick,
-  transPin,
   bankName,
   bankCode,
   accountNumber,

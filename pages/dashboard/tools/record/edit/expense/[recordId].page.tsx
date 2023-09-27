@@ -80,6 +80,7 @@ const EditExpenseRecord = () => {
             onSubmit={(values) => {
               // destructure value
               const { expenseCategory, ...expenseRecord } = values;
+              console.log(expenseCategory);
               const formData: ExpenseRecordDetailsType = {
                 ...expenseRecord,
                 ...(values.expenseCategory &&

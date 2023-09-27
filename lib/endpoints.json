@@ -46,7 +46,7 @@
     "linkedBanks": "businesses/banks",
     "linkBankAccount": "businesses/linkBankAccount",
     "getWallet": "businesses/wallets",
-    "getVirtualAccount": "businesses/virtualAccounts?provider=seerbit",
+    "getVirtualAccount": "businesses/virtualAccounts?provider=providus",
     "searchBusinessDocs": "businesses/search",
     "cards": "businesses/cards"
   },
