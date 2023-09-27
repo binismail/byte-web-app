@@ -1,5 +1,5 @@
 import { FieldArray, Form, Formik } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { useCreateInvoiceMutation } from '../../../lib/services/businessApi';
@@ -17,7 +17,7 @@ import TotalAmount from '../../total amount/total-amount';
 
 type Props = {};
 
-const ProductDetails = (props: Props) => {
+const ProductDetails = () => {
   // STATES
   const [invoiceDetails, setInvoiceDetails] =
     useState<SingleInvoiceDetailsType>({
@@ -59,7 +59,11 @@ const ProductDetails = (props: Props) => {
   const [createInvoice, { isLoading }] = useCreateInvoiceMutation();
 
   // DATA INITIALIZATION
-  // const router = useRouter();
+  // const router = useRouter()
+
+  useEffect(() => {
+    console.log(setInvoiceDetails);
+  });
 
   return (
     <div className="h-full w-full flex items-center justify-center">

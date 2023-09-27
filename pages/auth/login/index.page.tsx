@@ -15,7 +15,7 @@ import PasswordInput from '../../../components/shared/input/password-input/passw
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import {
   selectLoggedIn,
-  setCredentials,
+  setCredentials
 } from '../../../lib/redux/authSlice/authSlice';
 import { useLoginMutation } from '../../../lib/services/businessApi';
 import logo from '../../../public/logo.svg';
@@ -44,7 +44,7 @@ const Login: NextPage = () => {
     } else {
       setRedirectLoading(false);
     }
-  }, []);
+  });
 
   // RETURNED JSX: REDIRECT TO DASHBOARD IF USER IS LOGGED-IN
   if (redirectLoading) {

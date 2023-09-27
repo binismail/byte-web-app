@@ -13,7 +13,7 @@ import RecordTable from '../../../shared/table/record-table/record-table';
 
 type Props = {};
 
-const ExpenseRecords = (props: Props) => {
+const ExpenseRecords = () => {
   // STATES
   const [searchInput, setSearchInput] = useState<string>('');
   const [filter, setFilter] = useState<string>('date');

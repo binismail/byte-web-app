@@ -4,10 +4,10 @@
   justify-content: center;
   align-items: center;
   padding: 0 2rem;
-  width: 50%;
+  width: 60%;
 }
 .background {
-  width: 50%;
+  width: 40%;
   height: 100vh;
 }
 .side {
@@ -15,4 +15,6 @@
   width: 100%;
   background-image: url('../../../public/backgroundbos.png');
   height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
 }

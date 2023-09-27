@@ -15,43 +15,43 @@ export interface IInvoice {
 const Invoice: NextPageWithLayout = () => {
   const [status, setStatus] = useState(false);
   // const [tab, setTab] = useState('');
-  const header = [
-    'Incvoice name',
-    'Customer name',
-    'Amount',
-    'Expiry date',
-    'Date issued',
-    'Status',
-  ];
+  // const header = [
+  //   'Incvoice name',
+  //   'Customer name',
+  //   'Amount',
+  //   'Expiry date',
+  //   'Date issued',
+  //   'Status',
+  // ];
 
-  const contents = [
-    {
-      item: '#l23234',
-      name: 'Chike & River ',
-      amount: 'N1,000',
-      expiryDate: '09/09/2021',
-      deliveryDate: '09/09/2021',
-      status: 'Paid',
-    },
+  // const contents = [
+  //   {
+  //     item: '#l23234',
+  //     name: 'Chike & River ',
+  //     amount: 'N1,000',
+  //     expiryDate: '09/09/2021',
+  //     deliveryDate: '09/09/2021',
+  //     status: 'Paid',
+  //   },
 
-    {
-      item: '#l23234',
-      name: 'Chike & River ',
-      amount: 'N1,000',
-      expiryDate: '09/09/2021',
-      deliveryDate: '09/09/2021',
-      status: 'Unpaid',
-    },
+  //   {
+  //     item: '#l23234',
+  //     name: 'Chike & River ',
+  //     amount: 'N1,000',
+  //     expiryDate: '09/09/2021',
+  //     deliveryDate: '09/09/2021',
+  //     status: 'Unpaid',
+  //   },
 
-    {
-      item: '#l23234',
-      name: 'Chike & River ',
-      amount: 'N1,000',
-      expiryDate: '09/09/2021',
-      deliveryDate: '09/09/2021',
-      status: 'Overpaid',
-    },
-  ];
+  //   {
+  //     item: '#l23234',
+  //     name: 'Chike & River ',
+  //     amount: 'N1,000',
+  //     expiryDate: '09/09/2021',
+  //     deliveryDate: '09/09/2021',
+  //     status: 'Overpaid',
+  //   },
+  // ];
 
   return (
     <div>

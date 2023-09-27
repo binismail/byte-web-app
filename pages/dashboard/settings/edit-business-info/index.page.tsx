@@ -16,14 +16,14 @@ import { selectUserDetails } from '../../../../lib/redux/userDetailsSlice/userDe
 import { useUpdateBusinessInfoMutation } from '../../../../lib/services/businessApi';
 import { NextPageWithLayout } from '../../../_app.page';
 
-type PickedImageType = {
-  path: string;
-  preview: string;
-  name: string;
-  size: number;
-  type: string;
-  webkitRelativePath: string;
-};
+// type PickedImageType = {
+//   path: string;
+//   preview: string;
+//   name: string;
+//   size: number;
+//   type: string;
+//   webkitRelativePath: string;
+// };
 
 const EditBusinessInfo: NextPageWithLayout = () => {
   // DATA INITIALZIATION
@@ -135,6 +135,7 @@ const EditBusinessInfo: NextPageWithLayout = () => {
         }}
         onSubmit={(values) => {
           const { name, ...formData } = values;
+          console.log(name);
           // make request
           updateBusinessInfo(formData)
             .unwrap()

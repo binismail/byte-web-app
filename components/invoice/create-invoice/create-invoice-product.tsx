@@ -86,7 +86,7 @@ const CreateInvoiceProduct = ({
     // setField values
     setFieldValue('taxAmount', combinedTaxPercentage);
     setFieldValue('subTotal', totalCost);
-  }, [totalCost, combinedTaxPercentage]);
+  }, [totalCost, combinedTaxPercentage.toFixed, setFieldValue]);
 
   //   populate inventory options
   useEffect(() => {
@@ -96,7 +96,6 @@ const CreateInvoiceProduct = ({
           ({
             productName,
             unitCostPrice,
-            ...inventory
           }: {
             productName: string;
             unitCostPrice: number;

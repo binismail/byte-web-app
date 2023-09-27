@@ -89,8 +89,6 @@ const CompareModal = ({
           values,
           touched,
           errors,
-          handleChange,
-          handleBlur,
           handleSubmit,
           isSubmitting,
           isValid,

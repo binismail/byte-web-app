@@ -15,7 +15,7 @@ const Verifications: NextPageWithLayout = () => {
 
   useEffect(() => {
     console.log(userDetails);
-  }, []);
+  }, [userDetails]);
 
   return (
     <div>

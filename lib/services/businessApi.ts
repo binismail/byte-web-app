@@ -16,6 +16,7 @@ import {
   MakePaymentTypes,
   ResolveBankType,
 } from '../../pages/dashboard/home/home.types';
+import { RequestPosTypes } from '../../pages/dashboard/pos/pos.types';
 import { UpdateInventoryType } from '../../pages/dashboard/tools/inventory-management/inventory.types';
 import { SingleInvoiceDetailsType } from '../../pages/dashboard/tools/invoices/invoices.types';
 import {
@@ -480,6 +481,15 @@ export const businessApi = createApi({
       query: (url) => `${baseUrl.business.getAnalytics}?${url}`,
       providesTags: ['Inventory', 'Records', 'Transactions'],
     }),
+
+    requestPos: builder.mutation<any, RequestPosTypes>({
+      query: (body: RequestPosTypes) => ({
+        url: baseUrl.businessPayment.withdrawToNonLinkedBank,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Transactions'],
+    }),
   }),
 });
 
@@ -539,4 +549,7 @@ export const {
 
   // PAYMENTS ANALYTICS
   useGetAnalyticsQuery,
+
+  // POS
+  useRequestPosMutation,
 } = businessApi;
