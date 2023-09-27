@@ -10,6 +10,7 @@ type Props = {
 };
 
 const ConfirmWalletFund = ({ amount, onProceedClick }: Props) => {
+  console.log(onProceedClick);
   // STATES
   const [isSwitchOn, setIsSwitchOn] = useState(false);
 
@@ -83,7 +84,7 @@ const ConfirmWalletFund = ({ amount, onProceedClick }: Props) => {
           {/* button */}
           <div className="flex w-full flex-col items-stretch">
             <Button
-              click={() => onProceedClick(chargedAmount)}
+              click={(chargedAmount:number) => onProceedClick(chargedAmount)}
               color="btnPrimary"
               title="Proceed"
               type="block"

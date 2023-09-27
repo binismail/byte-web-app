@@ -1,10 +1,11 @@
 import { ReactElement, useState } from 'react';
-
 import Filter from '../../../components/filter/filter';
 import DashboardLayout from '../../../components/layouts/dashboard-layout';
 import Layout from '../../../components/layouts/layout';
+import RecordDetails from '../../../components/records/record-details.modal/record-details ';
 import Button from '../../../components/shared/butttons/button/button';
 import SearchInput from '../../../components/shared/input/search-input/search-input';
+import Modal from '../../../components/shared/modal/modal';
 import Tabs from '../../../components/shared/tabs/tabs';
 import { NextPageWithLayout } from '../../_app.page';
 
@@ -15,32 +16,32 @@ export interface IRecords {
 const Records: NextPageWithLayout = () => {
   const [status, setStatus] = useState(false);
   const [tab, setTab] = useState('');
-  const header = ['Customer name', 'Item/s purchased', 'Amount', 'Date '];
+  // const header = ['Customer name', 'Item/s purchased', 'Amount', 'Date '];
 
-  const contents = [
-    {
-      name: 'Fife Animashaun',
-      items: 'Smart Watch + 2 others',
-      amount: 'N1,000',
-      date: 'Yesterday - 10:00 AM',
-      type: 'negative',
-    },
-    {
-      name: 'Fife Animashaun',
-      items: 'Smart Watch + 2 others',
-      amount: 'N1,000',
-      date: 'Yesterday - 10:00 AM',
-      type: 'negative',
-    },
-  ];
+  // const contents = [
+  //   {
+  //     name: 'Fife Animashaun',
+  //     items: 'Smart Watch + 2 others',
+  //     amount: 'N1,000',
+  //     date: 'Yesterday - 10:00 AM',
+  //     type: 'negative',
+  //   },
+  //   {
+  //     name: 'Fife Animashaun',
+  //     items: 'Smart Watch + 2 others',
+  //     amount: 'N1,000',
+  //     date: 'Yesterday - 10:00 AM',
+  //     type: 'negative',
+  //   },
+  // ];
 
   return (
     <div>
-      {/* {status && (
+      {status && (
         <Modal closeModal={() => setStatus(false)} header={''}>
-          <RecordDetails />
+          <RecordDetails recordId="" setRecordDetailsState={() => {}} />
         </Modal>
-      )} */}
+      )}
       <div className="mb-md-2">
         <Tabs
           label={['Sales', 'Expense']}

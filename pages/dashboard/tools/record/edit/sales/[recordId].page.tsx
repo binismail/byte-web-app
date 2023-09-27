@@ -83,6 +83,7 @@ const EditSalesRecord = () => {
             onSubmit={(values) => {
               // destructure value
               const { description, ...salesRecord } = values;
+              console.log(description);
               const formData: SalesRecordDetailsType = {
                 ...salesRecord,
                 ...(values.description &&

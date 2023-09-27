@@ -1,9 +1,14 @@
-import { ReactElement, useEffect, useState } from 'react';
-import logo from '../../public/logo.svg';
-
-import { Briefcase, CardPos, Home2, LogoutCurve, People } from 'iconsax-react';
+import {
+  Briefcase,
+  CardPos,
+  Home2,
+  LogoutCurve,
+  People,
+  RecordCircle,
+} from 'iconsax-react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { ReactElement, useEffect, useState } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 import Modal from '../../components/shared/modal/modal';
@@ -19,6 +24,7 @@ import {
   useGetUserInformationQuery,
   useLogoutUserMutation,
 } from '../../lib/services/businessApi';
+import logo from '../../public/logo.svg';
 import ActiveLink from '../shared/active-link/active-link';
 import LayoutHeader from './header';
 
@@ -81,63 +87,84 @@ const DashboardLayout = ({
           <ActiveLink
             exact={true}
             href={'/dashboard'}
-            text="Home"
+            text="Account"
             Icon={Home2}
+          />
+
+          {/* Transfer */}
+          <ActiveLink
+            href={'/dashboard/transfer'}
+            text="Transfer"
+            Icon={CardPos}
           />
 
           {/* TOOLS */}
           <ActiveLink href={'/dashboard/tools'} text="Tools" Icon={Briefcase} />
 
+          {/* Pos */}
+          <ActiveLink href={'/dashboard/pos'} text="POS" Icon={CardPos} />
+
           {/* PAYMENTS */}
           <ActiveLink
             href={'/dashboard/payment'}
-            text="Payments"
-            Icon={CardPos}
-          />
-
-          {/* NETWORK */}
-          <ActiveLink
-            href={'/dashboard/settings'}
-            text="Settings"
-            Icon={People}
+            text="Analytics"
+            Icon={RecordCircle}
           />
         </ul>
+        <hr className="mt-16"></hr>
 
-        {/* LOGOUT */}
-        <div className="flex w-[70%] ml-auto mt-auto">
-          {logoutLoading ? (
-            <span className="font-normal inline-flex items-center gap-2 text-base text-[#6A78D1]">
-              <RotatingLines
-                strokeColor="#6A78D1"
-                strokeWidth="4"
-                animationDuration="0.75"
-                width="24"
-                visible={true}
-              />
-              Siging out...
-            </span>
-          ) : (
-            <div
-              onClick={() => {
-                logoutUser({
-                  userId,
-                })
-                  .unwrap()
-                  .then(() => {
-                    router.replace('/auth/login');
-                    dispatch(logout());
-                    dispatch(clearUserDetails());
+        {/* DASHBOARD LIST 2 */}
+        <div className="mt-auto">
+          <p className="text-[#808691] flex flex-col align-item mb-8 w-[100%] items-center ">
+            SUPPORT
+          </p>
+          <ul className="flex flex-col gap-6 w-[70%] ml-auto ">
+            {/* HELP */}
+            <ActiveLink href={'/help'} text="Help" Icon={Home2} />
+
+            {/* SETTINGS */}
+            <ActiveLink
+              href={'/dashboard/settings'}
+              text="Settings"
+              Icon={People}
+            />
+          </ul>
+          {/* LOGOUT */}
+          <div className="flex w-[72%] ml-auto mt-5 ">
+            {logoutLoading ? (
+              <span className="font-normal inline-flex items-center gap-2 text-base text-[#6A78D1]">
+                <RotatingLines
+                  strokeColor="#6A78D1"
+                  strokeWidth="4"
+                  animationDuration="0.75"
+                  width="24"
+                  visible={true}
+                />
+                Siging out...
+              </span>
+            ) : (
+              <div
+                onClick={() => {
+                  logoutUser({
+                    userId,
                   })
-                  .catch((error) => {
-                    toast.error(error?.data?.message || 'Logout failed!');
-                  });
-              }}
-              className="font-normal cursor-pointer text-base text-[#808691] flex items-center gap-4 hover:text-[#6A78D1]"
-            >
-              <LogoutCurve size="20" color="#808691" variant="Outline" />
-              Log out
-            </div>
-          )}
+                    .unwrap()
+                    .then(() => {
+                      router.replace('/auth/login');
+                      dispatch(logout());
+                      dispatch(clearUserDetails());
+                    })
+                    .catch((error) => {
+                      toast.error(error?.data?.message || 'Logout failed!');
+                    });
+                }}
+                className="font-normal cursor-pointer text-base text-[#808691] flex items-center gap-7 hover:text-[#6A78D1]"
+              >
+                <LogoutCurve size="20" color="#808691" variant="Outline" />
+                Log out
+              </div>
+            )}
+          </div>
         </div>
       </aside>
 

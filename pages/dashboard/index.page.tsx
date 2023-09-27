@@ -1,14 +1,12 @@
-import { WalletMoney } from 'iconsax-react';
 import Head from 'next/head';
 import { ReactElement, useState } from 'react';
-import QuickLinkCard from '../../components/cards/quicklink.card';
 import TransactionHistory from '../../components/home/transaction-history';
-import WalletBalance from '../../components/home/wallet-balance/wallet-balance';
+import VirtualBank from '../../components/home/virtual-bank/virtual-bank';
+import WalletBalance2 from '../../components/home/wallet-balance/wallet-balance2';
 import DashboardLayout from '../../components/layouts/dashboard-layout';
 import FundWalletLayout from '../../components/layouts/home/fund-wallet-layout';
 import MakePaymentLayout from '../../components/layouts/home/make-payment-layout';
 import Layout from '../../components/layouts/layout';
-import Button from '../../components/shared/butttons/button/button';
 import FailedModal from '../../components/shared/modal/components/failed/failed.modal';
 import SuccessModal from '../../components/shared/modal/components/success/success.modal';
 import Modal from '../../components/shared/modal/modal';
@@ -72,19 +70,36 @@ const Dashboard: NextPageWithLayout = () => {
 
         {/* Header container */}
         <div className="">
-          {/* icon container */}
-          <div className="flex gap-2 items-center">
-            {/* icon */}
-            <WalletMoney size="12" color="#353C69" variant="Bold" />
+          {/* Balance Amount */}
+          <div className="flex gap-8">
+            <div>
+              <div className="flex gap-2 items-center">
+                {/* title */}
+                <p className="font-normal text-base text-[#353C69]">
+                  Primary wallet
+                </p>
+              </div>
+              <WalletBalance2 />
+            </div>
 
-            {/* title */}
-            <p className="font-normal text-base text-[#353C69]">Byte Pocket</p>
+            {/* Pos wallet */}
+            <div className="border-l-4 px-8 ">
+              <div className="flex gap-2 items-center">
+                {/* title */}
+                <p className="font-normal text-base text-[#353C69]">
+                  POS wallet
+                </p>
+              </div>
+              <WalletBalance2 />
+            </div>
+
+            {/* Virtual account */}
+            <div className="ml-auto">
+              <VirtualBank />
+            </div>
           </div>
 
-          {/* Balance Amount */}
-          <WalletBalance />
-
-          {/* Funding Wallet */}
+          {/* Funding Wallet
           <div className="flex gap-5 mt-7">
             <Button
               type="large"
@@ -102,11 +117,11 @@ const Dashboard: NextPageWithLayout = () => {
               title="Make a payment"
               color="btnPrimary"
             />
-          </div>
+          </div> */}
         </div>
 
         {/* Quick Links */}
-        <div className="flex flex-col gap-2">
+        {/* <div className="flex flex-col gap-2">
           <p className="font-normal text-[#30333B] text-xl">Quick links</p>
           <div className="flex gap-3">
             <QuickLinkCard
@@ -142,10 +157,17 @@ const Dashboard: NextPageWithLayout = () => {
               path="/dashboard/tools/record?recordType=2"
             />
           </div>
-        </div>
+        </div> */}
+        <div className="flex mt-8 gap-x-5">
+          {/* Transaction History */}
+          <TransactionHistory />
 
-        {/* Transaction History */}
-        <TransactionHistory />
+          {/* unknown */}
+          <div className="flex flex-column">
+            <div className="w-[14rem] h-[14rem] bg-[#F0F2F5] mb-4"></div>
+            <div className="w-[14rem] h-[14rem] bg-[#F0F2F5]"></div>
+          </div>
+        </div>
       </div>
     </div>
   );

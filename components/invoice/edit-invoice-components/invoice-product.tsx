@@ -54,7 +54,7 @@ const InvoiceProduct = ({
     // setField values
     setFieldValue('taxAmount', combinedTaxPercentage);
     setFieldValue('subTotal', totalCost);
-  }, [totalCost, combinedTaxPercentage]);
+  }, [totalCost, combinedTaxPercentage, setFieldValue]);
 
   return (
     <>

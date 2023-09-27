@@ -81,12 +81,16 @@ const TransactionTable = ({ header, transactions, loading }: ITable) => {
 
               {/* Transaction ID */}
               <td className="inline-flex flex-col gap-1 text-left h-[72px] border-b border-[#E6EAED] pr-3 justify-center">
-                <p className="text-[#30333B] font-normal text-sm">
-                  {transaction.transID}
+                <p
+                  className={`${
+                    transaction.status === 'success'
+                      ? 'text-[#19A97B]'
+                      : 'text-[#CF4F66]'
+                  } font-normal text-sm`}
+                >
+                  {transaction.status}
                 </p>
-                <p className="font-normal text-sm text-[#565A63]">
-                  Transaction ID
-                </p>
+                <p className="font-normal text-sm text-[#565A63]">Status</p>
               </td>
 
               {/* arrow */}

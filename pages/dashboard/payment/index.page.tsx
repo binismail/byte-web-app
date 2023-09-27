@@ -57,7 +57,7 @@ const Payment: NextPageWithLayout = () => {
 
       return newPrevDate;
     }
-  }, [type]);
+  }, [type, currentDate]);
 
   // API CALL HOOK
   const params = new URLSearchParams();
