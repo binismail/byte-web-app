@@ -44,7 +44,7 @@ const Login: NextPage = () => {
     } else {
       setRedirectLoading(false);
     }
-  });
+  },[ [isLoggedIn, router]]);
 
   // RETURNED JSX: REDIRECT TO DASHBOARD IF USER IS LOGGED-IN
   if (redirectLoading) {

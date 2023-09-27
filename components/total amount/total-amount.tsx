@@ -29,7 +29,7 @@ const TotalAmount: React.FC<ITotalAmount> = ({
   // SIDE EFFECTS
   useEffect(() => {
     setFields ? setFields(total, discountAmount) : null;
-  }, [total, discountAmount]);
+  }, [total, discountAmount, setFields]);
   return (
     <div className={styles.container}>
       <p className="text-[#808691] text-base font-normal">Total Amount</p>

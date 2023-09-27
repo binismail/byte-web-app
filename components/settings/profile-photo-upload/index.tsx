@@ -93,7 +93,7 @@ const ProfilePhotoUpload = () => {
   }, [router]);
   useEffect(() => {
     setHasImage(!isEmpty(userDetails.image));
-  }, []);
+  }, [userDetails]);
   useEffect(() => {
     setPickedImage(files[0] as PickedImageType);
   }, [files]);

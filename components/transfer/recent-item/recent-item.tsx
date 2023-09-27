@@ -29,7 +29,7 @@ const RecentItem: React.FC<IRecentItem> = ({
   // SIDE EFFECTS
   useEffect(() => {
     setFields ? setFields(total, discountAmount) : null;
-  }, [total, discountAmount]);
+  }, [total, discountAmount, setFields]);
   return (
     <div className="flex justify-between mt-4">
       <div className="flex justify-center flex-center">

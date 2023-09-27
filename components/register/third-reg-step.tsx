@@ -42,7 +42,7 @@ const ThirdRegStep = ({
       ...otpData,
       otpId: id,
     });
-  }, []);
+  }, [otpData, getItem]);
 
   //   handle otp countdown
   useEffect(() => {
