@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { SalesRecordType } from '../../tools/record/records.types';
-import RecentTable, { IRecentTable } from './recent-table';
+import  RecentTable, { IRecentTable } from './recent-table';
 import { mockRecentTableProps } from './recent-table.mocks';
 
 export default {

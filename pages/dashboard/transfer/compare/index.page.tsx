@@ -10,7 +10,7 @@ import LoadingState from '../../../../components/shared/loading-state';
 import { isEmpty } from '../../../../helpers/is-emtpy';
 import { useGetAnalyticsQuery } from '../../../../lib/services/businessApi';
 import { NextPageWithLayout } from '../../../_app.page';
-import { MostSold, PaymentAnalyticsRootType } from '../payement.types';
+import { MostSold, TransferAnalyticsRootType } from '../payement.types';
 
 const Payment: NextPageWithLayout = () => {
   // DATA INITIALIZATION: CURRENT DATA
@@ -19,7 +19,7 @@ const Payment: NextPageWithLayout = () => {
 
   // STATES
   const [businessAnalytics, setBusinessAnalytics] =
-    useState<PaymentAnalyticsRootType | null>();
+    useState<TransferAnalyticsRootType | null>();
 
   // API CALL HOOK
   const params = new URLSearchParams();

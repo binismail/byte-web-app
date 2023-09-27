@@ -1,15 +1,16 @@
 import { ArrowRight2, Bank } from 'iconsax-react';
+import { NextPageWithLayout } from '../../../_app.page';
 import styles from './recent-table.module.scss';
 
-// export interface IRecentTable<T> {
-  // header?: unknown;
-  // recents: T[];
-  // filter: string;
-  // isAscending: boolean;
-  // loading: boolean;
-// }
+export interface IRecentTable<T> {
+  header?: unknown;
+  recents: T[];
+  filter: string;
+  isAscending: boolean;
+  loading: boolean;
+}
 
-const RecentTable = () => {
+const RecentTable: NextPageWithLayout = () => {
   return (
     <div className="rounded-[10px] border p-6 h-[400px] w-[400px]">
       <div className={styles.header}>
