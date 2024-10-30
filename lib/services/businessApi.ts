@@ -38,7 +38,7 @@ const mutex = new Mutex();
 
 // Define baseQuery
 const baseQuery = fetchBaseQuery({
-  baseUrl: baseUrl.prodUrl,
+  baseUrl: baseUrl.urli,
   timeout: 1500 * 60,
   prepareHeaders: (headers, { getState, endpoint }) => {
     // getting access token from store

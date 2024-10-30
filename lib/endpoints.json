@@ -1,5 +1,5 @@
 {
-  "urli": "localhost:3000/api/v2/",
+  "urli": "http://localhost:3000/api/v2/",
   "prodUrl": "https://api.joinbyte.co/api/v2/",
   "devUrl": "https://byte-app-v2.herokuapp.com/api/v2/",
   "testUrl": "https://byte-backend-testing.onrender.com",
