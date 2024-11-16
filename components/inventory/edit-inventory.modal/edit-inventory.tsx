@@ -292,7 +292,7 @@ const EditInventory = ({ setEditProductState, productId }: Props) => {
                         <label>Category</label>
                         <Select
                           classNames={{
-                            control: (state) =>
+                            control: (state: any) =>
                               state.isFocused
                                 ? 'border-red-600 h-[48px] w-full mt-1 !rounded-xl'
                                 : 'border-grey-300 h-[48px] w-full mt-1 !rounded-xl',
@@ -304,7 +304,7 @@ const EditInventory = ({ setEditProductState, productId }: Props) => {
                             (cateogry) =>
                               cateogry.value === values.productCategory
                           )}
-                          onChange={(selectedOption) => {
+                          onChange={(selectedOption: any) => {
                             setFieldValue(
                               'productCategory',
                               selectedOption?.value || ''

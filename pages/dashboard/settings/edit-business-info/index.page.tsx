@@ -278,7 +278,7 @@ const EditBusinessInfo: NextPageWithLayout = () => {
                   <span>Business Category</span>
                   <Select
                     classNames={{
-                      control: (state) =>
+                      control: (state: any) =>
                         state.isFocused
                           ? 'border-red-600 h-[48px] w-full mt-1 !rounded-xl'
                           : 'border-grey-300 h-[48px] w-full mt-1 !rounded-xl',
@@ -289,7 +289,7 @@ const EditBusinessInfo: NextPageWithLayout = () => {
                     value={businessCategories.find(
                       (cateogry) => cateogry.value === values.category
                     )}
-                    onChange={(selectedOption) => {
+                    onChange={(selectedOption: any) => {
                       setFieldValue('category', selectedOption?.value || '');
                     }}
                     placeholder="Select business category"

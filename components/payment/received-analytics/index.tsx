@@ -76,7 +76,7 @@ const ReceivedAnalytics = ({
 
             <Select
               classNames={{
-                control: (state) =>
+                control: (state: any) =>
                   state.isFocused
                     ? 'border-red-600 h-[28px] text-sm w-full mt-0 !rounded-xl'
                     : 'border-grey-300 h-[28px] text-sm w-full mt-0 !rounded-xl',
@@ -85,7 +85,7 @@ const ReceivedAnalytics = ({
               }}
               name="period"
               value={typeOption.find((type) => type.value === periodType)}
-              onChange={(selectedOption) => {
+              onChange={(selectedOption: any) => {
                 setType(selectedOption?.value as BusinessAnalyticsType);
               }}
               placeholder="Select period"

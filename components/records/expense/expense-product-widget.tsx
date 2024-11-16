@@ -129,7 +129,7 @@ const ExpenseProductWidget = ({
                 <Select
                   isDisabled={getInventoryLoading || isEmpty(inventoryOptions)}
                   classNames={{
-                    control: (state) =>
+                    control: (state: any) =>
                       state.isFocused
                         ? 'border-red-600 h-[48px] w-full mt-1 !rounded-xl'
                         : 'border-grey-300 h-[48px] w-full mt-1 !rounded-xl',
@@ -138,7 +138,7 @@ const ExpenseProductWidget = ({
                   }}
                   defaultValue={selectedProduct || undefined}
                   value={selectedProduct || undefined}
-                  onChange={(selectedValue) => {
+                  onChange={(selectedValue: any) => {
                     setSelectedProduct(selectedValue);
                     replace(productIndex, {
                       name: selectedValue !== null ? selectedValue.label : '',
